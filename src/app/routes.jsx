@@ -4,6 +4,7 @@ import dashboardRoutes from 'app/views/dashboard/DashboardRoutes';
 import materialRoutes from 'app/views/material-kit/MaterialRoutes';
 import NotFound from 'app/views/sessions/NotFound';
 import sessionRoutes from 'app/views/sessions/SessionRoutes';
+import academicRoutes from './views/academics/AcademicRoutes';
 import { Navigate } from 'react-router-dom';
 import MatxLayout from './components/MatxLayout/MatxLayout';
 
@@ -14,9 +15,9 @@ const routes = [
         <MatxLayout />
       </AuthGuard>
     ),
-    children: [...dashboardRoutes, ...chartsRoute, ...materialRoutes],
+    children: [...dashboardRoutes, ...chartsRoute, ...materialRoutes, ...academicRoutes,],
   },
-  ...sessionRoutes,
+  ...sessionRoutes, 
   { path: '/', element: <Navigate to="/session/signin" /> },
   // { path: '/', element: <Navigate to="dashboard/default" /> },
   { path: '*', element: <NotFound /> },
