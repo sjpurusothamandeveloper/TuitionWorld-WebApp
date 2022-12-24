@@ -7,6 +7,9 @@ import sessionRoutes from 'app/views/sessions/SessionRoutes';
 import academicRoutes from './views/academics/AcademicRoutes';
 import { Navigate } from 'react-router-dom';
 import MatxLayout from './components/MatxLayout/MatxLayout';
+import hrmsRoutes from 'app/views/hrms/HrmsRoutes';
+import administrationRoutes from './views/administration/AdministrationRoutes';
+import resultRoutes from './views/result/ResultRoutes';
 
 const routes = [
   {
@@ -15,7 +18,7 @@ const routes = [
         <MatxLayout />
       </AuthGuard>
     ),
-    children: [...dashboardRoutes, ...chartsRoute, ...materialRoutes, ...academicRoutes,],
+    children: [...dashboardRoutes, ...chartsRoute, ...materialRoutes, ...academicRoutes, ...hrmsRoutes, ...administrationRoutes, ...resultRoutes],
   },
   ...sessionRoutes, 
   { path: '/', element: <Navigate to="/session/signin" /> },

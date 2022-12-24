@@ -15,18 +15,18 @@ export const navigations = [
     name: 'HRMS',
     icon: 'person',
     children: [
-      { name: 'Staff Management', iconText: 'SM', path: '/session/signin' },
-      { name: 'Leave Management', iconText: 'LM', path: '/session/signup' },
+      { name: 'Staff Management', iconText: 'SM', path: '/hrms/staff-management' },
+      { name: 'Leave Management', iconText: 'LM', path: '/hrms/leave-management' },
     ],
   },
   {
     name: 'Administration',
     icon: 'money',
     children: [
-      { name: 'Admission', iconText: 'AD', path: '/session/signin' },
+      { name: 'Admission', iconText: 'AD', path: '/administration/admission' },
     ],
   },
-  { name: 'Result', path: '/dashboard/default', icon: 'handshake'  },
+  { name: 'Result', path: '/result', icon: 'handshake'  },
   // {
   //   name: 'Session/Auth',
   //   icon: 'security',
