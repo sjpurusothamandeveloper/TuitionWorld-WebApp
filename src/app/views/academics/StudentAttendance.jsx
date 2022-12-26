@@ -26,6 +26,7 @@ const NotFoundRoot = styled(FlexBox)(() => ({
 
 const StudentAttendance = () => {
   const navigate = useNavigate();
+ 
 
   return (
     <NotFoundRoot>
