@@ -8,6 +8,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const AdditionForm = (props) =>{
    return(
     <div>
+      <Card style={{padding:"15px"}}>
+        <form>
  <Grid
   container
   direction="row"
@@ -16,20 +18,14 @@ const AdditionForm = (props) =>{
   alignItems="center"
 >
   <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-<Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
+
           <Typography><Typography variant='h6'>Basic Details</Typography>  </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
+       
         <Grid container
   direction="row"
   rowSpacing={2}
   columnSpacing={2}
-  justifyContent="space-between"
+  justifyContent="flex-start"
   alignItems="center"
         >
 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
@@ -60,23 +56,16 @@ const AdditionForm = (props) =>{
 </Grid>
 
         </Grid>
-        </AccordionDetails>
-      </Accordion></Grid>
+       </Grid>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
+    
           <Typography variant='h6'>Address Details</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
+        
         <Grid container
   direction="row"
   rowSpacing={2}
   columnSpacing={2}
-  justifyContent="space-between"
+  justifyContent="flex-start"
   alignItems="center"
         >
 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
@@ -99,23 +88,16 @@ const AdditionForm = (props) =>{
 </Grid>
 
         </Grid>
-        </AccordionDetails>
-      </Accordion></Grid>
+        </Grid>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
+   
           <Typography variant='h6'>Employment Details</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
+       
         <Grid container
   direction="row"
   rowSpacing={2}
   columnSpacing={2}
-  justifyContent="space-between"
+  justifyContent="flex-start"
   alignItems="center"
         >
 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
@@ -141,25 +123,18 @@ const AdditionForm = (props) =>{
 </Grid>
 
         </Grid>
-        </AccordionDetails>
-      </Accordion></Grid>
+        </Grid>
 
 
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
+    
           <Typography variant='h6'>Additional Details</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
+       
         <Grid container
   direction="row"
   rowSpacing={2}
   columnSpacing={2}
-  justifyContent="space-between"
+  justifyContent="flex-start"
   alignItems="center"
         >
 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
@@ -192,24 +167,17 @@ const AdditionForm = (props) =>{
 </Grid>
 
         </Grid>
-        </AccordionDetails>
-      </Accordion></Grid>
+      </Grid>
 
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
+     
           <Typography variant='h6'>Previous Experience</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
+        
         <Grid container
   direction="row"
   rowSpacing={2}
   columnSpacing={2}
-  justifyContent="space-between"
+  justifyContent="flex-start"
   alignItems="center"
         >
 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
@@ -235,19 +203,12 @@ const AdditionForm = (props) =>{
 </Grid>
 
         </Grid>
-        </AccordionDetails>
-      </Accordion></Grid>
+     </Grid>
 
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
+    
           <Typography variant='h6'>Bank Details</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
+       
         <Grid container
   direction="row"
   rowSpacing={2}
@@ -268,12 +229,16 @@ const AdditionForm = (props) =>{
 <TextField fullWidth id="outlined-basic" label="Account Holder's Name" variant="outlined" />
 </Grid>
 
-        </Grid>
-        </AccordionDetails>
-      </Accordion></Grid>
-
-
+<Grid item xs={10} sm={5} md={3} lg={12} xl={12} >
+<br />
+<Button fullWidth variant='contained'>Submit</Button>
 </Grid>
+
+        </Grid>
+       </Grid>
+
+
+</Grid></form ></Card>
     </div>
   );
 

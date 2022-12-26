@@ -27,6 +27,7 @@ export default function SubjectManagement(props) {
 
     return (
       <div>
+         <Card style={{padding:"15px"}}>
         <Grid
             container
             direction="row"
@@ -43,7 +44,7 @@ export default function SubjectManagement(props) {
              <Link to='/academic/addition-form'><Button>+ Assign Class Teacher</Button></Link></Card>
           </Grid>
 
-          <Grid style={{padding:"10px"}} item lg={12} xl={12} md={12} sm={12} xs={12}>
+          <Grid  item lg={12} xl={12} md={12} sm={12} xs={12}>
           <TableContainer  style={{padding:"10px"}} component={Paper}>
       <Table sx={{ minWidth: 650}} aria-label="simple table">
         <TableHead>
@@ -86,7 +87,7 @@ export default function SubjectManagement(props) {
     <Button>+ Add Subject</Button>
           </Grid>
         </Grid>
-      
+        </Card>
       </div>
     );
 }
