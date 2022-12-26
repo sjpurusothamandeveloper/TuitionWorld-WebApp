@@ -61,39 +61,29 @@ const NotFoundRoot = styled(FlexBox)(() => ({
 const ClassroomSetup = (props) => {
   const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
-  const [section, setSection] = useState(["A"]);
-  
-  const classes = ["A", "B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-   
-  const addClassCard = (index) =>{
-    setSection([...section , classes[index]] )
-  }
-
-  // var list= 
-  //   {
-  //     id: 1,
-  //     name: "Avy"
-  //   }
-  // ;
-  // useEffect(() => {
-   
-  //   setSection([...section, list])
-
-  // }, [])
-  // console.log("hii",section)
-  // section = ["A", "B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-  // const [categories,setCategories]=useState([]);
-  // categories=["senior-secondary","secondary","middle","primary","pre-primary"]
+  const [lastCreatedSection, setLastCreatedSection] = useState("A");
+  const [createdSectionsArr, setCreatedSectionsArr] = useState(["A"]);
+  const sectionArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+  const createNxtNewSection = () => {
+    let indexOfLastSection = sectionArr.indexOf(lastCreatedSection)
+    let nextSection = sectionArr[indexOfLastSection + 1]
+    let tempArr = []
+    tempArr.push(nextSection)
+    let x = [...createdSectionsArr, ...tempArr]
+    setLastCreatedSection(nextSection)
+    setCreatedSectionsArr(x)
+  }
+
   return (
 
-    <div style={{padding:"15px"}}>
-     
-      <Accordion style={{marginTop:"10px",borderRadius:"10px"}}>
+    <div style={{ padding: "15px" }}>
+
+      <Accordion style={{ marginTop: "10px", borderRadius: "10px" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -102,20 +92,34 @@ const ClassroomSetup = (props) => {
           <Typography><Typography variant='h6'>Senior Secondary</Typography>  </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <StraightFlex><Typography>Class 12</Typography><Button onClick={addClassCard} >Add New Class</Button></StraightFlex>
-        
-          <ClassCard>
-            <Typography variant='p' > 12 - {section}
-             {/* {section && section.map
-((item) => <p>{item.name}</p>)} */}
-</Typography>
-            <br />
-            <br />
-            <br />
-            <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}> <Typography variant='p'>View Class </Typography><ArrowForwardIosIcon fontSize='14px' /></span>
-          </ClassCard></AccordionDetails></Accordion>
-         
-      <Accordion style={{marginTop:"10px",borderRadius:"10px"}}>
+          <Button style={{ float: "right" }} onClick={createNxtNewSection} >+ Add New Section</Button>
+          <StraightFlex>
+            <Typography><b>Class 12</b></Typography>
+          </StraightFlex>
+          {
+            createdSectionsArr.length > 0 && createdSectionsArr.map((sect, i) => {
+              return (
+                <div key={i}>
+                  <ClassCard>
+                    <Typography variant='p' > 12 - {sect}
+                    </Typography>
+                    <br />
+                    <br />
+                    <br />
+                    <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
+                      <ArrowForwardIosIcon fontSize='14px' />
+                    </span>
+                  </ClassCard>
+                </div>
+              )
+            })
+          }
+
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion style={{ marginTop: "10px", borderRadius: "10px" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -125,14 +129,14 @@ const ClassroomSetup = (props) => {
         </AccordionSummary>
         <AccordionDetails>
           <ClassCard>
-            <Typography variant='p' >12 - {section}</Typography>
+            <Typography variant='p' >12 - {lastCreatedSection}</Typography>
             <br />
             <br />
             <br />
             <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}> <Typography variant='p'>View Class </Typography><ArrowForwardIosIcon fontSize='14px' /></span>
           </ClassCard></AccordionDetails></Accordion>
-          
-      <Accordion style={{marginTop:"10px",borderRadius:"10px"}}>
+
+      <Accordion style={{ marginTop: "10px", borderRadius: "10px" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -142,14 +146,14 @@ const ClassroomSetup = (props) => {
         </AccordionSummary>
         <AccordionDetails>
           <ClassCard>
-            <Typography variant='p' >12 - {section}</Typography>
+            <Typography variant='p' >12 - {lastCreatedSection}</Typography>
             <br />
             <br />
             <br />
             <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}> <Typography variant='p'>View Class </Typography><ArrowForwardIosIcon fontSize='14px' /></span>
           </ClassCard></AccordionDetails></Accordion>
-         
-      <Accordion style={{marginTop:"10px",borderRadius:"10px"}}>
+
+      <Accordion style={{ marginTop: "10px", borderRadius: "10px" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -159,13 +163,13 @@ const ClassroomSetup = (props) => {
         </AccordionSummary>
         <AccordionDetails>
           <ClassCard>
-            <Typography variant='p' >12 - {section}</Typography>
+            <Typography variant='p' >12 - {lastCreatedSection}</Typography>
             <br />
             <br />
             <br />
             <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}> <Typography variant='p'>View Class </Typography><ArrowForwardIosIcon fontSize='14px' /></span>
-          </ClassCard></AccordionDetails></Accordion> 
-      <Accordion style={{marginTop:"10px",borderRadius:"10px"}}>
+          </ClassCard></AccordionDetails></Accordion>
+      <Accordion style={{ marginTop: "10px", borderRadius: "10px" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -175,13 +179,13 @@ const ClassroomSetup = (props) => {
         </AccordionSummary>
         <AccordionDetails>
           <ClassCard>
-            <Typography variant='p' >12 - {section}</Typography>
+            <Typography variant='p' >12 - {lastCreatedSection}</Typography>
             <br />
             <br />
             <br />
             <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}> <Typography variant='p'>View Class </Typography><ArrowForwardIosIcon fontSize='14px' /></span>
           </ClassCard></AccordionDetails></Accordion>
-         
+
     </div>
 
     // <NotFoundRoot>

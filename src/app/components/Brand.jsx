@@ -1,5 +1,5 @@
 import { Box, styled } from '@mui/material';
-import { MatxLogo } from 'app/components';
+import TWLogo from 'app/appicon/TWLogo.png';
 import useSettings from 'app/hooks/useSettings';
 import { Span } from './Typography';
 
@@ -24,7 +24,7 @@ const Brand = ({ children }) => {
   return (
     <BrandRoot>
       <Box display="flex" alignItems="center">
-        {/* <MatxLogo /> */}
+        {/* <img src={TWLogo} alt='TW' width={'50px'} height={'50px'}/> */}
         <StyledSpan mode={mode} className="sidenavHoverShow">
           Tuition World
         </StyledSpan>
