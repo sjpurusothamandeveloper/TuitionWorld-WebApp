@@ -5,12 +5,12 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
 
-const AdditionForm = (props) =>{
+const StudentAdditionForm = (props) =>{
    return(
     <div>
       <Card style={{padding:"15px"}}>
 <br />
-<Typography variant='h5' align='center'>Add Teacher Details</Typography>
+<Typography variant='h5' align='center'>Add Student Details</Typography>
         <form>
  <Grid
   container
@@ -253,4 +253,4 @@ const AdditionForm = (props) =>{
 
 };
 
-export default  AdditionForm
+export default  StudentAdditionForm

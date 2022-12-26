@@ -91,8 +91,8 @@ const ClassroomSetup = (props) => {
 
   return (
 
-    <div >
-      <Card style={{padding:"15px"}}>
+    <div style={{padding:"15px"}}>
+     
       <Accordion style={{marginTop:"10px",borderRadius:"10px"}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -181,7 +181,7 @@ const ClassroomSetup = (props) => {
             <br />
             <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}> <Typography variant='p'>View Class </Typography><ArrowForwardIosIcon fontSize='14px' /></span>
           </ClassCard></AccordionDetails></Accordion>
-          </Card>
+         
     </div>
 
     // <NotFoundRoot>
