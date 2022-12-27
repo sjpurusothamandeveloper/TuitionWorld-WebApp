@@ -1,11 +1,28 @@
 import { React, useState } from 'react';
-import { Grid, Box, Button, Accordion, AccordionSummary, AccordionDetails, TextField, styled, Typography, Card, Collapse, IconButton } from '@mui/material';
+import { useForm, Controller, useFieldArray } from "react-hook-form";
+import { Grid, Box, Select,
+  MenuItem,
+  InputLabel, FormControlLabel,
+  FormGroup,
+  FormControl, Button, TextField, styled, Typography, Card, Collapse, IconButton } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 
 
 const StudentAdditionForm = (props) => {
+  const [value, setValue] = useState(null);
+  const {
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors },
+  } = useForm();
+  const submitEmployee = (empdata) => {
+    console.log("submitEmployee", empdata);
+  }
   return (
     <div>
       <Card style={{ padding: "15px" }}>
@@ -31,33 +48,156 @@ const StudentAdditionForm = (props) => {
                 alignItems="center"
               >
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Mobile Number" variant="outlined" />
+                <Controller
+              control={control}
+              name="mobileNumber"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (  <TextField  {...field} fullWidth id="outlined-basic" label="Mobile Number" variant="outlined" />   )}
+              />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Email ID" variant="outlined" />
+                <Controller
+              control={control}
+              name="Emailid"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (  <TextField  {...field} fullWidth id="outlined-basic" label="Email ID" variant="outlined" /> )}
+              />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Employee ID
-" required variant="outlined" /></Grid>
-                <Grid item xs={10} sm={6} md={3} lg={3} xl={3} ><TextField fullWidth id="outlined-basic" label="First Name
-" required variant="outlined" />
+                <Controller
+              control={control}
+              name="Enroleid"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (
+                  <TextField fullWidth id="outlined-basic"  {...field} label="Enrole ID  
+" required variant="outlined" /> )}
+/></Grid>
+                <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
+                <Controller
+              control={control}
+              name="firstName"
+              rules={{
+                required: true,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="First Name"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Last Name" variant="outlined" />
-                </Grid>
+                <Controller
+              control={control}
+              name="lasstName"
+              rules={{
+                required: true,
+              }}
+              defaultValue=""
+              render={({ field }) => (  <TextField    {...field}  fullWidth id="outlined-basic" label="Last Name" variant="outlined" />
+              )}
+              /> </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Date of Admission" variant="outlined" /></Grid>
+                <Controller
+              control={control}
+              name="admissionDate"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (  <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DatePicker
+        label="Date of Admission"
+        {...field}
+        renderInput={(params) => <TextField {...params} />}
+      />
+    </LocalizationProvider> )}
+              /></Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Date of Birth" variant="outlined" /></Grid>
+                <Controller
+              control={control}
+              name="birthDate"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (  <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DatePicker
+        label="Date of Birth"
+        {...field}
+        renderInput={(params) => <TextField {...params} />}
+      />
+    </LocalizationProvider> )} /></Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <TextField fullWidth id="outlined-basic" label="Roll No" variant="outlined" />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Gender" variant="outlined" />
+                <Controller
+              control={control}
+              name="title"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (
+                <FormControl  fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Gender
+                  </InputLabel>
+                  <Select
+                    {...field}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    variant="outlined"
+                    label="Gender"
+                  >
+                  <MenuItem >Male</MenuItem> 
+                  <MenuItem >Female</MenuItem>
+                  <MenuItem >Others</MenuItem>
+                  </Select>
+                </FormControl>
+              )}
+            />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Blood Group
-" required variant="outlined" />
+                <Controller
+              control={control}
+              name="title"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (
+                <FormControl  fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Blood Group
+                  </InputLabel>
+                  <Select
+                    {...field}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    variant="outlined"
+                    label="Blood Group"
+                  >
+                  <MenuItem >A+</MenuItem> 
+                  <MenuItem >A-</MenuItem>
+                  <MenuItem >B+</MenuItem>
+                  <MenuItem >B+</MenuItem>
+                  <MenuItem >AB+</MenuItem>
+                  <MenuItem >AB-</MenuItem>
+                  <MenuItem >O+</MenuItem>
+                  <MenuItem >O-</MenuItem>
+
+                  </Select>
+                </FormControl>
+              )}
+            />
                 </Grid>
 
               </Grid>
@@ -74,19 +214,59 @@ const StudentAdditionForm = (props) => {
                 alignItems="center"
               >
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Address" variant="outlined" />
+                <Controller
+              control={control}
+              name="address"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Address"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="City" variant="outlined" />
+                <Controller
+              control={control}
+              name="city"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="City"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="PinCode" variant="outlined" />
+                <Controller
+              control={control}
+              name="pinCode"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Pin Code"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="State" variant="outlined" />
+                <Controller
+              control={control}
+              name="state"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="State"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Country" variant="outlined" />
+                <Controller
+              control={control}
+              name="country"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Country"  variant="outlined" />)}
+/>
                 </Grid>
 
               </Grid>
@@ -103,31 +283,103 @@ const StudentAdditionForm = (props) => {
                 alignItems="center"
               >
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Name" variant="outlined" />
+                <Controller
+              control={control}
+              name="fatherName"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Father Name"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Mobile No" variant="outlined" />
+                <Controller
+              control={control}
+              name="fatherMobile"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Mobile Number"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="EMail ID" variant="outlined" />
+                <Controller
+              control={control}
+              name="fatheremail"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Email"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Occupation" variant="outlined" />
+                <Controller
+              control={control}
+              name="fatherOccupation"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Occupation"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Organization" variant="outlined" />
+                <Controller
+              control={control}
+              name="fatherOrganization"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Organization"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Designation" variant="outlined" />
+                <Controller
+              control={control}
+              name="fatherDesignation"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Designation"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Experience (Years)" variant="outlined" />
+                <Controller
+              control={control}
+              name="fatherExperience"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Experience(in Years)"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Highest Qualification" variant="outlined" />
+                <Controller
+              control={control}
+              name="fatherQualification"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Highest Qualification"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Annual Income" variant="outlined" />
+                <Controller
+              control={control}
+              name="fatherIncome"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Annual Income"  variant="outlined" />)}
+/>
                 </Grid>
 
               </Grid>
@@ -146,31 +398,103 @@ const StudentAdditionForm = (props) => {
                 alignItems="center"
               >
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Name" variant="outlined" />
+                <Controller
+              control={control}
+              name="motherName"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field}  fullWidth id="outlined-basic" label="Mother Name"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Mobile No" variant="outlined" />
+                <Controller
+              control={control}
+              name="motherMobile"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field}  fullWidth id="outlined-basic" label="Mobile Number"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="EMail ID" variant="outlined" />
+                <Controller
+              control={control}
+              name="motheremail"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field}  fullWidth id="outlined-basic" label="Email"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Occupation" variant="outlined" />
+                <Controller
+              control={control}
+              name="motherOccupation"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field}  fullWidth id="outlined-basic" label="Occupation"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Organization" variant="outlined" />
+                <Controller
+              control={control}
+              name="motherOrganization"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field}  fullWidth id="outlined-basic" label="Organization"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Designation" variant="outlined" />
+                <Controller
+              control={control}
+              name="motherDesignation"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Designation"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Experience (Years)" variant="outlined" />
+                <Controller
+              control={control}
+              name="motherExperience"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field}  fullWidth id="outlined-basic" label="Experience(in Years)"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Highest Qualification" variant="outlined" />
+                <Controller
+              control={control}
+              name="motherQualification"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field}  fullWidth id="outlined-basic" label="Highest Qualification"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Annual Income" variant="outlined" />
+                <Controller
+              control={control}
+              name="motherIncome"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field}  fullWidth id="outlined-basic" label="Annual Income"  variant="outlined" />)}
+/>
                 </Grid>
 
               </Grid>
@@ -181,41 +505,113 @@ const StudentAdditionForm = (props) => {
 <Typography variant='h6'>Guardian Details</Typography>
 
 <Grid container
-  direction="row"
-  rowSpacing={2}
-  columnSpacing={2}
-  justifyContent="flex-start"
-  alignItems="center"
->
-  <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="Name" variant="outlined" />
-  </Grid>
-  <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="Mobile No" variant="outlined" />
-  </Grid>
-  <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="EMail ID" variant="outlined" />
-  </Grid>
-  <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="Occupation" variant="outlined" />
-  </Grid>
-  <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="Organization" variant="outlined" />
-  </Grid>
-  <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="Designation" variant="outlined" />
-  </Grid>
-  <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="Experience (Years)" variant="outlined" />
-  </Grid>
-  <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="Highest Qualification" variant="outlined" />
-  </Grid>
-  <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="Annual Income" variant="outlined" />
-  </Grid>
+                direction="row"
+                rowSpacing={2}
+                columnSpacing={2}
+                justifyContent="flex-start"
+                alignItems="center"
+              >
+                <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
+                <Controller
+              control={control}
+              name="guardianName"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field}  fullWidth id="outlined-basic" label="Guardian Name"  variant="outlined" />)}
+/>
+                </Grid>
+                <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
+                <Controller
+              control={control}
+              name="guardianMobile"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field}  fullWidth id="outlined-basic" label="Mobile Number"  variant="outlined" />)}
+/>
+                </Grid>
+                <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
+                <Controller
+              control={control}
+              name="guardianemail"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field}  fullWidth id="outlined-basic" label="Email"  variant="outlined" />)}
+/>
+                </Grid>
+                <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
+                <Controller
+              control={control}
+              name="guardianOccupation"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Occupation"  variant="outlined" />)}
+/>
+                </Grid>
+                <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
+                <Controller
+              control={control}
+              name="guardianOrganization"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field}  fullWidth id="outlined-basic" label="Organization"  variant="outlined" />)}
+/>
+                </Grid>
+                <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
+                <Controller
+              control={control}
+              name="guardianDesignation"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Designation"  variant="outlined" />)}
+/>
+                </Grid>
+                <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
+                <Controller
+              control={control}
+              name="guardianExperience"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Experience(in Years)"  variant="outlined" />)}
+/>
+                </Grid>
+                <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
+                <Controller
+              control={control}
+              name="guardianQualification"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field}  fullWidth id="outlined-basic" label="Highest Qualification"  variant="outlined" />)}
+/>
+                </Grid>
+                <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
+                <Controller
+              control={control}
+              name="guardianIncome"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field}  fullWidth id="outlined-basic" label="Annual Income"  variant="outlined" />)}
+/>
+                </Grid>
 
-</Grid>
+              </Grid>
 </Grid>
 
 
@@ -231,16 +627,50 @@ const StudentAdditionForm = (props) => {
   alignItems="center"
 >
   <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="Bank Name" variant="outlined" />
+  <Controller
+              control={control}
+              name="bankname"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field}  fullWidth id="outlined-basic" label="Bank Name"  variant="outlined" />)}
+/>
   </Grid>
   <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="Bank Account Number" variant="outlined" />
+  <Controller
+              control={control}
+              name="bankaccNumber"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field}  fullWidth id="outlined-basic" label="Bank Account Number"  variant="outlined" />)}
+/>
+    
   </Grid>
   <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="IFSC Code" variant="outlined" />
+  
+  <Controller
+              control={control}
+              name="ifsccode"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field}  fullWidth id="outlined-basic" label="IFSC Code"  variant="outlined" />)}
+/>
   </Grid>
   <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="Account Holder's Name" variant="outlined" />
+  <Controller
+              control={control}
+              name="accountholderName"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Account Holder Name"  variant="outlined" />)}
+/>
   </Grid>
   
 
@@ -322,22 +752,70 @@ const StudentAdditionForm = (props) => {
                 alignItems="center"
               >
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Weight (kg)" variant="outlined" />
+                <Controller
+              control={control}
+              name="weight"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Weight In Kg"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Height (cm)" variant="outlined" />
+                <Controller
+              control={control}
+              name="height"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Height in cm"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Body Mass Index (BMI)" variant="outlined" />
+                <Controller
+              control={control}
+              name="bmi"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="BMI"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Pulse Rate" variant="outlined" />
+                <Controller
+              control={control}
+              name="pulseRate"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Pulse Rate"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Haemoglobin (Hb)" variant="outlined" />
+                <Controller
+              control={control}
+              name="hemoglobin"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Hemoglobin hp"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Allergies" variant="outlined" />
+                <Controller
+              control={control}
+              name="allergies"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Allergies"  variant="outlined" />)}
+/>
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <TextField fullWidth id="outlined-basic" label="COVID Vaccination" variant="outlined" />
@@ -346,7 +824,15 @@ const StudentAdditionForm = (props) => {
                   <TextField fullWidth id="outlined-basic" label="Child Immunisation" variant="outlined" />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Immunisation Remarks" variant="outlined" />
+                <Controller
+              control={control}
+              name="immunisationRemarks"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Immunisation Remarks"  variant="outlined" />)}
+/>
                 </Grid>
 
               </Grid>
@@ -363,32 +849,91 @@ const StudentAdditionForm = (props) => {
   alignItems="center"
 >
   <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="School Name" variant="outlined" />
+  <Controller
+              control={control}
+              name="schoolName"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="School Name"  variant="outlined" />)}
+/>
   </Grid>
   <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="School Address" variant="outlined" />
+  <Controller
+              control={control}
+              name="schoolAddress"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="School Address"  variant="outlined" />)}
+/>
+   
   </Grid>
   <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="Board" variant="outlined" />
+  <Controller
+              control={control}
+              name="board"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="board"  variant="outlined" />)}
+/>
+  
   </Grid>
   <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="Medium of Instruction" variant="outlined" />
+  <Controller
+              control={control}
+              name="medium"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Medium of Instruction"  variant="outlined" />)}
+/>
+   
   </Grid>
   <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="T.C.Number" variant="outlined" />
+  <Controller
+              control={control}
+              name="tcNumber"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="TC Number"  variant="outlined" />)}
+/>
   </Grid>
   <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="Last Class Passed" variant="outlined" />
+  <Controller
+              control={control}
+              name="lastclsPassed"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Last Class Passed"  variant="outlined" />)}
+/>
   </Grid>
   <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-    <TextField fullWidth id="outlined-basic" label="Percentage/Grade" variant="outlined" />
+  <Controller
+              control={control}
+              name="percentage/grade"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Percentage / Grade"  variant="outlined" />)}
+/>
   </Grid>
   <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
    
   </Grid>
   <Grid item xs={10} sm={5} md={3} lg={2} xl={2} >
 
-    <Button fullWidth variant='contained' color='warning'>Submit</Button>
+    <Button   onClick={handleSubmit(submitEmployee)} fullWidth variant='contained' color='warning'>Submit</Button>
   </Grid>
   <Grid item xs={10} sm={5} md={3} lg={2} xl={2} >
 
