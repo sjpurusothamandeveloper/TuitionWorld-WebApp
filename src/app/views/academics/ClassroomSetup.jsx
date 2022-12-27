@@ -1,4 +1,5 @@
 import { React, useEffect, useState } from 'react';
+import '../academics/index.css';
 import { Grid, Box, Button, Accordion, AccordionSummary, AccordionDetails, styled, Typography, Card, Collapse } from '@mui/material';
 import { useNavigate, Link } from 'react-router-dom';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -36,7 +37,6 @@ const IMG = styled('img')(() => ({
 
 const ClassCard = styled(Card)(() => ({
   width: '100%',
-  maxWidth: '200px',
   padding: '12px',
   borderRadius: '8px',
   height: '100px',
@@ -83,7 +83,7 @@ const ClassroomSetup = (props) => {
 
     <div style={{ padding: "15px" }}>
 
-      <Accordion style={{ marginTop: "10px", borderRadius: "10px" }}>
+      <Accordion className='Accordion-main'>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -94,32 +94,39 @@ const ClassroomSetup = (props) => {
         <AccordionDetails>
           <Button style={{ float: "right" }} onClick={createNxtNewSection} >+ Add New Section</Button>
           <StraightFlex>
-            <Typography><b>Class 12</b></Typography>
+            <Typography  variant='h6'>Class 12</Typography>
           </StraightFlex>
-          {
+       
+                
+                  <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+                  {
             createdSectionsArr.length > 0 && createdSectionsArr.map((sect, i) => {
               return (
-                <div key={i}>
-                  <ClassCard>
-                    <Typography variant='p' > 12 - {sect}
+                    <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
+                  
+                    <ClassCard>
+                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 12 - {sect}
                     </Typography>
                     <br />
                     <br />
-                    <br />
-                    <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
                       <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
                       <ArrowForwardIosIcon fontSize='14px' />
                     </span>
                   </ClassCard>
-                </div>
-              )
-            })
-          }
+                 </Grid> 
+                   )
+                  })
+                }
+                  </Grid>
+                 
+               
+            
 
         </AccordionDetails>
       </Accordion>
 
-      <Accordion style={{ marginTop: "10px", borderRadius: "10px" }}>
+      <Accordion className='Accordion-main'>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -136,7 +143,7 @@ const ClassroomSetup = (props) => {
             <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}> <Typography variant='p'>View Class </Typography><ArrowForwardIosIcon fontSize='14px' /></span>
           </ClassCard></AccordionDetails></Accordion>
 
-      <Accordion style={{ marginTop: "10px", borderRadius: "10px" }}>
+      <Accordion className='Accordion-main'>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -153,7 +160,7 @@ const ClassroomSetup = (props) => {
             <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}> <Typography variant='p'>View Class </Typography><ArrowForwardIosIcon fontSize='14px' /></span>
           </ClassCard></AccordionDetails></Accordion>
 
-      <Accordion style={{ marginTop: "10px", borderRadius: "10px" }}>
+      <Accordion className='Accordion-main'>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -169,7 +176,7 @@ const ClassroomSetup = (props) => {
             <br />
             <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}> <Typography variant='p'>View Class </Typography><ArrowForwardIosIcon fontSize='14px' /></span>
           </ClassCard></AccordionDetails></Accordion>
-      <Accordion style={{ marginTop: "10px", borderRadius: "10px" }}>
+      <Accordion className='Accordion-main'>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"

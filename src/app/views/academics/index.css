@@ -1,0 +1,15 @@
+.flex-row-space-bw{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.padding-15 {
+    padding:15px
+}
+
+.Accordion-main{
+    margin-top: 10px;
+    border-radius: 10px;
+}
