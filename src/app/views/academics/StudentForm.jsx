@@ -2,8 +2,7 @@ import { React, useState } from 'react';
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { Grid, Box, Select,
   MenuItem,
-  InputLabel, FormControlLabel,
-  FormGroup,
+  InputLabel, 
   FormControl, Button, TextField, styled, Typography, Card, Collapse, IconButton } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -13,15 +12,15 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 
 const StudentAdditionForm = (props) => {
-  const [value, setValue] = useState(null);
+  
   const {
     handleSubmit,
     reset,
     control,
     formState: { errors },
   } = useForm();
-  const submitEmployee = (empdata) => {
-    console.log("submitEmployee", empdata);
+  const submitStudent = (studentData) => {
+    console.log("submitStudent", studentData);
   }
   return (
     <div>
@@ -140,7 +139,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                 <Controller
               control={control}
-              name="title"
+              name="gender"
               rules={{
                 required: false,
               }}
@@ -157,9 +156,9 @@ const StudentAdditionForm = (props) => {
                     variant="outlined"
                     label="Gender"
                   >
-                  <MenuItem >Male</MenuItem> 
-                  <MenuItem >Female</MenuItem>
-                  <MenuItem >Others</MenuItem>
+                  <MenuItem value="Male" >Male</MenuItem> 
+                  <MenuItem value="Female" >Female</MenuItem>
+                  <MenuItem value="Others" >Others</MenuItem>
                   </Select>
                 </FormControl>
               )}
@@ -168,7 +167,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                 <Controller
               control={control}
-              name="title"
+              name="bloodgroup"
               rules={{
                 required: false,
               }}
@@ -185,14 +184,14 @@ const StudentAdditionForm = (props) => {
                     variant="outlined"
                     label="Blood Group"
                   >
-                  <MenuItem >A+</MenuItem> 
-                  <MenuItem >A-</MenuItem>
-                  <MenuItem >B+</MenuItem>
-                  <MenuItem >B+</MenuItem>
-                  <MenuItem >AB+</MenuItem>
-                  <MenuItem >AB-</MenuItem>
-                  <MenuItem >O+</MenuItem>
-                  <MenuItem >O-</MenuItem>
+                  <MenuItem value="A+" >A+</MenuItem> 
+                  <MenuItem value="A-" >A-</MenuItem>
+                  <MenuItem value="B+" >B+</MenuItem>
+                  <MenuItem value="B-" >B+</MenuItem>
+                  <MenuItem value="AB+" >AB+</MenuItem>
+                  <MenuItem value="AB-" >AB-</MenuItem>
+                  <MenuItem value="O+" >O+</MenuItem>
+                  <MenuItem value="O-" >O-</MenuItem>
 
                   </Select>
                 </FormControl>
@@ -689,25 +688,153 @@ const StudentAdditionForm = (props) => {
                 alignItems="center"
               >
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Religion" variant="outlined" />
+                <Controller
+              control={control}
+              name="religion"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (
+                <FormControl  fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Religion
+                  </InputLabel>
+                  <Select
+                    {...field}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    variant="outlined"
+                    label="Religion"
+                  >
+                  <MenuItem value="Hindu">Hindu</MenuItem> 
+                  <MenuItem value="Christian">Christian</MenuItem>
+                  <MenuItem value="Islam">Islam</MenuItem>
+                  <MenuItem value="Others">Others</MenuItem>
+                  </Select>
+                </FormControl>
+              )}
+            />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Category" variant="outlined" />
+                <Controller
+              control={control}
+              name="category"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (
+                <FormControl  fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Category
+                  </InputLabel>
+                  <Select
+                    {...field}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    variant="outlined"
+                    label="Category"
+                  >
+                  <MenuItem value="OBC" >OBC</MenuItem> 
+                  <MenuItem value="ST/Sc" >ST/Sc</MenuItem>
+                  <MenuItem value="MBC" >MBC</MenuItem>
+                  <MenuItem value="Others" >Others</MenuItem>
+                  </Select>
+                </FormControl>
+              )}
+            />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Right To Education (RTE)" variant="outlined" />
+                <Controller
+              control={control}
+              name="rte"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (
+                <FormControl  fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    RTE
+                  </InputLabel>
+                  <Select
+                    {...field}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    variant="outlined"
+                    label="RTE"
+                  >
+                    <MenuItem value="Yes">Yes</MenuItem> 
+                  <MenuItem value="No">No</MenuItem>
+                 
+                  </Select>
+                </FormControl>
+              )}
+            />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <TextField fullWidth id="outlined-basic" label="Nationality" variant="outlined" />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="BPL Student" variant="outlined" />
+                <Controller
+              control={control}
+              name="bplStudent"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (
+                <FormControl  fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    BPL Student
+                  </InputLabel>
+                  <Select
+                    {...field}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    variant="outlined"
+                    label="BPL Student"
+                  >
+                   <MenuItem value="Yes">Yes</MenuItem> 
+                  <MenuItem value="No">No</MenuItem>
+                 
+                  </Select>
+                </FormControl>
+              )}
+            />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <TextField fullWidth id="outlined-basic" label="BPL Card No." variant="outlined" />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Person with Disability (PwD)" variant="outlined" />
+                <Controller
+              control={control}
+              name="PwD"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (
+                <FormControl  fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Person with Disability (PwD)
+                  </InputLabel>
+                  <Select
+                    {...field}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    variant="outlined"
+                    label="Person with Disability (PwD)"
+                  >
+                    <MenuItem value="Yes">Yes</MenuItem> 
+                  <MenuItem value="No">No</MenuItem>
+                 
+                  </Select>
+                </FormControl>
+              )}
+            />
+                 
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <TextField fullWidth id="outlined-basic" label="Type of Disability
@@ -726,13 +853,90 @@ const StudentAdditionForm = (props) => {
                   <TextField fullWidth id="outlined-basic" label="Emergency Contact Number" variant="outlined" />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Single Parent Child" variant="outlined" />
+                <Controller
+              control={control}
+              name="singleParentY/N"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (
+                <FormControl  fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Single Parent
+                  </InputLabel>
+                  <Select
+                    {...field}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    variant="outlined"
+                    label="Single Parent"
+                  >
+                  <MenuItem value="Yes">Yes</MenuItem> 
+                  <MenuItem value="No">No</MenuItem>
+                 
+                  </Select>
+                </FormControl>
+              )}
+            />
+                 
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Single Parent" variant="outlined" />
+                <Controller
+              control={control}
+              name="singleParent"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (
+                <FormControl  fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Single Parent
+                  </InputLabel>
+                  <Select
+                    {...field}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    variant="outlined"
+                    label="Single Parent"
+                  >
+                  <MenuItem value="Male">Male</MenuItem> 
+                  <MenuItem value="Female">Female</MenuItem>
+                 
+                  </Select>
+                </FormControl>
+              )}
+            />
+                 
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Sponsered Student" variant="outlined" />
+                <Controller
+              control={control}
+              name="sponsorStudent"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (
+                <FormControl  fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Sponsored Student
+                  </InputLabel>
+                  <Select
+                    {...field}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    variant="outlined"
+                    label="Sponsored Student"
+                  >
+                  <MenuItem value="Yes" >Yes</MenuItem> 
+                  <MenuItem value="No">No</MenuItem>
+                 
+                  </Select>
+                </FormControl>
+              )}
+            />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <TextField fullWidth id="outlined-basic" label="Sponser Name" variant="outlined" />
@@ -818,10 +1022,54 @@ const StudentAdditionForm = (props) => {
 />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="COVID Vaccination" variant="outlined" />
+                <Controller
+              control={control}
+              name="covidVaccination"
+              rules={{
+                required: false,
+              }}
+              defaultValue=""
+              render={({ field }) => (
+                <FormControl  fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Covid Vaccination
+                  </InputLabel>
+                  <Select
+                    {...field}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    variant="outlined"
+                    label="Covid Vaccination"
+                  >
+                  <MenuItem value="single">Single</MenuItem> 
+                  <MenuItem value="both">Both</MenuItem>
+                  <MenuItem value="none">None</MenuItem>
+                  </Select>
+                </FormControl>
+              )}
+            />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Child Immunisation" variant="outlined" />
+
+                <Controller
+                 name="childImmunisation"
+                 control={control}
+          render={({ field }) => (
+            <FormControl  fullWidth>
+            <InputLabel id="demo-simple-select-label">
+              Child Immunisation
+            </InputLabel>
+            <Select labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    variant="outlined"
+                    label="Child Immunisation" {...field}>
+              <MenuItem value={"yes"}>Yes</MenuItem>
+              <MenuItem value={"no"}>No</MenuItem>
+             
+            </Select>  </FormControl>
+          )}
+         
+        />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                 <Controller
@@ -933,7 +1181,7 @@ const StudentAdditionForm = (props) => {
   </Grid>
   <Grid item xs={10} sm={5} md={3} lg={2} xl={2} >
 
-    <Button   onClick={handleSubmit(submitEmployee)} fullWidth variant='contained' color='warning'>Submit</Button>
+    <Button   onClick={handleSubmit(submitStudent)} fullWidth variant='contained' color='warning'>Submit</Button>
   </Grid>
   <Grid item xs={10} sm={5} md={3} lg={2} xl={2} >
 
