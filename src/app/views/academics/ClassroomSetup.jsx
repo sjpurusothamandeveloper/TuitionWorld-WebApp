@@ -60,21 +60,18 @@ const NotFoundRoot = styled(FlexBox)(() => ({
 
 const ClassroomSetup = (props) => {
   const navigate = useNavigate();
-  const [expanded, setExpanded] = useState(false);
+ 
   const [lastCreatedSection, setLastCreatedSection] = useState("A");
   const [createdSectionsArr, setCreatedSectionsArr] = useState(["A"]);
   const sectionArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+ 
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
-  const createNxtNewSection = () => {
+  const createNxtNewSection = (x) => {
     let indexOfLastSection = sectionArr.indexOf(lastCreatedSection)
     let nextSection = sectionArr[indexOfLastSection + 1]
     let tempArr = []
     tempArr.push(nextSection)
-    let x = [...createdSectionsArr, ...tempArr]
+    x = [...createdSectionsArr, ...tempArr]
     setLastCreatedSection(nextSection)
     setCreatedSectionsArr(x)
   }
@@ -92,9 +89,9 @@ const ClassroomSetup = (props) => {
           <Typography><Typography variant='h6'>Senior Secondary</Typography>  </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Button style={{ float: "right" }} onClick={createNxtNewSection} >+ Add New Section</Button>
+         
           <StraightFlex>
-            <Typography  variant='h6'>Class 12</Typography>
+            <Typography  variant='h6'>Class 12</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection} >+ Add New Section</Button>
           </StraightFlex>
        
                 
@@ -105,7 +102,7 @@ const ClassroomSetup = (props) => {
                     <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
                   
                     <ClassCard>
-                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 12 - {sect}
+                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 11 - {sect}
                     </Typography>
                     <br />
                     <br />
@@ -120,7 +117,33 @@ const ClassroomSetup = (props) => {
                 }
                   </Grid>
                  
-               
+                  <StraightFlex>
+            <Typography  variant='h6'>Class 12</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection} >+ Add New Section</Button>
+          </StraightFlex>
+       
+                
+                  <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+                  {
+            createdSectionsArr.length > 0 && createdSectionsArr.map((sect, i) => {
+              return (
+                    <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
+                  
+                    <ClassCard>
+                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 11 - {sect}
+                    </Typography>
+                    <br />
+                    <br />
+                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
+                      <ArrowForwardIosIcon fontSize='14px' />
+                    </span>
+                  </ClassCard>
+                 </Grid> 
+                   )
+                  })
+                }
+                  </Grid>
+                 
             
 
         </AccordionDetails>

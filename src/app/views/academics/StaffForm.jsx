@@ -1,18 +1,59 @@
 import { React, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import {
   Grid, Button, MenuItem,
   InputLabel,
-  Select, FormControl, TextField, styled, Typography, Card
+  Select, FormControl, TextField, styled, Typography, Card,Tabs,Tab,Box,AppBar
 } from '@mui/material';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { Link } from 'react-router-dom';
 
 
 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
 
 const AdditionForm = (props) => {
+
+ 
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   const {
     handleSubmit,
@@ -26,6 +67,28 @@ const AdditionForm = (props) => {
 
   return (
     <div>
+         <Box sx={{ width: '100%' }}>
+      <Box sx={{width: '100%', borderBottom: 1, borderColor: 'divider' }}>
+      <AppBar position="static">
+        <Tabs centered
+          value={value}
+          onChange={handleChange}
+          indicatorColor="secondary"
+          textColor="inherit"
+          variant="fullWidth"
+          aria-label="full width tabs example"
+        >
+          <Tab label="Teacher Directory" {...a11yProps(1)} />
+          <Tab label="Add Teacher" {...a11yProps(0)} />
+         
+        </Tabs>
+      </AppBar>
+      </Box>
+      <TabPanel value={value} index={0}>
+        <Typography variant='h5' align="center">Start adding teachers to your school <br /> <Button variant='contained' color='primary'>Add Teacher</Button></Typography>
+      
+      </TabPanel>
+      <TabPanel value={value} index={1}>
       <Card style={{ padding: "15px" }}>
         <br />
         <Typography variant='h5' align='center'><b>Add Staff</b></Typography>
@@ -519,14 +582,10 @@ const AdditionForm = (props) => {
               render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Emergency Contact No"  variant="outlined" />)}
 />
                 </Grid>
-
               </Grid>
             </Grid>
-
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-
               <Typography variant='h6'>Previous Experience</Typography>
-
               <Grid container
                 direction="row"
                 rowSpacing={2}
@@ -621,14 +680,10 @@ const AdditionForm = (props) => {
               render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Reference Mobile Number"  variant="outlined" />)}
 />
                 </Grid>
-
               </Grid>
             </Grid>
-
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-
               <Typography variant='h6'>Bank Details</Typography>
-
               <Grid container
                 direction="row"
                 rowSpacing={2}
@@ -666,8 +721,7 @@ const AdditionForm = (props) => {
                 required: false,
               }}
               defaultValue=""
-              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="IFSC Code"  variant="outlined" />)}
-/>
+              render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="IFSC Code"  variant="outlined" />)} />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                 <Controller
@@ -678,24 +732,20 @@ const AdditionForm = (props) => {
               }}
               defaultValue=""
               render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Account Holder's Name"  variant="outlined" />)}
-/>
-                  
+/>                  
                 </Grid>
-
                 <Grid item xs={10} sm={5} md={3} lg={2} xl={2} >
-
                   <Button onClick={handleSubmit(submitStaff)} fullWidth variant='contained' color='warning'>Submit</Button>
                 </Grid>
                 <Grid item xs={10} sm={5} md={3} lg={2} xl={2} >
-
                   <Button fullWidth variant='contained' color='inherit'>Cancel</Button>
                 </Grid>
-
               </Grid>
             </Grid>
-
-
           </Grid></form ></Card>
+      </TabPanel>
+    </Box>
+     
     </div>
   );
 
