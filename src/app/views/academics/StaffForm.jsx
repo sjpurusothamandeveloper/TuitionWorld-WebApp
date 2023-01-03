@@ -10,7 +10,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Link } from 'react-router-dom';
-
+import '../academics/index.css';
 
 
 function TabPanel(props) {
@@ -69,11 +69,10 @@ const AdditionForm = (props) => {
     <div>
          <Box sx={{ width: '100%' }}>
       <Box sx={{width: '100%', borderBottom: 1, borderColor: 'divider' }}>
-      <AppBar position="static">
+      <AppBar className='appbar' position="static">
         <Tabs centered
           value={value}
-          onChange={handleChange}
-          indicatorColor="secondary"
+          onChange={handleChange}         
           textColor="inherit"
           variant="fullWidth"
           aria-label="full width tabs example"
@@ -85,7 +84,7 @@ const AdditionForm = (props) => {
       </AppBar>
       </Box>
       <TabPanel value={value} index={0}>
-        <Typography variant='h5' align="center">Start adding teachers to your school <br /> <Button variant='contained' color='primary'>Add Teacher</Button></Typography>
+        <Typography variant='h5' align="center">Start adding teachers to your school <br /> </Typography>
       
       </TabPanel>
       <TabPanel value={value} index={1}>
