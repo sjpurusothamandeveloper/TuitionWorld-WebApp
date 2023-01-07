@@ -12,6 +12,8 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Link } from 'react-router-dom';
 
 const dateTday = new Date();
+import '../academics/index.css';
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
