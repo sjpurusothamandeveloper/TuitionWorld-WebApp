@@ -164,13 +164,13 @@ const JwtLogin = () => {
                     >
                       Login
                     </LoadingButton>
-                    <GoogleLogin
+                    {/* <GoogleLogin
                       clientId="333302395939-90eii6bjop7bnq02sfvsp8t7ndc76kef.apps.googleusercontent.com"
                       buttonText="Sign in with Google "
                       onSuccess={responseGoogle}
                       onFailure={responseGoogle}
                       cookiePolicy={'single_host_origin'}
-                    />
+                    /> */}
 
                     <Paragraph>
                       Don't have an account?
