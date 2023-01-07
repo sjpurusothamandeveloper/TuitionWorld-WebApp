@@ -99,7 +99,7 @@ const StudentAdditionForm = (props) => {
                       <DatePicker
                         label="Date of Admission"
                         {...field}
-                        renderInput={(params) => <TextField {...params} />}
+                        renderInput={(params) => <TextField fullWidth {...params} />}
                       />
                     </LocalizationProvider>)}
                   /></Grid>
@@ -112,7 +112,7 @@ const StudentAdditionForm = (props) => {
                       <DatePicker
                         label="Date of Birth"
                         {...field}
-                        renderInput={(params) => <TextField {...params} />}
+                        renderInput={(params) => <TextField fullWidth {...params} />}
                       />
                     </LocalizationProvider>)} /></Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
