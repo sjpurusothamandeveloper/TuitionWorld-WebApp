@@ -9,8 +9,9 @@ import {
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { Link } from 'react-router-dom';
+import useFetch from '../../hooks/useFetch.js';
 import '../academics/index.css';
+import { saveStaff } from 'app/services/CreateService.js';
 const dateTday = new Date();
 
 function TabPanel(props) {
@@ -47,8 +48,7 @@ function a11yProps(index) {
 }
 
 const AdditionForm = (props) => {
-
-
+  // const { data: quote, loading, error } = useFetch('http://localhost:5000/staffs')
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -62,8 +62,16 @@ const AdditionForm = (props) => {
     formState: { errors },
   } = useForm();
   
-  const submitStaff = (staffData) => {
+  const submitStaff = async (staffData) => {
     console.log("submitStaff", staffData);
+    try{
+      const responseFromApi = saveStaff(staffData)
+      // const response = await axios.get('/user?ID=12345');
+      // console.log(response);
+    }
+    catch (err) {
+      console.log("Error in Staff Submit Method", err)
+    }
   }
 
   return (
