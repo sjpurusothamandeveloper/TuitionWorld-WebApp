@@ -156,7 +156,7 @@ const AdditionForm = (props) => {
                         <DatePicker
                           label="Date of Birth"
                           {...field}
-                          renderInput={(params) => <TextField {...params} />}
+                          renderInput={(params) => <TextField {...params} fullWidth />}
                         />
                       </LocalizationProvider>)} />
                     </Grid>
@@ -338,7 +338,7 @@ const AdditionForm = (props) => {
                           <DatePicker
                             label="Date of Appointed"
                             {...field}
-                            renderInput={(params) => <TextField {...params} />}
+                            renderInput={(params) => <TextField {...params} fullWidth />}
                           />
                         </LocalizationProvider>)}
                       />
@@ -552,7 +552,7 @@ const AdditionForm = (props) => {
                           <DatePicker
                             label="Date of Joined"
                             {...field}
-                            renderInput={(params) => <TextField {...params} />}
+                            renderInput={(params) => <TextField {...params} fullWidth />}
                           />
                         </LocalizationProvider>)} />
                     </Grid>
