@@ -66,12 +66,12 @@ const ClassroomSetup = (props) => {
   const sectionArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
  
 
-  const createNxtNewSection = (x) => {
+  const createNxtNewSection = () => {
     let indexOfLastSection = sectionArr.indexOf(lastCreatedSection)
     let nextSection = sectionArr[indexOfLastSection + 1]
     let tempArr = []
     tempArr.push(nextSection)
-    x = [...createdSectionsArr, ...tempArr]
+    let x = [...createdSectionsArr, ...tempArr]
     setLastCreatedSection(nextSection)
     setCreatedSectionsArr(x)
   }

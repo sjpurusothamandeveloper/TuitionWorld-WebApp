@@ -238,7 +238,6 @@ const AdditionForm = (props) => {
                           <MenuItem value="AB-" >AB-</MenuItem>
                           <MenuItem value="O+" >O+</MenuItem>
                           <MenuItem value="O-" >O-</MenuItem>
-
                         </Select>
                       </FormControl>
                     )}
