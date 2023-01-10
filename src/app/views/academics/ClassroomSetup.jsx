@@ -107,7 +107,7 @@ const ClassroomSetup = (props) => {
                     <br />
                     <br />
                   <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link  to={`/academics/subject-management/11-${sect}`}><Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography></Link>
+                      <Link  to="/academics/subject-management"><Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography></Link>
                       <ArrowForwardIosIcon fontSize='14px' />
                     </span>
                   </ClassCard>

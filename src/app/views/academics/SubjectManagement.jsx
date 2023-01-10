@@ -5,10 +5,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteIcon from '@mui/icons-material/Delete';
 import LabelledSwitch from '../material-kit/switch/LabelledSwitch';
+import './index.css';
 
 
-
-
+const maxDialog="500px";
 
 const SpaceBetwwenDiv = styled(`div`)(() => ({
     width: '100%',
@@ -31,6 +31,8 @@ export default function SubjectManagement(props) {
   const [users, setUsers] = useState(usersData);
   const [editing, setEditing] = useState(false);
   const [currentUser, setCurrentUser] = useState(initialFormState);
+  const [assignedTeacher,setAssignedTeacher]=useState(false);
+  const[teachers,setTeachers]=useState([])
  
   const [user, setUser] = useState(
     editing ? currentUser : initialFormState
@@ -48,6 +50,7 @@ export default function SubjectManagement(props) {
 
   const resetAddUser = () => {
     setEditing(false);
+    setOpen(!true)
     setUser(initialFormState);
     setCurrentUser(initialFormState);
   };
@@ -105,7 +108,7 @@ export default function SubjectManagement(props) {
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{padding:"20px"}} xs={12} sm={12} md={12} lg={12} xl={12}>
              <SpaceBetwwenDiv> <Typography variant='h6'>Manage class teacher, attendance for 12 - A</Typography><Button>Manage Attendance</Button></SpaceBetwwenDiv>
-             <Link to='/academic/new-staff'><Button>+ Assign Class Teacher</Button></Link></Card>
+             <Link to='/academic/new-staff'><Typography color="primary">+ Assign Class Teacher</Typography></Link></Card>
           </Grid>
 
           <Grid  item lg={12} xl={12} md={12} sm={12} xs={12}>
@@ -131,13 +134,13 @@ export default function SubjectManagement(props) {
             <FormControl component="fieldset" className="formControl">      
         <RadioGroup
           value={value}
-          name="gender1"
+          name="subtype"
           className="group"
-          aria-label="Gender"
+         
           onChange={handleChange}
         >
-          <FormControlLabel value="compulsory" control={<Radio />} label="compulsory" />
-          <FormControlLabel value="optional" control={<Radio />} label="optional" />
+          <FormControlLabel name="compulsory" value="compulsory" control={<Radio />} label="compulsory" />
+          <FormControlLabel name="optional" value="optional" control={<Radio />} label="optional" />
         </RadioGroup>
       </FormControl>
              </TableCell><TableCell></TableCell>
@@ -207,7 +210,7 @@ export default function SubjectManagement(props) {
       </Table>
     </TableContainer>
     <Button onClick={handleClickOpen}>+ Add Subject</Button>
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog fullWidth maxWidth="sm" open={open} onClose={handleClose}>
         <DialogTitle>{editing ? "Edit Subject" : "Add Subject"}</DialogTitle>
         <DialogContent>
         <form
@@ -221,16 +224,16 @@ export default function SubjectManagement(props) {
     >
       <br />
       <TextField
+       fullWidth
         type="text"
         name="name"
         label="Subject"
         variant="outlined"
         value={ user.name}
         onChange={handleInputChange}
-      />
-     
-      <br />
-      <Button type="submit">{editing ? "Update Subject" : "Add Subject"}</Button>
+      />   
+      <br /><br />
+      <Button style={{backgroundColor:"#34314c"}} variant="contained" type="submit">{editing ? "Update" : "Add"}</Button>
       {editing && (
         <Button onClick={resetAddUser} >
           Cancel

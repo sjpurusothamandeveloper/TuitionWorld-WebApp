@@ -4,14 +4,24 @@ import { useForm, Controller, useFieldArray } from "react-hook-form";
 import {
   Grid, Button, MenuItem,
   InputLabel,
-  Select, FormControl, TextField, styled, Typography, Card, Tabs, Tab, Box, AppBar
+  Select, FormControl, TextField, styled, Typography, Card, Tabs, Tab, Box, AppBar,Paper,Table,TableBody,TableCell,TableContainer,TableHead,TableRow
 } from '@mui/material';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Link } from 'react-router-dom';
 import '../academics/index.css';
+import { teacherslist } from './Constants';
 const dateTday = new Date();
+
+
+const SpaceBetwwenDiv = styled(`div`)(() => ({
+  width: '100%',
+  display:'flex',
+  flexDirection:'row',
+  justifyContent:'space-between' ,
+  alignItems:'center'
+}));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -84,6 +94,15 @@ const AdditionForm = (props) => {
             </Tabs>
           </AppBar>
         </Box>
+        <TabPanel value={value} index={0}>
+          <Grid container rowSpacing={2} direction="column"  justifyContent="center">
+          {teacherslist.map((teacher)=>
+         <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
+             <Card className='padding-15'>
+       <SpaceBetwwenDiv><Typography variant='subtitle2' component='p'>{teacher.name}</Typography><Button >Assign</Button></SpaceBetwwenDiv>
+       <Typography variant='body2' component='p'>{teacher.email}</Typography></Card></Grid>)}</Grid>
+       
+        </TabPanel>
         <TabPanel value={value} index={1}>
           <Card style={{ padding: "15px" }}>
             <br />
