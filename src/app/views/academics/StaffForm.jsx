@@ -13,6 +13,9 @@ import useFetch from '../../hooks/useFetch.js';
 import '../academics/index.css';
 import { teacherslist } from './Constants';
 import { saveStaff } from 'app/services/CreateService.js';
+import LoadingButton from '@mui/lab/LoadingButton';
+import Send from '@mui/icons-material/Send';
+
 const dateTday = new Date();
 
 
@@ -60,7 +63,7 @@ function a11yProps(index) {
 const AdditionForm = (props) => {
   // const { data: quote, loading, error } = useFetch('http://localhost:5000/staffs')
   const [value, setValue] = useState(0);
-
+  const [isLoading, setisLoading] = useState(false)
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -71,15 +74,18 @@ const AdditionForm = (props) => {
     control,
     formState: { errors },
   } = useForm();
-  
+
   const submitStaff = async (staffData) => {
+    setisLoading(true)
     console.log("submitStaff", staffData);
-    try{
+    try {
       const responseFromApi = saveStaff(staffData)
+      console.log("resp", responseFromApi)
       // const response = await axios.get('/user?ID=12345');
       // console.log(response);
     }
     catch (err) {
+      setisLoading(false)
       console.log("Error in Staff Submit Method", err)
     }
   }
@@ -92,7 +98,6 @@ const AdditionForm = (props) => {
             <Tabs centered
               value={value}
               onChange={handleChange}
-              
               textColor="inherit"
               variant="fullWidth"
               aria-label="full width tabs example"
@@ -145,7 +150,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="Emailid"
+                        name="emailId"
                         defaultValue=""
                         render={({ field }) => (<TextField  {...field} fullWidth id="outlined-basic" label="Email ID" variant="outlined" />)}
                       />
@@ -153,7 +158,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="Empid"
+                        name="employeeId"
                         defaultValue=""
                         render={({ field }) => (
                           <TextField fullWidth id="outlined-basic"  {...field} label="Employee ID" required variant="outlined" />)}
@@ -164,7 +169,7 @@ const AdditionForm = (props) => {
                         control={control}
                         name="firstName"
                         defaultValue=""
-                        render={({ field }) => (<TextField  required  {...field} fullWidth id="outlined-basic" label="First Name" variant="outlined" />)}
+                        render={({ field }) => (<TextField required  {...field} fullWidth id="outlined-basic" label="First Name" variant="outlined" />)}
                       />
                     </Grid>
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
@@ -172,12 +177,12 @@ const AdditionForm = (props) => {
                         control={control}
                         name="lastName"
                         defaultValue=""
-                        render={({ field }) => (<TextField  required  {...field} fullWidth id="outlined-basic" label="Last Name" variant="outlined" />
+                        render={({ field }) => (<TextField required  {...field} fullWidth id="outlined-basic" label="Last Name" variant="outlined" />
                         )}
                       /> </Grid>
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} > <Controller
                       control={control}
-                      name="birthDate"
+                      name="dob"
                       defaultValue={dateTday}
                       render={({ field }) => (<LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
@@ -322,7 +327,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="jobtitle"
+                        name="jobTitle"
 
                         defaultValue=""
                         render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Job Title" variant="outlined" />)}
@@ -349,7 +354,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="emp-type"
+                        name="employeeType"
 
                         defaultValue=""
                         render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Employment Type" variant="outlined" />)}
@@ -358,7 +363,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="appointmentDate"
+                        name="dateOfAppointed"
 
                         defaultValue={dateTday}
                         render={({ field }) => (<LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -373,7 +378,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="experience"
+                        name="yearOfExp"
 
                         defaultValue=""
                         render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Experience in Yrs" variant="outlined" />)}
@@ -407,7 +412,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="aadharNumber"
+                        name="aadharNo"
 
                         defaultValue=""
                         render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Aadhar Number" variant="outlined" />)}
@@ -416,7 +421,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="panNumber"
+                        name="panNo"
 
                         defaultValue=""
                         render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="PAN Number" variant="outlined" />)}
@@ -499,7 +504,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="maritual-status"
+                        name="maritualStatus"
 
                         defaultValue=""
                         render={({ field }) => (
@@ -534,7 +539,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="emergencyContact"
+                        name="emergContact"
 
                         defaultValue=""
                         render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Emergency Contact No" variant="outlined" />)}
@@ -554,7 +559,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="instituteName"
+                        name="prvsInstName"
 
                         defaultValue=""
                         render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Institute Name" variant="outlined" />)}
@@ -563,7 +568,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="jobtitle"
+                        name="prvsJobTitle"
 
                         defaultValue=""
                         render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Job Title" variant="outlined" />)}
@@ -572,7 +577,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="joiningDate"
+                        name="prvsDtOfJoining"
 
                         defaultValue={dateTday}
                         render={({ field }) => (<LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -586,7 +591,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="releivedDate"
+                        name="prvsDtOfRlvng"
 
                         defaultValue={dateTday}
                         render={({ field }) => (<LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -600,7 +605,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="workLocation"
+                        name="prvsLocation"
 
                         defaultValue=""
                         render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Location" variant="outlined" />)}
@@ -609,7 +614,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="referenceName"
+                        name="prvsRefName"
 
                         defaultValue=""
                         render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Reference Name" variant="outlined" />)}
@@ -618,7 +623,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="referenceMobileNo"
+                        name="prvsRefMob"
 
                         defaultValue=""
                         render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Reference Mobile Number" variant="outlined" />)}
@@ -647,7 +652,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="bankAccountNumber"
+                        name="bankAccNo"
 
                         defaultValue=""
                         render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Bank Account Number" variant="outlined" />)}
@@ -656,7 +661,7 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="ifsc-code"
+                        name="bankIfscCode"
 
                         defaultValue=""
                         render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="IFSC Code" variant="outlined" />)} />
@@ -664,14 +669,24 @@ const AdditionForm = (props) => {
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
                         control={control}
-                        name="accountHolderName"
+                        name="bankAccHolderName"
 
                         defaultValue=""
                         render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Account Holder's Name" variant="outlined" />)}
                       />
                     </Grid>
                     <Grid item xs={10} sm={5} md={3} lg={2} xl={2} >
-                      <Button onClick={handleSubmit(submitStaff)} fullWidth variant='contained' color='warning'>Submit</Button>
+                      {/* <Button  fullWidth variant='contained' color='warning' >Submit</Button> */}
+                      <LoadingButton
+                        loading={isLoading}
+                        fullWidth
+                        loadingPosition="start"
+                        variant="contained"
+                        style={{"backgroundColor": "#ed6c02", "color": "white"}}
+                        onClick={handleSubmit(submitStaff)}
+                      >
+                        Save
+                      </LoadingButton>
                     </Grid>
                     <Grid item xs={10} sm={5} md={3} lg={2} xl={2} >
                       <Button fullWidth variant='contained' color='inherit'>Cancel</Button>
