@@ -28,3 +28,17 @@ export const getStaffs = async(payload) => {
             })
             return apiResp;
 }
+
+export const saveStudent = async(payload) => {
+    const payloadObj = payload;
+        let apiResp = await axios.post(studentCreationUrl, payloadObj)
+            .then(res => {
+                console.log("Data", res)
+                return res.data;    
+            })
+            .catch(err => {
+                console(err)
+                return err
+            })
+            return apiResp;
+}

@@ -10,11 +10,14 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { saveStudent } from 'app/services/AppService.js';
 
 const dateTday = new Date();
 
 
 const StudentAdditionForm = (props) => {
+  const [staffList, setStaffList] = useState([])
+  const [isLoading, setisLoading] = useState(false)
 
   const {
     handleSubmit,
@@ -22,9 +25,30 @@ const StudentAdditionForm = (props) => {
     control,
     formState: { errors },
   } = useForm();
-  const submitStudent = (studentData) => {
+
+  const submitStudent = async (studentData) => {
+    setisLoading(true)
     console.log("submitStudent", studentData);
+    // try {
+      const responseFromApi = await saveStudent(studentData)
+    //   console.log("resp", responseFromApi)
+    //   if (responseFromApi && responseFromApi.statusCode === 200) {
+    //     setisLoading(false)
+    //     handleToastMessage(true, responseFromApi.message)
+    //     reset()
+    //   }
+    //   else {
+    //     setisLoading(false)
+    //     handleToastMessage(false, responseFromApi.message)
+    //   }
+    // }
+    // catch (err) {
+    //   setisLoading(false)
+    //   handleToastMessage(false, "Something Went Wrong :(")
+    //   console.log("Error in Staff Submit Method", err)
+    // }
   }
+
   return (
     <div>
       <Card style={{ padding: "15px" }}>
