@@ -1,4 +1,4 @@
-import { staffCreationUrl, staffListUrl } from "app/services/Services";
+import { staffCreationUrl, staffListUrl, studentCreationUrl } from "app/services/Services";
 import axios from "axios";
 
 export const saveStaff = async(payload) => {
