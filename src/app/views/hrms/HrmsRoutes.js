@@ -8,10 +8,10 @@ const StaffAttendance = Loadable(lazy(() => import('./StaffAttendance')));
 
 const hrmsRoutes = [
   { path: '/hrms/leave-management', element: <LeaveManagement /> },
+  
   { path: '/hrms/staff-management', element: <StaffManagement /> },
   { path: '/hrms/staff-attendance', element: <StaffAttendance /> },
-  // { path: '/academic/administration', element: <ForgotPassword /> },
-  // { path: '/academic/404', element: <NotFound /> },
+ 
 ];
 
 export default hrmsRoutes;

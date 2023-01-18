@@ -103,7 +103,7 @@ const StudentAdditionForm = (props) => {
                     control={control}
                     name="firstName"
                     defaultValue=""
-                    render={({ field }) => (<TextField  required  {...field} fullWidth id="outlined-basic" label="First Name" variant="outlined" />)}
+                    render={({ field }) => (<TextField required  {...field} fullWidth id="outlined-basic" label="First Name" variant="outlined" />)}
                   />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
@@ -111,7 +111,7 @@ const StudentAdditionForm = (props) => {
                     control={control}
                     name="lastName"
                     defaultValue=""
-                    render={({ field }) => (<TextField  required  {...field} fullWidth id="outlined-basic" label="Last Name" variant="outlined" />
+                    render={({ field }) => (<TextField required  {...field} fullWidth id="outlined-basic" label="Last Name" variant="outlined" />
                     )}
                   /> </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
@@ -217,7 +217,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="address"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Address" variant="outlined" />)}
                   />
@@ -226,7 +225,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="city"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="City" variant="outlined" />)}
                   />
@@ -235,7 +233,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="pinCode"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Pin Code" variant="outlined" />)}
                   />
@@ -244,7 +241,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="state"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="State" variant="outlined" />)}
                   />
@@ -253,7 +249,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="country"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Country" variant="outlined" />)}
                   />
@@ -276,7 +271,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="fatherName"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Father Name" variant="outlined" />)}
                   />
@@ -285,7 +279,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="fatherMobile"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Mobile Number" variant="outlined" />)}
                   />
@@ -294,7 +287,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="fatherEmail"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Email" variant="outlined" />)}
                   />
@@ -303,7 +295,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="fatherOccupation"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Occupation" variant="outlined" />)}
                   />
@@ -312,7 +303,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="fatherOrganization"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Organization" variant="outlined" />)}
                   />
@@ -321,7 +311,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="fatherDesignation"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Designation" variant="outlined" />)}
                   />
@@ -330,7 +319,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="fatherExperience"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Experience(in Years)" variant="outlined" />)}
                   />
@@ -339,7 +327,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="fatherQualification"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Highest Qualification" variant="outlined" />)}
                   />
@@ -348,7 +335,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="fatherIncome"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Annual Income" variant="outlined" />)}
                   />
@@ -373,7 +359,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="motherName"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Mother Name" variant="outlined" />)}
                   />
@@ -382,7 +367,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="motherMobile"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Mobile Number" variant="outlined" />)}
                   />
@@ -391,7 +375,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="motherEmail"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Email" variant="outlined" />)}
                   />
@@ -400,7 +383,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="motherOccupation"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Occupation" variant="outlined" />)}
                   />
@@ -409,7 +391,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="motherOrganization"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Organization" variant="outlined" />)}
                   />
@@ -418,7 +399,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="motherDesignation"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Designation" variant="outlined" />)}
                   />
@@ -427,7 +407,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="motherExperience"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Experience(in Years)" variant="outlined" />)}
                   />
@@ -436,7 +415,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="motherQualification"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Highest Qualification" variant="outlined" />)}
                   />
@@ -445,7 +423,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="motherIncome"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Annual Income" variant="outlined" />)}
                   />
@@ -697,7 +674,15 @@ const StudentAdditionForm = (props) => {
                   />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Nationality" variant="outlined" />
+
+
+                  <Controller
+                    control={control}
+                    name="nationality"
+
+                    defaultValue=""
+                    render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Nationality" variant="outlined" />)}
+                  />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
@@ -726,7 +711,12 @@ const StudentAdditionForm = (props) => {
                   />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="BPL Card No." variant="outlined" />
+                  <Controller
+                    control={control}
+                    name="bplCardNo"
+                    defaultValue=""
+                    render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="BPL Card No." variant="outlined" />)}
+                  />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
@@ -756,25 +746,56 @@ const StudentAdditionForm = (props) => {
 
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Type of Disability" variant="outlined" />
+                  <Controller
+                    control={control}
+                    name="typeOfDisability"
+                    defaultValue=""
+                    render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Type of Disability" variant="outlined" />)}
+                  />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Identification Mark" variant="outlined" />
+                  <Controller
+                    control={control}
+                    name="identificationMark"
+                    defaultValue=""
+                    render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Identification Mark" variant="outlined" />)}
+                  />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Mother Tongue" variant="outlined" />
+
+
+                  <Controller
+                    control={control}
+                    name="motherTongue"
+
+                    defaultValue=""
+                    render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Mother Tongue" variant="outlined" />)}
+                  />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Second Language" variant="outlined" />
+
+
+
+                  <Controller
+                    control={control}
+                    name="secondLanguage"
+
+                    defaultValue=""
+                    render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Second Language" variant="outlined" />)}
+                  />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Emergency Contact Number" variant="outlined" />
+                  <Controller
+                    control={control}
+                    name="emgContactNo"
+                    defaultValue=""
+                    render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Emergency Contact Number" variant="outlined" />)}
+                  />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
                     name="singleParentYesNo"
-
                     defaultValue=""
                     render={({ field }) => (
                       <FormControl fullWidth>
@@ -795,13 +816,11 @@ const StudentAdditionForm = (props) => {
                       </FormControl>
                     )}
                   />
-
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
                     name="singleParent"
-
                     defaultValue=""
                     render={({ field }) => (
                       <FormControl fullWidth>
@@ -828,7 +847,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="sponsoredStudent"
-
                     defaultValue=""
                     render={({ field }) => (
                       <FormControl fullWidth>
@@ -851,15 +869,17 @@ const StudentAdditionForm = (props) => {
                   />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Sponser Name" variant="outlined" />
+                  <Controller
+                    control={control}
+                    name="sponsorName"
+                    defaultValue=""
+                    render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Sponser Name" variant="outlined" />)}
+                  />
                 </Grid>
               </Grid>
             </Grid>
-
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-
               <Typography variant='h6'>Medical Records</Typography>
-
               <Grid container
                 direction="row"
                 rowSpacing={2}
@@ -871,7 +891,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="weight"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Weight In Kg" variant="outlined" />)}
                   />
@@ -880,7 +899,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="height"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Height in cm" variant="outlined" />)}
                   />
@@ -889,7 +907,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="bmi"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="BMI" variant="outlined" />)}
                   />
@@ -898,7 +915,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="pulseRate"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Pulse Rate" variant="outlined" />)}
                   />
@@ -907,7 +923,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="hemoglobin"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Hemoglobin hp" variant="outlined" />)}
                   />
@@ -916,7 +931,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="allergies"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Allergies" variant="outlined" />)}
                   />
@@ -925,7 +939,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="covidVaccination"
-
                     defaultValue=""
                     render={({ field }) => (
                       <FormControl fullWidth>
@@ -951,7 +964,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     name="childImmunisation"
                     control={control}
-
                     defaultValue=""
                     render={({ field }) => (
                       <FormControl fullWidth>
@@ -967,14 +979,12 @@ const StudentAdditionForm = (props) => {
 
                         </Select>  </FormControl>
                     )}
-
                   />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
                     name="immunisationRemarks"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Immunisation Remarks" variant="outlined" />)}
                   />
@@ -983,9 +993,7 @@ const StudentAdditionForm = (props) => {
               </Grid>
             </Grid>
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-
               <Typography variant='h6'>Previous School Details</Typography>
-
               <Grid container
                 direction="row"
                 rowSpacing={2}
@@ -997,7 +1005,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="schoolName"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="School Name" variant="outlined" />)}
                   />
@@ -1006,37 +1013,30 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="schoolAddress"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="School Address" variant="outlined" />)}
                   />
-
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
                     name="board"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="board" variant="outlined" />)}
                   />
-
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
                     name="mediumOfInstruction"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Medium of Instruction" variant="outlined" />)}
                   />
-
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
                     name="tcNumber"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="TC Number" variant="outlined" />)}
                   />
@@ -1045,7 +1045,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="lastClsPassed"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Last Class Passed" variant="outlined" />)}
                   />
@@ -1054,7 +1053,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="percentageGrade"
-
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Percentage / Grade" variant="outlined" />)}
                   />

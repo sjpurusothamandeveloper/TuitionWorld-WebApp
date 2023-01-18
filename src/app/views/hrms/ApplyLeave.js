@@ -54,36 +54,20 @@ const NotFoundRoot = styled(FlexBox)(() => ({
   height: '100vh !important',
 }));
 
-const LeaveManagement = () => {
+const ApplyLeave = () => {
   const navigate = useNavigate();
 
   return (
    <React.Fragment>
      <Paper className='component-paper'>
-     <ProfileCard className='profile-card-major'> 
-      <img className='img-rounded' src={pic1}></img>
-      <JustifyBox ><Typography variant="h6">Sabash , <strong>Purusothaman</strong></Typography>
-      
-      <Typography variant="subtitle1">Mail:<strong>dinesh@gmail.com</strong> &emsp;Designation : <strong>Tutor</strong></Typography>
-      </JustifyBox>
-     </ProfileCard>
-     <br />
+     
      <Grid container direction='row'  justifyContent="space-between" alignItems="center">
       <Grid item md={3} lg={3} xl={3} >
-        <LeaveCard className='pink-card'>
-        <Typography variant="subtitle1"><strong>Total Leave</strong></Typography>
-        <Typography variant="h3"><strong>28</strong></Typography>
-        </LeaveCard></Grid>
+       </Grid>
         <Grid item md={3} lg={3} xl={3} >
-        <LeaveCard className="blue-card">
-        <Typography variant="subtitle1"><strong>Remaining Leave</strong> </Typography>
-        <Typography variant="h3"><strong>25</strong></Typography>
-        </LeaveCard></Grid>
+        </Grid>
         <Grid item md={3} lg={3} xl={3} >
-        <LeaveCard className='green-card'>
-        <Typography variant="subtitle1"><strong>Working Days</strong></Typography>
-        <Typography variant="h3"><strong>21</strong></Typography>
-        </LeaveCard>
+        
       </Grid>
 
      </Grid>
@@ -92,4 +76,4 @@ const LeaveManagement = () => {
   );
 };
 
-export default LeaveManagement;
+export default ApplyLeave;
