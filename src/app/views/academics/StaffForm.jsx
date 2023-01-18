@@ -73,6 +73,9 @@ const AdditionForm = (props) => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    if(newValue === 0){
+      handleGetStaffList()
+    }
   };
 
   const {
@@ -84,10 +87,10 @@ const AdditionForm = (props) => {
   } = useForm();
 
   const handleToastMessage = (typeOfMsg, msg) => {
-    const failureMessage = 'Something went wrong :(';  
+    const failureMessage = 'Something went wrong :(';
 
     enqueueSnackbar(msg ? msg : failureMessage, {
-      variant: typeOfMsg? "success" : "error",
+      variant: typeOfMsg ? "success" : "error",
       persist: false,
       autoHideDuration: 2000
     });
@@ -96,7 +99,7 @@ const AdditionForm = (props) => {
   const submitStaff = async (staffData) => {
     setisLoading(true)
     // console.log("submitStaff", staffData);
-    
+
     try {
       const responseFromApi = await saveStaff(staffData)
       console.log("resp", responseFromApi)
@@ -119,21 +122,21 @@ const AdditionForm = (props) => {
 
   useEffect(() => {
     handleGetStaffList()
-  },[])
+  }, [])
 
   const handleGetStaffList = async () => {
-    try{
+    try {
       const responseFromApi = await getStaffs()
       console.log("getCall", responseFromApi)
-      if(responseFromApi && responseFromApi.statusCode === 200 ){
-        if(responseFromApi.data && responseFromApi.data.length > 0){
+      if (responseFromApi && responseFromApi.statusCode === 200) {
+        if (responseFromApi.data && responseFromApi.data.length > 0) {
           setStaffList(responseFromApi.data)
         }
-        else{
+        else {
           setStaffList([])
         }
       }
-      
+
     }
     catch (err) {
       console.log(err)
@@ -164,7 +167,7 @@ const AdditionForm = (props) => {
             {staffList.map((teacher) =>
               <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
                 <Card className='padding-15'>
-                  <SpaceBetwwenDiv><Typography variant='subtitle2' component='p'>{teacher.firstName + " " +teacher.lastName}</Typography><Button >Assign</Button></SpaceBetwwenDiv>
+                  <SpaceBetwwenDiv><Typography variant='subtitle2' component='p'>{teacher.firstName + " " + teacher.lastName}</Typography><Button >Assign</Button></SpaceBetwwenDiv>
                   <Typography variant='body2' component='p'>{teacher.emailId}</Typography></Card></Grid>)}</Grid>
 
         </TabPanel>
