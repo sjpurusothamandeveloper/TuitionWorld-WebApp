@@ -61,7 +61,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="Emailid"
+                    name="emailId"
                     defaultValue=""
                     render={({ field }) => (<TextField  {...field} fullWidth id="outlined-basic" label="Email ID" variant="outlined" />)}
                   />
@@ -69,7 +69,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="Enroleid"
+                    name="enroleId"
                     defaultValue=""
                     render={({ field }) => (
                       <TextField required fullWidth id="outlined-basic"  {...field} label="Enrole ID" variant="outlined" />)}
@@ -93,7 +93,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="admissionDate"
+                    name="dateOfAdmission"
                     defaultValue={dateTday}
                     render={({ field }) => (<LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DatePicker
@@ -106,7 +106,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="birthDate"
+                    name="dob"
                     defaultValue={dateTday}
                     render={({ field }) => (<LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DatePicker
@@ -122,7 +122,6 @@ const StudentAdditionForm = (props) => {
                   <Controller
                     control={control}
                     name="gender"
-
                     defaultValue=""
                     render={({ field }) => (
                       <FormControl fullWidth>
@@ -147,7 +146,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="bloodgroup"
+                    name="bloodGroup"
 
                     defaultValue=""
                     render={({ field }) => (
@@ -270,7 +269,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="fatheremail"
+                    name="fatherEmail"
 
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Email" variant="outlined" />)}
@@ -367,7 +366,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="motheremail"
+                    name="motherEmail"
 
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Email" variant="outlined" />)}
@@ -463,7 +462,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="guardianemail"
+                    name="guardianEmail"
 
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Email" variant="outlined" />)}
@@ -542,7 +541,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="bankname"
+                    name="parentBankName"
 
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Bank Name" variant="outlined" />)}
@@ -551,7 +550,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="bankaccNumber"
+                    name="parentBankAccNo"
 
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Bank Account Number" variant="outlined" />)}
@@ -562,7 +561,7 @@ const StudentAdditionForm = (props) => {
 
                   <Controller
                     control={control}
-                    name="ifsccode"
+                    name="parentIfscCode"
 
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="IFSC Code" variant="outlined" />)}
@@ -571,7 +570,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="accountholderName"
+                    name="parentAccHolderName"
 
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Account Holder Name" variant="outlined" />)}
@@ -708,7 +707,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="PwD"
+                    name="pwd"
 
                     defaultValue=""
                     render={({ field }) => (
@@ -733,8 +732,7 @@ const StudentAdditionForm = (props) => {
 
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <TextField fullWidth id="outlined-basic" label="Type of Disability
-" variant="outlined" />
+                  <TextField fullWidth id="outlined-basic" label="Type of Disability" variant="outlined" />
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <TextField fullWidth id="outlined-basic" label="Identification Mark" variant="outlined" />
@@ -751,7 +749,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="singleParentY/N"
+                    name="singleParentYesNo"
 
                     defaultValue=""
                     render={({ field }) => (
@@ -805,7 +803,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="sponsorStudent"
+                    name="sponsoredStudent"
 
                     defaultValue=""
                     render={({ field }) => (
@@ -1003,7 +1001,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="medium"
+                    name="mediumOfInstruction"
 
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Medium of Instruction" variant="outlined" />)}
@@ -1022,7 +1020,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="lastclsPassed"
+                    name="lastClsPassed"
 
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Last Class Passed" variant="outlined" />)}
@@ -1031,7 +1029,7 @@ const StudentAdditionForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="percentage/grade"
+                    name="percentageGrade"
 
                     defaultValue=""
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Percentage / Grade" variant="outlined" />)}
