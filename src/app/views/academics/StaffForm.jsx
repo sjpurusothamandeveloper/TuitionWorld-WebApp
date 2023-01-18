@@ -1,10 +1,10 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import {
   Grid, Button, MenuItem,
   InputLabel,
-  Select, FormControl, TextField, styled, Typography, Card, Tabs, Tab, Box, AppBar,Paper,Table,TableBody,TableCell,TableContainer,TableHead,TableRow
+  Select, FormControl, TextField, styled, Typography, Card, Tabs, Tab, Box, AppBar, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 } from '@mui/material';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -12,19 +12,21 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import useFetch from '../../hooks/useFetch.js';
 import '../academics/index.css';
 import { teacherslist } from './Constants';
-import { saveStaff } from 'app/services/CreateService.js';
+import { getStaffs, saveStaff } from 'app/services/AppService.js';
 import LoadingButton from '@mui/lab/LoadingButton';
-import Send from '@mui/icons-material/Send';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import { useSnackbar } from 'notistack';
 
 const dateTday = new Date();
 
 
 const SpaceBetwwenDiv = styled(`div`)(() => ({
   width: '100%',
-  display:'flex',
-  flexDirection:'row',
-  justifyContent:'space-between' ,
-  alignItems:'center'
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center'
 }));
 
 function TabPanel(props) {
@@ -60,10 +62,15 @@ function a11yProps(index) {
   };
 }
 
+
+
 const AdditionForm = (props) => {
   // const { data: quote, loading, error } = useFetch('http://localhost:5000/staffs')
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [value, setValue] = useState(0);
+  const [staffList, setStaffList] = useState([])
   const [isLoading, setisLoading] = useState(false)
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -76,25 +83,69 @@ const AdditionForm = (props) => {
     formState: { errors },
   } = useForm();
 
+  const handleToastMessage = (typeOfMsg, msg) => {
+    const failureMessage = 'Something went wrong :(';  
+
+    enqueueSnackbar(msg ? msg : failureMessage, {
+      variant: typeOfMsg? "success" : "error",
+      persist: false,
+      autoHideDuration: 2000
+    });
+  }
+
   const submitStaff = async (staffData) => {
     setisLoading(true)
-    console.log("submitStaff", staffData);
+    // console.log("submitStaff", staffData);
+    
     try {
-      const responseFromApi = saveStaff(staffData)
+      const responseFromApi = await saveStaff(staffData)
       console.log("resp", responseFromApi)
-      // const response = await axios.get('/user?ID=12345');
-      // console.log(response);
+      if (responseFromApi && responseFromApi.statusCode === 200) {
+        setisLoading(false)
+        handleToastMessage(true, responseFromApi.message)
+        reset()
+      }
+      else {
+        setisLoading(false)
+        handleToastMessage(false, responseFromApi.message)
+      }
     }
     catch (err) {
       setisLoading(false)
+      handleToastMessage(false, "Something Went Wrong :(")
       console.log("Error in Staff Submit Method", err)
+    }
+  }
+
+  useEffect(() => {
+    handleGetStaffList()
+  },[])
+
+  const handleGetStaffList = async () => {
+    try{
+      const responseFromApi = await getStaffs()
+      console.log("getCall", responseFromApi)
+      if(responseFromApi && responseFromApi.statusCode === 200 ){
+        if(responseFromApi.data && responseFromApi.data.length > 0){
+          setStaffList(responseFromApi.data)
+        }
+        else{
+          setStaffList([])
+        }
+      }
+      
+    }
+    catch (err) {
+      console.log(err)
     }
   }
 
   return (
     <div>
       <Box sx={{ width: '100%' }}>
+
         <Box sx={{ width: '100%', borderBottom: 1, borderColor: 'divider' }}>
+
           <AppBar className="appbar" position="static">
             <Tabs centered
               value={value}
@@ -109,18 +160,19 @@ const AdditionForm = (props) => {
           </AppBar>
         </Box>
         <TabPanel value={value} index={0}>
-          <Grid container rowSpacing={2} direction="column"  justifyContent="center">
-          {teacherslist.map((teacher)=>
-         <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
-             <Card className='padding-15'>
-       <SpaceBetwwenDiv><Typography variant='subtitle2' component='p'>{teacher.name}</Typography><Button >Assign</Button></SpaceBetwwenDiv>
-       <Typography variant='body2' component='p'>{teacher.email}</Typography></Card></Grid>)}</Grid>
-       
+          <Grid container rowSpacing={2} direction="column" justifyContent="center">
+            {staffList.map((teacher) =>
+              <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
+                <Card className='padding-15'>
+                  <SpaceBetwwenDiv><Typography variant='subtitle2' component='p'>{teacher.firstName + " " +teacher.lastName}</Typography><Button >Assign</Button></SpaceBetwwenDiv>
+                  <Typography variant='body2' component='p'>{teacher.emailId}</Typography></Card></Grid>)}</Grid>
+
         </TabPanel>
         <TabPanel value={value} index={1}>
           <Card style={{ padding: "15px" }}>
             <br />
             <Typography variant='h5' align='center'><b>Add Staff</b></Typography>
+
             <form>
               <Grid
                 container
@@ -153,8 +205,8 @@ const AdditionForm = (props) => {
                         control={control}
                         name="emailId"
                         defaultValue=""
-                        render={({ field }) => (<TextField {...field} {...register("emailId", { required: true })} 
-                        aria-invalid={errors.emailId ? "true" : "false"} fullWidth id="outlined-basic" label="Email ID" variant="outlined" required/>)}
+                        render={({ field }) => (<TextField {...field} {...register("emailId", { required: true })}
+                          aria-invalid={errors.emailId ? "true" : "false"} fullWidth id="outlined-basic" label="Email ID" variant="outlined" required />)}
                       />
                       {/* {errors.emailId?.type === 'required' && <p role="alert" style={{color:"red"}}>First name is required</p>} */}
                     </Grid>
@@ -685,7 +737,7 @@ const AdditionForm = (props) => {
                         fullWidth
                         loadingPosition="start"
                         variant="contained"
-                        style={{"backgroundColor": "#ed6c02", "color": "white"}}
+                        style={{ "backgroundColor": "#ed6c02", "color": "white" }}
                         onClick={handleSubmit(submitStaff)}
                       >
                         Submit
