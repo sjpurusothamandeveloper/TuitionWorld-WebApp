@@ -61,21 +61,92 @@ const NotFoundRoot = styled(FlexBox)(() => ({
 const ClassroomSetup = (props) => {
   const navigate = useNavigate();
  
-  const [lastCreatedSection, setLastCreatedSection] = useState("A");
-  const [createdSectionsArr, setCreatedSectionsArr] = useState(["A"]);
-  const sectionArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  const [lastCreatedSection12, setLastCreatedSection12] = useState("A");
+  const [lastCreatedSection11, setLastCreatedSection11] = useState("A");
+  const [lastCreatedSection10, setLastCreatedSection10] = useState("A");
+  const [lastCreatedSection9, setLastCreatedSection9] = useState("A");
+  const [lastCreatedSection8, setLastCreatedSection8] = useState("A");
+  const [lastCreatedSection7, setLastCreatedSection7] = useState("A");
+  const [lastCreatedSection6, setLastCreatedSection6] = useState("A");
+  const [lastCreatedSection5, setLastCreatedSection5] = useState("A");
+  const [lastCreatedSection4, setLastCreatedSection4] = useState("A");
+  const [lastCreatedSection3, setLastCreatedSection3] = useState("A");
+  const [lastCreatedSection2, setLastCreatedSection2] = useState("A");
+  const [lastCreatedSection1, setLastCreatedSection1] = useState("A");
+
+  const [createdSectionsArr12, setCreatedSectionsArr12] = useState(["A"]);
+  const [createdSectionsArr11, setCreatedSectionsArr11] = useState(["A"]);
+  const [createdSectionsArr10, setCreatedSectionsArr10] = useState(["A"]);
+  const [createdSectionsArr9, setCreatedSectionsArr9] = useState(["A"]);
+  const [createdSectionsArr8, setCreatedSectionsArr8] = useState(["A"]);
+  const [createdSectionsArr7, setCreatedSectionsArr7] = useState(["A"]);
+  const [createdSectionsArr6, setCreatedSectionsArr6] = useState(["A"]);
+  const [createdSectionsArr5, setCreatedSectionsArr5] = useState(["A"]);
+  const [createdSectionsArr4, setCreatedSectionsArr4] = useState(["A"]);
+  const [createdSectionsArr3, setCreatedSectionsArr3] = useState(["A"]);
+  const [createdSectionsArr2, setCreatedSectionsArr2] = useState(["A"]);
+  const [createdSectionsArr1, setCreatedSectionsArr1] = useState(["A"]);
  
 
-  const createNxtNewSection = () => {
-    let indexOfLastSection = sectionArr.indexOf(lastCreatedSection)
-    let nextSection = sectionArr[indexOfLastSection + 1]
+
+  const sectionArr12 = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  const sectionArr11 = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  const sectionArr10 = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  const sectionArr9 = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  const sectionArr8 = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  const sectionArr7 = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  const sectionArr6 = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  const sectionArr5 = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  const sectionArr4 = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  const sectionArr3 = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  const sectionArr2 = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  const sectionArr1 = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  const sectionArrUkg = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  const sectionArrLkg = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  const sectionArrPrekg = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+
+  
+
+  const createNxtNewSection12 = () => {
+    let indexOfLastSection = sectionArr12.indexOf(lastCreatedSection12)
+    let nextSection = sectionArr12[indexOfLastSection + 1]
     let tempArr = []
     tempArr.push(nextSection)
-    let x = [...createdSectionsArr, ...tempArr]
-    setLastCreatedSection(nextSection)
-    setCreatedSectionsArr(x)
+    let x = [...createdSectionsArr12, ...tempArr]
+    setLastCreatedSection12(nextSection)
+    setCreatedSectionsArr12(x)
   }
 
+  const createNxtNewSection11 = () => {
+    let indexOfLastSection = sectionArr11.indexOf(lastCreatedSection11)
+    let nextSection = sectionArr11[indexOfLastSection + 1]
+    let tempArr = []
+    tempArr.push(nextSection)
+    let x = [...createdSectionsArr11, ...tempArr]
+    setLastCreatedSection11(nextSection)
+    setCreatedSectionsArr11(x)
+  }
+   
+  const createNxtNewSection10 = () => {
+    let indexOfLastSection = sectionArr10.indexOf(lastCreatedSection10)
+    let nextSection = sectionArr10[indexOfLastSection + 1]
+    let tempArr = []
+    tempArr.push(nextSection)
+    let x = [...createdSectionsArr10, ...tempArr]
+    setLastCreatedSection10(nextSection)
+    setCreatedSectionsArr10(x)
+  }
+
+  const createNxtNewSection9 = () => {
+    let indexOfLastSection = sectionArr9.indexOf(lastCreatedSection9)
+    let nextSection = sectionArr9[indexOfLastSection + 1]
+    let tempArr = []
+    tempArr.push(nextSection)
+    let x = [...createdSectionsArr9, ...tempArr]
+    setLastCreatedSection9(nextSection)
+    setCreatedSectionsArr9(x)
+  }
+ 
   return (
 
     <div style={{ padding: "15px" }}>
@@ -91,13 +162,13 @@ const ClassroomSetup = (props) => {
         <AccordionDetails>
          
           <StraightFlex>
-            <Typography  variant='h6'>Class 12</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection} >+ Add New Section</Button>
+            <Typography  variant='h6'>Class 12</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection12} >+ Add New Section</Button>
           </StraightFlex>
        
                 
                   <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
                   {
-            createdSectionsArr.length > 0 && createdSectionsArr.map((sect, i) => {
+            createdSectionsArr12.length > 0 && createdSectionsArr12.map((sect, i) => {
               return (
                     <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
                   
@@ -118,13 +189,13 @@ const ClassroomSetup = (props) => {
                   </Grid>
                  
                   <StraightFlex>
-            <Typography  variant='h6'>Class 12</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection} >+ Add New Section</Button>
+            <Typography  variant='h6'>Class 11</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection11} >+ Add New Section</Button>
           </StraightFlex>
        
                 
                   <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
                   {
-            createdSectionsArr.length > 0 && createdSectionsArr.map((sect, i) => {
+            createdSectionsArr11.length > 0 && createdSectionsArr11.map((sect, i) => {
               return (
                     <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
                   
@@ -158,13 +229,55 @@ const ClassroomSetup = (props) => {
           <Typography><Typography variant='h6'>Secondary</Typography>  </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <ClassCard>
-            <Typography variant='p' >12 - {lastCreatedSection}</Typography>
-            <br />
-            <br />
-            <br />
-            <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}> <Typography variant='p'>View Class </Typography><ArrowForwardIosIcon fontSize='14px' /></span>
-          </ClassCard></AccordionDetails></Accordion>
+        <StraightFlex>
+            <Typography  variant='h6'>Class 10</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection10} >+ Add New Section</Button>
+          </StraightFlex>
+        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+                  {
+            createdSectionsArr10.length > 0 && createdSectionsArr10.map((sect, i) => {
+              return (
+                    <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
+                  
+                    <ClassCard>
+                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 10 - {sect}
+                    </Typography>
+                    <br />
+                    <br />
+                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
+                      <ArrowForwardIosIcon fontSize='14px' />
+                    </span>
+                  </ClassCard>
+                 </Grid> 
+                   )
+                  })
+                }
+                  </Grid>
+                  <StraightFlex>
+            <Typography  variant='h6'>Class 9</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection9} >+ Add New Section</Button>
+          </StraightFlex>
+        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+                  {
+            createdSectionsArr9.length > 0 && createdSectionsArr9.map((sect, i) => {
+              return (
+                    <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
+                  
+                    <ClassCard>
+                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 9 - {sect}
+                    </Typography>
+                    <br />
+                    <br />
+                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
+                      <ArrowForwardIosIcon fontSize='14px' />
+                    </span>
+                  </ClassCard>
+                 </Grid> 
+                   )
+                  })
+                }
+                  </Grid>
+         </AccordionDetails></Accordion>
 
       <Accordion className='Accordion-main'>
         <AccordionSummary
@@ -175,13 +288,7 @@ const ClassroomSetup = (props) => {
           <Typography><Typography variant='h6'>Middle</Typography>  </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <ClassCard>
-            <Typography variant='p' >12 - {lastCreatedSection}</Typography>
-            <br />
-            <br />
-            <br />
-            <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}> <Typography variant='p'>View Class </Typography><ArrowForwardIosIcon fontSize='14px' /></span>
-          </ClassCard></AccordionDetails></Accordion>
+        </AccordionDetails></Accordion>
 
       <Accordion className='Accordion-main'>
         <AccordionSummary
@@ -193,7 +300,7 @@ const ClassroomSetup = (props) => {
         </AccordionSummary>
         <AccordionDetails>
           <ClassCard>
-            <Typography variant='p' >12 - {lastCreatedSection}</Typography>
+            <Typography variant='p' >12 - </Typography>
             <br />
             <br />
             <br />
@@ -209,7 +316,7 @@ const ClassroomSetup = (props) => {
         </AccordionSummary>
         <AccordionDetails>
           <ClassCard>
-            <Typography variant='p' >12 - {lastCreatedSection}</Typography>
+            <Typography variant='p' >12 - </Typography>
             <br />
             <br />
             <br />

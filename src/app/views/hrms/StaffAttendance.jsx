@@ -1,66 +1,45 @@
 import { Box, Button, styled, Typography,Grid,Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
-  Card,
-  IconButton} from '@mui/material';
+    MenuItem,
+    InputLabel,
+    FormControl,
+    Card,
+    IconButton} from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './index.css';
-import { studentsList } from './Constants';
+import '../academics/index.css';
+import { studentsList } from '../academics/Constants';
 import HdrAutoIcon from '@mui/icons-material/HdrAuto';
 import PanToolIcon from '@mui/icons-material/PanTool';
-import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
-import FaceRetouchingOffIcon from '@mui/icons-material/FaceRetouchingOff';
-import FaceIcon from '@mui/icons-material/Face';
-import EventBusyIcon from '@mui/icons-material/EventBusy';
-import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+  import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+  import FaceRetouchingOffIcon from '@mui/icons-material/FaceRetouchingOff';
+  import FaceIcon from '@mui/icons-material/Face';
+  import EventBusyIcon from '@mui/icons-material/EventBusy';
+  import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 
-const FlexBox = styled(Box)(() => ({
-  display: 'flex',
-  alignItems: 'center',
-}));
+  const StraightFlex = styled(`div`)(() => ({
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  }));
 
-const StraightFlex = styled(`div`)(() => ({
-  width: '100%',
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  alignItems: 'center'
-}));
 
-const JustifyBox = styled(FlexBox)(() => ({
-  maxWidth: 320,
-  flexDirection: 'column',
-  justifyContent: 'center',
-}));
-
-const IMG = styled('img')(() => ({
-  width: '100%',
-  marginBottom: '32px',
-}));
-
-const NotFoundRoot = styled(FlexBox)(() => ({
-  width: '100%',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '100vh !important',
-}));
-
-const StudentAttendance = () => {
-  const navigate = useNavigate();
- 
-
-  return (
-    <React.Fragment>
-      <div >
-        <StraightFlex className='padding-15'><Typography variant="h6">Student Attendance</Typography></StraightFlex>
-     <br />
-      {/* <Grid container display="row" alignItems="center" justifyContent="space-evenly">
+const StaffAttendance = () => {
+    return ( 
+        <React.Fragment>
+      <div className='padding-15'>
+        <StraightFlex ><Typography variant="h6">Staff Attendance</Typography></StraightFlex>
+    
+     {/* <Card><br />
+      <Grid container display="row" alignItems="center" justifyContent="space-evenly">
+      
         <Grid item sm={5} xs={10} md={3} xl={3} lg={3}>
         <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Select Class</InputLabel>
-       <Select       
+       <Select
+       size="medium"   
+              
          id="demo-simple-select" 
          labelId="demo-simple-select-label"
          label="Select Class"
@@ -74,7 +53,9 @@ const StudentAttendance = () => {
         <Grid item sm={5} xs={10} md={3} xl={3} lg={3}>
         <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Select Subject</InputLabel>
-       <Select       
+       <Select
+       size="medium"     
+            
          id="demo-simple-select" 
          labelId="demo-simple-select-label"
          label="Select Subject"
@@ -88,7 +69,9 @@ const StudentAttendance = () => {
         <Grid item sm={5} xs={10} md={3} xl={3} lg={3}>
         <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Select Section</InputLabel>
-       <Select        
+       <Select
+       size="medium"  
+            
          id="demo-simple-select" 
          labelId="demo-simple-select-label"
          label="Select Section"
@@ -99,15 +82,16 @@ const StudentAttendance = () => {
         </Select>
       </FormControl>
         </Grid>
-      </Grid> */}
-      <br />
+         </Grid>
+      <br /></Card> */}
+      <br /> <br />
       <Grid container columnSpacing={2} rowSpacing={2} display="row" alignItems="center" justifyContent="space-evenly">
        {studentsList.map((student)=> 
         <Grid item md={2} lg={2} xl={2} sm={2} xs={5}>
           <Card className='card-student padding-15'>
              <img class="card-photo" src={student.image}></img>
           <Typography className='padding-15'>{student.name}</Typography> 
-          <StraightFlex><IconButton><FaceIcon className='present-color' /></IconButton><IconButton><FaceRetouchingOffIcon className='absent-color' /></IconButton></StraightFlex>
+          <StraightFlex><IconButton><EventAvailableIcon className='present-color' /></IconButton><IconButton><EventBusyIcon className='absent-color' /></IconButton></StraightFlex>
            </Card>
         </Grid>
         )}
@@ -115,7 +99,7 @@ const StudentAttendance = () => {
       </div>
 
     </React.Fragment>
-  );
-};
+     );
+}
 
-export default StudentAttendance;
+export default StaffAttendance;

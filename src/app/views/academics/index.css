@@ -8,6 +8,23 @@
 .padding-15 {
     padding:15px
 }
+.card-student{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.present-color{
+    color: #52b202 !important;
+}
+.absent-color{
+    color:#ff3d00;
+}
+.card-photo{
+    border-radius: 50%;
+   
+    max-width: 50px;
+}
 
 .Accordion-main{
     margin-top: 10px;
