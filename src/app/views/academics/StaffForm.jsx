@@ -70,6 +70,7 @@ const AdditionForm = (props) => {
 
   const {
     handleSubmit,
+    register,
     reset,
     control,
     formState: { errors },
@@ -152,8 +153,10 @@ const AdditionForm = (props) => {
                         control={control}
                         name="emailId"
                         defaultValue=""
-                        render={({ field }) => (<TextField  {...field} fullWidth id="outlined-basic" label="Email ID" variant="outlined" />)}
+                        render={({ field }) => (<TextField {...field} {...register("emailId", { required: true })} 
+                        aria-invalid={errors.emailId ? "true" : "false"} fullWidth id="outlined-basic" label="Email ID" variant="outlined" required/>)}
                       />
+                      {/* {errors.emailId?.type === 'required' && <p role="alert" style={{color:"red"}}>First name is required</p>} */}
                     </Grid>
                     <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                       <Controller
@@ -685,7 +688,7 @@ const AdditionForm = (props) => {
                         style={{"backgroundColor": "#ed6c02", "color": "white"}}
                         onClick={handleSubmit(submitStaff)}
                       >
-                        Save
+                        Submit
                       </LoadingButton>
                     </Grid>
                     <Grid item xs={10} sm={5} md={3} lg={2} xl={2} >
