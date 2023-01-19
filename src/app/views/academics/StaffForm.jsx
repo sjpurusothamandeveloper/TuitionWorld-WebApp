@@ -99,7 +99,6 @@ const AdditionForm = (props) => {
   const submitStaff = async (staffData) => {
     setisLoading(true)
     // console.log("submitStaff", staffData);
-
     try {
       const responseFromApi = await saveStaff(staffData)
       console.log("resp", responseFromApi)
