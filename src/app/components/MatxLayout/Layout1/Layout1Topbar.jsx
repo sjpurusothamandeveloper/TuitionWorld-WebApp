@@ -3,14 +3,18 @@ import { Box, styled, useTheme } from '@mui/system';
 import { MatxMenu, MatxSearchBox } from 'app/components';
 import { themeShadows } from 'app/components/MatxTheme/themeColors';
 import { NotificationProvider } from 'app/contexts/NotificationContext';
-import useAuth from 'app/hooks/useAuth';
+// import useAuth from 'app/hooks/useAuth';
 import useSettings from 'app/hooks/useSettings';
 import { topBarHeight } from 'app/utils/constant';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Span } from '../../../components/Typography';
 import NotificationBar from '../../NotificationBar/NotificationBar';
-import ShoppingCart from '../../ShoppingCart';
+// import ShoppingCart from '../../ShoppingCart';
+import { NavLink, useNavigate } from 'react-router-dom';
+import jwt from "jwt-simple";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { deepOrange, deepPurple, blueGrey, lime } from '@mui/material/colors';
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.text.primary,
@@ -73,8 +77,10 @@ const IconBox = styled('div')(({ theme }) => ({
 const Layout1Topbar = () => {
   const theme = useTheme();
   const { settings, updateSettings } = useSettings();
-  const { logout, user } = useAuth();
+  const [loggedInUserName, setloggedInUserName] = useState("")
+  // const { logout, user } = useAuth();
   const isMdScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const navigate = useNavigate();
 
   const updateSidebarMode = (sidebarSettings) => {
     updateSettings({
@@ -92,6 +98,36 @@ const Layout1Topbar = () => {
     }
     updateSidebarMode({ mode });
   };
+
+  useEffect(() => {
+    decryptuserData()
+  }, [])
+
+  const decryptuserData = () => {
+    let sessionEncToken = sessionStorage.getItem("twSampleData")
+    let sessionGoogleEncTojen = sessionStorage.getItem("googleUserObj")
+    console.log("sessionGoogleEncTojen", sessionGoogleEncTojen)
+    console.log("Sess", sessionEncToken)
+    var secret = 'TU!tI0nW0R1d';
+    // decode
+    var decoded = jwt.decode(sessionEncToken, secret);
+    console.log(decoded, "decoded");
+
+    // decode
+
+    if (sessionGoogleEncTojen === null) {
+      setloggedInUserName(decoded?.userData?.userName)
+    }
+    else {
+
+    }
+
+  }
+
+  const logout = () => {
+    sessionStorage.clear()
+    navigate('/session/signup')
+  }
 
   return (
     <TopbarRoot>
@@ -118,7 +154,7 @@ const Layout1Topbar = () => {
 
         <Box display="flex" alignItems="center">
           <MatxSearchBox />
-          
+
           <NotificationProvider>
             <NotificationBar />
           </NotificationProvider>
@@ -130,10 +166,10 @@ const Layout1Topbar = () => {
               <UserMenu>
                 <Hidden xsDown>
                   <Span>
-                    Hi <strong>{user.name}</strong>
+                    Hi <strong>{loggedInUserName}</strong>
                   </Span>
                 </Hidden>
-                <Avatar src={user.avatar} sx={{ cursor: 'pointer' }} />
+                <Avatar sx={{ bgcolor: deepPurple[400] }} src={<AccountCircleIcon />}></Avatar>
               </UserMenu>
             }
           >

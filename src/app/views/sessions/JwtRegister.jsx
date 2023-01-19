@@ -10,6 +10,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useSnackbar } from 'notistack';
 import { saveUser } from 'app/services/AppService';
+import jwt from "jwt-simple";
 
 const FlexBox = styled(Box)(() => ({ display: 'flex', alignItems: 'center' }));
 
@@ -67,6 +68,18 @@ const JwtRegister = () => {
         setLoading(false)
         handleToastMessage(true, responseFromApi.message)
         navigate('/academic/classroom-setup');
+        var payload = { userData: responseFromApi.data };
+        var secret = 'TU!tI0nW0R1d';
+        // HS256 secrets are typically 128-bit random strings, for example hex-encoded:
+        // var secret = Buffer.from('fe1a1915a379f3be5394b64d14794932', 'hex')
+
+        // encode
+        var token = jwt.encode(payload, secret);
+
+        // decode
+        // var decoded = jwt.decode(token, secret);
+        // console.log(decoded); //=> { foo: 'bar' }
+        sessionStorage.setItem('twSampleData', token)
         // reset()
       }
       else {
