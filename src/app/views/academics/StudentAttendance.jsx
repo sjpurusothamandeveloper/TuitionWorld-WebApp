@@ -53,53 +53,10 @@ const StudentAttendance = () => {
 
   return (
     <React.Fragment>
-      <div >
-        <StraightFlex className='padding-15'><Typography variant="h6">Student Attendance</Typography></StraightFlex>
+      <div className='padding-15'>
+        <StraightFlex ><Typography variant="h6">Student Attendance</Typography></StraightFlex>
      <br />
-      {/* <Grid container display="row" alignItems="center" justifyContent="space-evenly">
-        <Grid item sm={5} xs={10} md={3} xl={3} lg={3}>
-        <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Select Class</InputLabel>
-       <Select       
-         id="demo-simple-select" 
-         labelId="demo-simple-select-label"
-         label="Select Class"
-         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-        </Grid>
-        <Grid item sm={5} xs={10} md={3} xl={3} lg={3}>
-        <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Select Subject</InputLabel>
-       <Select       
-         id="demo-simple-select" 
-         labelId="demo-simple-select-label"
-         label="Select Subject"
-         >
-         <MenuItem value={10}>Ten</MenuItem>
-         <MenuItem value={20}>Twenty</MenuItem>
-         <MenuItem value={30}>Thirty</MenuItem>
-       </Select>
-     </FormControl>
-        </Grid>
-        <Grid item sm={5} xs={10} md={3} xl={3} lg={3}>
-        <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Select Section</InputLabel>
-       <Select        
-         id="demo-simple-select" 
-         labelId="demo-simple-select-label"
-         label="Select Section"
-         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-        </Grid>
-      </Grid> */}
+     
       <br />
       <Grid container columnSpacing={2} rowSpacing={2} display="row" alignItems="center" justifyContent="space-evenly">
        {studentsList.map((student)=> 
