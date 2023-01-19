@@ -61,7 +61,6 @@ const JwtLogin = () => {
   // const { login } = useAuth();
 
   const handleresponseGoogle = (response) => {
-    // console.log("Encoded JWT ID toker: "+ response.credential);
     var userObj = jwt_decode(response.credential)
     sessionStorage.setItem("googleUserObj", response.credential)
     if(userObj){
@@ -70,7 +69,6 @@ const JwtLogin = () => {
     else{
       navigate('/session/signin')
     }
-    // console.log("UserObj", userObj)
   }
 
   useEffect(() => {

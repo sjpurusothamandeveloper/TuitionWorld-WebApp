@@ -7,6 +7,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { indexOf } from 'lodash';
+import { getSection } from 'app/services/AppService';
 
 
 
@@ -92,7 +93,7 @@ const ClassroomSetup = (props) => {
   const [createdSectionsArrUkg, setCreatedSectionsArrUkg] = useState(["A"]);
   const [createdSectionsArrLkg, setCreatedSectionsArrLkg] = useState(["A"]);
   const [createdSectionsArrPreKg, setCreatedSectionsArrPreKg] = useState(["A"]);
-
+  const [sectionListArr, setSectionListArr] = useState([])
 
 
   const sectionArr12 = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
@@ -111,9 +112,18 @@ const ClassroomSetup = (props) => {
   const sectionArrLkg = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
   const sectionArrPreKg = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
+  useEffect(() => {
+    handleGetSections()
+  }, [])
 
+  const handleGetSections = async() => {
+    let saveSection = await getSection()
+    console.log("SectionsList", saveSection)
+    setSectionListArr(saveSection.data)
+  }
 
-  const createNxtNewSection12 = () => {
+  const createNxtNewSection12 = async () => {
+  
     let indexOfLastSection = sectionArr12.indexOf(lastCreatedSection12)
     let nextSection = sectionArr12[indexOfLastSection + 1]
     let tempArr = []
@@ -696,20 +706,6 @@ const ClassroomSetup = (props) => {
         </AccordionDetails></Accordion>
 
     </div>
-
-    // <NotFoundRoot>
-    //   <JustifyBox>
-    //     <IMG src="/assets/images/illustrations/404.svg" alt="" />
-    //     <Button
-    //       color="primary"
-    //       variant="contained"
-    //       sx={{ textTransform: 'capitalize' }}
-    //       onClick={() => navigate(-1)}
-    //     >
-    //       Classroom Setup
-    //     </Button>
-    //   </JustifyBox>
-    // </NotFoundRoot>
   );
 };
 
