@@ -64,6 +64,12 @@ const JwtLogin = () => {
     // console.log("Encoded JWT ID toker: "+ response.credential);
     var userObj = jwt_decode(response.credential)
     sessionStorage.setItem("googleUserObj", response.credential)
+    if(userObj){
+      navigate('/dashboard/default')
+    }
+    else{
+      navigate('/session/signin')
+    }
     // console.log("UserObj", userObj)
   }
 
@@ -203,7 +209,6 @@ const JwtLogin = () => {
                       Login
                     </LoadingButton>
                     <div id="signInDiv"></div>
-                    {/* <button onClick={handleLogout()}>Logout</button> */}
                     <Paragraph>
                       Don't have an account?
                       <NavLink

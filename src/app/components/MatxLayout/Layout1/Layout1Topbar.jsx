@@ -15,6 +15,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import jwt from "jwt-simple";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { deepOrange, deepPurple, blueGrey, lime } from '@mui/material/colors';
+import jwt_decode from "jwt-decode";
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.text.primary,
@@ -106,27 +107,26 @@ const Layout1Topbar = () => {
   const decryptuserData = () => {
     let sessionEncToken = sessionStorage.getItem("twSampleData")
     let sessionGoogleEncTojen = sessionStorage.getItem("googleUserObj")
-    console.log("sessionGoogleEncTojen", sessionGoogleEncTojen)
-    console.log("Sess", sessionEncToken)
-    var secret = 'TU!tI0nW0R1d';
-    // decode
-    var decoded = jwt.decode(sessionEncToken, secret);
-    console.log(decoded, "decoded");
-
-    // decode
-
     if (sessionGoogleEncTojen === null) {
+      var secret = 'TU!tI0nW0R1d';
+      // decode
+      var decoded = jwt.decode(sessionEncToken, secret);
+      console.log(decoded, "decoded");
       setloggedInUserName(decoded?.userData?.userName)
     }
     else {
-
+      // decode
+      var encodedGoogleObj = sessionStorage.getItem("googleUserObj")
+      var decodeGoogleuserObj = jwt_decode(encodedGoogleObj)
+      console.log(decodeGoogleuserObj, "google")
+      setloggedInUserName(decodeGoogleuserObj?.name)
     }
 
   }
 
   const logout = () => {
     sessionStorage.clear()
-    navigate('/session/signup')
+    navigate('/session/signin')
   }
 
   return (
