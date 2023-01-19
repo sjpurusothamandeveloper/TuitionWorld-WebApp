@@ -1,12 +1,13 @@
 import  {React,useState,useEffect} from 'react';
-import { Grid, Box, Button,Radio,RadioGroup, FormControl,FormControlLabel, styled, Typography, Card, Collapse,DialogActions,DialogTitle,DialogContent,TextField,DialogContentText ,Paper,Table,TableBody,TableCell,TableContainer,TableHead,TableRow, Dialog} from '@mui/material';
+import { Grid, Box, Button,Radio,RadioGroup, FormControl,FormControlLabel, styled, Typography, Card, Collapse,DialogActions,DialogTitle,DialogContent,TextField,DialogContentText ,Paper,Table,TableBody,TableCell,TableContainer,TableHead,TableRow, Dialog, Chip, Avatar} from '@mui/material';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CloseIcon from '@mui/icons-material/Close';
 import LabelledSwitch from '../material-kit/switch/LabelledSwitch';
 import './index.css';
-
+import pic1 from "../../assets/images/2.jpg"
 
 const maxDialog="500px";
 
@@ -23,30 +24,37 @@ export default function SubjectManagement(props) {
   const { classDetails } = location.state
   console.log("#####", classDetails)
   const [open, setOpen] = useState(false);
+  const [assignOpen, setAssignOpen] = useState(false);
   const [value, setValue] = useState("compulsory");
   const usersData = [
     { id: 1, name: "Tamil" },
     { id: 2, name: "English" },
     { id: 3, name: "Mathematics" }
   ];
+  
   const initialFormState = { id: null, name: "" };
 
   const [users, setUsers] = useState(usersData);
   const [editing, setEditing] = useState(false);
   const [currentUser, setCurrentUser] = useState(initialFormState);
-  const [assignedTeacher,setAssignedTeacher]=useState(false);
-  const[teachers,setTeachers]=useState([])
+  const [assignedTeacher,setAssignedTeacher]=useState("");
+  const [isAssignedTeacher,setIsAssignedTeacher]=useState(false);
+  
  
   const [user, setUser] = useState(
     editing ? currentUser : initialFormState
   );
-
+  const staffData = [
+    { id: 1, name: "Purus" },
+    { id: 2, name: "Thaman" },
+    { id: 3, name: "HipHop" }
+  ];
   const handleInputChange = event => {
     const { name, value } = event.target;
 
     setUser({ ...user, [name]: value });
   };
-
+  
   useEffect(() => {
     setUser(currentUser);
   }, [currentUser]);
@@ -92,7 +100,20 @@ export default function SubjectManagement(props) {
   const handleClose = () => {
     setOpen(false);
   };
+  
+  const handleAssignOpen = () => {
+    setAssignOpen(true);
+  };
 
+  const handleAssignClose = () => {
+    setAssignOpen(false);
+  };
+
+  const assigningTeacher =(name)=>{
+    setAssignedTeacher(name)
+    setIsAssignedTeacher(true)
+    handleAssignClose(true)   
+  }
 
 
     return (
@@ -106,12 +127,16 @@ export default function SubjectManagement(props) {
             alignItems="center">
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{padding:"20px"}} xs={12} sm={12} md={12} lg={12} xl={12}>
-             <SpaceBetwwenDiv> <Typography variant='h6'>{classDetails} &ensp;<EditIcon fontSize='18px' /></Typography><DeleteIcon /></SpaceBetwwenDiv></Card>
+             <SpaceBetwwenDiv> <Typography variant='h6'>{classDetails}
+              {/* &ensp;<EditIcon fontSize='18px' /> */}
+              </Typography>
+             {/* <DeleteIcon /> */}
+             </SpaceBetwwenDiv></Card>
           </Grid>
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{padding:"20px"}} xs={12} sm={12} md={12} lg={12} xl={12}>
-             <SpaceBetwwenDiv> <Typography variant='h6'>Manage class teacher, attendance for 12 - A</Typography><Button>Manage Attendance</Button></SpaceBetwwenDiv>
-             <Link to='/academic/new-staff'><Typography color="primary">+ Assign Class Teacher</Typography></Link></Card>
+             <SpaceBetwwenDiv> <Typography variant='h6'>Manage class teacher, attendance for {classDetails}</Typography><Button>Manage Attendance</Button></SpaceBetwwenDiv>
+             {isAssignedTeacher ? <Chip  avatar={<Avatar alt="Natacha" src={pic1} />} label={assignedTeacher}  variant="outlined" /> : <Button onClick={handleAssignOpen}><Typography color="primary">+ Assign Class Teacher</Typography></Button>}</Card>
           </Grid>
 
           <Grid  item lg={12} xl={12} md={12} sm={12} xs={12}>
@@ -256,6 +281,34 @@ export default function SubjectManagement(props) {
           </Grid>
         </Grid>
         </Card>
+
+        <Dialog fullWidth maxWidth="sm" open={assignOpen} onClose={handleAssignClose}>
+          <DialogTitle><SpaceBetwwenDiv>Assign Staff <span onClick={handleAssignClose}><CloseIcon /></span></SpaceBetwwenDiv></DialogTitle>
+          <DialogContent>
+          <TableContainer  style={{padding:"10px"}} component={Paper}>
+      <Table  aria-label="simple table">
+        <TableHead>
+       
+ <TableRow>
+ <TableCell>STAFF</TableCell>
+ <TableCell align="center">ACTION</TableCell>
+ 
+</TableRow>
+          
+         
+        </TableHead>
+        <TableBody>
+        {staffData.map((staff,i)=> (
+ <TableRow key={staff.id}>
+ <TableCell>{staff.name}</TableCell>
+ <TableCell align="center">
+  <Button  onClick={() => {
+                  assigningTeacher(staff.name);
+               }}>Assign</Button></TableCell>
+</TableRow>
+          ))} </TableBody></Table></TableContainer>
+          </DialogContent>
+        </Dialog>
       </div>
     );
 }
