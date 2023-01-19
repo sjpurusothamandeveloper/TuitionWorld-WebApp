@@ -316,22 +316,20 @@ const ClassroomSetup = (props) => {
                     <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
                   
                     <ClassCard>
-                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 11 - {sect}
-                    </Typography>
-                    <br />
-                    <br />
-                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
-                      <ArrowForwardIosIcon fontSize='14px' />
-                    </span>
-                  </ClassCard>
-                 </Grid> 
+                      <Typography variant='p' fontWeight='bold' fontSize='16px' > 11 - {sect}
+                      </Typography>
+                      <br />
+                      <br />
+                      <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Link to="/academic/subject-management" state= {{ classDetails : '11 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <ArrowForwardIosIcon fontSize='14px' />
+                      </span>
+                    </ClassCard>
+                  </Grid>
                    )
                   })
                 }
-                  </Grid>
-                 
-            
+            </Grid>
 
         </AccordionDetails>
       </Accordion>
@@ -355,20 +353,20 @@ const ClassroomSetup = (props) => {
                     <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
                   
                     <ClassCard>
-                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 10 - {sect}
-                    </Typography>
-                    <br />
-                    <br />
-                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
-                      <ArrowForwardIosIcon fontSize='14px' />
-                    </span>
-                  </ClassCard>
-                 </Grid> 
-                   )
-                  })
-                }
+                      <Typography variant='p' fontWeight='bold' fontSize='16px' > 10 - {sect}
+                      </Typography>
+                      <br />
+                      <br />
+                      <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Link to="/academic/subject-management" state= {{ classDetails : '10 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <ArrowForwardIosIcon fontSize='14px' />
+                      </span>
+                    </ClassCard>
                   </Grid>
+                  )
+                })
+              }
+          </Grid>
                   <StraightFlex>
             <Typography  variant='h6'>Class 9</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection9} >+ Add New Section</Button>
           </StraightFlex>
@@ -379,20 +377,19 @@ const ClassroomSetup = (props) => {
                     <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
                   
                     <ClassCard>
-                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 9 - {sect}
-                    </Typography>
-                    <br />
-                    <br />
-                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
-                      <ArrowForwardIosIcon fontSize='14px' />
-                    </span>
-                  </ClassCard>
-                 </Grid> 
-                   )
+                      <Typography variant='p' fontWeight='bold' fontSize='16px' > 9 - {sect}
+                      </Typography>
+                      <br />
+                      <br />
+                      <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Link to="/academic/subject-management" state= {{ classDetails : '9 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <ArrowForwardIosIcon fontSize='14px' />
+                      </span>
+                    </ClassCard>
+                  </Grid>)
                   })
                 }
-                  </Grid>
+            </Grid>
          </AccordionDetails></Accordion>
 
       <Accordion className='Accordion-main'>
@@ -414,21 +411,20 @@ const ClassroomSetup = (props) => {
                     <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
                   
                     <ClassCard>
-                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 8 - {sect}
-                    </Typography>
-                    <br />
-                    <br />
-                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
-                      <ArrowForwardIosIcon fontSize='14px' />
-                    </span>
-                  </ClassCard>
-                 </Grid> 
-                   )
-                  })
-                }
+                      <Typography variant='p' fontWeight='bold' fontSize='16px' > 8 - {sect}
+                      </Typography>
+                      <br />
+                      <br />
+                      <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Link to="/academic/subject-management" state= {{ classDetails : '8 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <ArrowForwardIosIcon fontSize='14px' />
+                      </span>
+                    </ClassCard>
                   </Grid>
-
+)
+})
+}
+</Grid>
                   <StraightFlex>
             <Typography  variant='h6'>Class 7</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection7} >+ Add New Section</Button>
           </StraightFlex>
@@ -439,21 +435,20 @@ const ClassroomSetup = (props) => {
                     <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
                   
                     <ClassCard>
-                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 7 - {sect}
-                    </Typography>
-                    <br />
-                    <br />
-                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
-                      <ArrowForwardIosIcon fontSize='14px' />
-                    </span>
-                  </ClassCard>
-                 </Grid> 
-                   )
-                  })
-                }
+                      <Typography variant='p' fontWeight='bold' fontSize='16px' > 7 - {sect}
+                      </Typography>
+                      <br />
+                      <br />
+                      <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Link to="/academic/subject-management" state= {{ classDetails : '7 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <ArrowForwardIosIcon fontSize='14px' />
+                      </span>
+                    </ClassCard>
                   </Grid>
-                 
+                 )
+                })
+              }
+          </Grid>
                   <StraightFlex>
             <Typography  variant='h6'>Class 6</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection6} >+ Add New Section</Button>
           </StraightFlex>
@@ -464,20 +459,19 @@ const ClassroomSetup = (props) => {
                     <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
                   
                     <ClassCard>
-                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 6 - {sect}
-                    </Typography>
-                    <br />
-                    <br />
-                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
-                      <ArrowForwardIosIcon fontSize='14px' />
-                    </span>
-                  </ClassCard>
-                 </Grid> 
-                   )
+                      <Typography variant='p' fontWeight='bold' fontSize='16px' > 6 - {sect}
+                      </Typography>
+                      <br />
+                      <br />
+                      <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Link to="/academic/subject-management" state= {{ classDetails : '6 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <ArrowForwardIosIcon fontSize='14px' />
+                      </span>
+                    </ClassCard>
+                  </Grid>)
                   })
                 }
-                  </Grid>
+            </Grid>
         </AccordionDetails></Accordion>
 
       <Accordion className='Accordion-main'>
@@ -499,21 +493,20 @@ const ClassroomSetup = (props) => {
                     <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
                   
                     <ClassCard>
-                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 6 - {sect}
-                    </Typography>
-                    <br />
-                    <br />
-                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
-                      <ArrowForwardIosIcon fontSize='14px' />
-                    </span>
-                  </ClassCard>
-                 </Grid> 
-                   )
-                  })
-                }
+                      <Typography variant='p' fontWeight='bold' fontSize='16px' > 6 - {sect}
+                      </Typography>
+                      <br />
+                      <br />
+                      <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Link to="/academic/subject-management" state= {{ classDetails : '5 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <ArrowForwardIosIcon fontSize='14px' />
+                      </span>
+                    </ClassCard>
                   </Grid>
-                  
+                  )
+                })
+              }
+          </Grid>
                   <StraightFlex>
             <Typography  variant='h6'>Class 4</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection4} >+ Add New Section</Button>
           </StraightFlex>
@@ -524,21 +517,20 @@ const ClassroomSetup = (props) => {
                     <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
                   
                     <ClassCard>
-                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 4 - {sect}
-                    </Typography>
-                    <br />
-                    <br />
-                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
-                      <ArrowForwardIosIcon fontSize='14px' />
-                    </span>
-                  </ClassCard>
-                 </Grid> 
-                   )
-                  })
-                }
+                      <Typography variant='p' fontWeight='bold' fontSize='16px' > 4 - {sect}
+                      </Typography>
+                      <br />
+                      <br />
+                      <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Link to="/academic/subject-management" state= {{ classDetails : '4 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <ArrowForwardIosIcon fontSize='14px' />
+                      </span>
+                    </ClassCard>
                   </Grid>
-                  
+                  )
+                })
+              }
+          </Grid>
                   <StraightFlex>
             <Typography  variant='h6'>Class 3</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection3} >+ Add New Section</Button>
           </StraightFlex>
@@ -549,21 +541,20 @@ const ClassroomSetup = (props) => {
                     <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
                   
                     <ClassCard>
-                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 3 - {sect}
-                    </Typography>
-                    <br />
-                    <br />
-                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
-                      <ArrowForwardIosIcon fontSize='14px' />
-                    </span>
-                  </ClassCard>
-                 </Grid> 
-                   )
-                  })
-                }
+                      <Typography variant='p' fontWeight='bold' fontSize='16px' > 3 - {sect}
+                      </Typography>
+                      <br />
+                      <br />
+                      <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Link to="/academic/subject-management" state= {{ classDetails : '3 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <ArrowForwardIosIcon fontSize='14px' />
+                      </span>
+                    </ClassCard>
                   </Grid>
-                  
+                  )
+                })
+              }
+          </Grid>
                   <StraightFlex>
             <Typography  variant='h6'>Class 2</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection2} >+ Add New Section</Button>
           </StraightFlex>
@@ -574,20 +565,19 @@ const ClassroomSetup = (props) => {
                     <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
                   
                     <ClassCard>
-                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 2 - {sect}
-                    </Typography>
-                    <br />
-                    <br />
-                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
-                      <ArrowForwardIosIcon fontSize='14px' />
-                    </span>
-                  </ClassCard>
-                 </Grid> 
-                   )
+                      <Typography variant='p' fontWeight='bold' fontSize='16px' > 2 - {sect}
+                      </Typography>
+                      <br />
+                      <br />
+                      <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Link to="/academic/subject-management" state= {{ classDetails : '2 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <ArrowForwardIosIcon fontSize='14px' />
+                      </span>
+                    </ClassCard>
+                  </Grid>)
                   })
                 }
-                  </Grid>
+            </Grid>
                   <StraightFlex>
             <Typography  variant='h6'>Class 1</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection1} >+ Add New Section</Button>
           </StraightFlex>
@@ -598,20 +588,20 @@ const ClassroomSetup = (props) => {
                     <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
                   
                     <ClassCard>
-                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 1 - {sect}
-                    </Typography>
-                    <br />
-                    <br />
-                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
-                      <ArrowForwardIosIcon fontSize='14px' />
-                    </span>
-                  </ClassCard>
-                 </Grid> 
-                   )
-                  })
-                }
-                  </Grid></AccordionDetails></Accordion>
+                      <Typography variant='p' fontWeight='bold' fontSize='16px' > 1 - {sect}
+                      </Typography>
+                      <br />
+                      <br />
+                      <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Link to="/academic/subject-management" state= {{ classDetails : '1 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <ArrowForwardIosIcon fontSize='14px' />
+                      </span>
+                    </ClassCard>
+                  </Grid>
+                )
+              })
+            }
+          </Grid></AccordionDetails></Accordion>
       <Accordion className='Accordion-main'>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -631,20 +621,20 @@ const ClassroomSetup = (props) => {
                     <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
                   
                     <ClassCard>
-                    <Typography variant='p' fontWeight='bold' fontSize='16px' > UKG - {sect}
-                    </Typography>
-                    <br />
-                    <br />
-                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
-                      <ArrowForwardIosIcon fontSize='14px' />
-                    </span>
-                  </ClassCard>
-                 </Grid> 
-                   )
-                  })
-                }
+                      <Typography variant='p' fontWeight='bold' fontSize='16px' > UKG - {sect}
+                      </Typography>
+                      <br />
+                      <br />
+                      <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Link to="/academic/subject-management" state= {{ classDetails : 'UKG - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <ArrowForwardIosIcon fontSize='14px' />
+                      </span>
+                    </ClassCard>
                   </Grid>
+                  )
+                })
+              }
+          </Grid>
                   <StraightFlex>
             <Typography  variant='h6'>Class LKG</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSectionLkg} >+ Add New Section</Button>
           </StraightFlex>
@@ -655,20 +645,20 @@ const ClassroomSetup = (props) => {
                     <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
                   
                     <ClassCard>
-                    <Typography variant='p' fontWeight='bold' fontSize='16px' > LKG - {sect}
-                    </Typography>
-                    <br />
-                    <br />
-                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
-                      <ArrowForwardIosIcon fontSize='14px' />
-                    </span>
-                  </ClassCard>
-                 </Grid> 
-                   )
-                  })
-                }
+                      <Typography variant='p' fontWeight='bold' fontSize='16px' > LKG - {sect}
+                      </Typography>
+                      <br />
+                      <br />
+                      <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Link to="/academic/subject-management" state= {{ classDetails : 'LKG - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <ArrowForwardIosIcon fontSize='14px' />
+                      </span>
+                    </ClassCard>
                   </Grid>
+                  )
+                })
+              }
+          </Grid>
                   <StraightFlex>
             <Typography  variant='h6'>Class PREKG</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSectionPreKg} >+ Add New Section</Button>
           </StraightFlex>
@@ -679,20 +669,19 @@ const ClassroomSetup = (props) => {
                     <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
                   
                     <ClassCard>
-                    <Typography variant='p' fontWeight='bold' fontSize='16px' > PREKG - {sect}
-                    </Typography>
-                    <br />
-                    <br />
-                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
-                      <ArrowForwardIosIcon fontSize='14px' />
-                    </span>
-                  </ClassCard>
-                 </Grid> 
-                   )
+                      <Typography variant='p' fontWeight='bold' fontSize='16px' > PREKG - {sect}
+                      </Typography>
+                      <br />
+                      <br />
+                      <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Link to="/academic/subject-management" state= {{ classDetails : 'PREKG - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <ArrowForwardIosIcon fontSize='14px' />
+                      </span>
+                    </ClassCard>
+                  </Grid>)
                   })
                 }
-                  </Grid>
+            </Grid>
                   </AccordionDetails></Accordion>
 
     </div>

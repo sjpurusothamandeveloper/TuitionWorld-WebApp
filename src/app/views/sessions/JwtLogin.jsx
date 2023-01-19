@@ -1,6 +1,6 @@
-import { Google } from '@mui/icons-material';
+// import { Google } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
-import { Card, Checkbox, Grid, TextField } from '@mui/material';
+import { Button, Card, Checkbox, Grid, TextField } from '@mui/material';
 import { Box, styled, useTheme } from '@mui/system';
 import { Paragraph } from 'app/components/Typography';
 import useAuth from 'app/hooks/useAuth';
@@ -8,7 +8,11 @@ import { Formik } from 'formik';
 import { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { GoogleLogin } from 'react-google-login';
+// import { GoogleLogin } from 'react-google-login';
+import { getUserAuth } from 'app/services/AppService';
+import { useSnackbar } from 'notistack';
+import jwt from "jwt-simple";
+import jwt_decode from "jwt-decode";
 
 const FlexBox = styled(Box)(() => ({ display: 'flex', alignItems: 'center' }));
 
@@ -36,9 +40,9 @@ const JWTRoot = styled(JustifyBox)(() => ({
 
 // inital login credentials
 const initialValues = {
-  email: 'jason@ui-lib.com',
-  password: 'dummyPass',
-  remember: true,
+  email: '',
+  password: '',
+  remember: false,
 };
 
 // form field validation schema
@@ -53,35 +57,69 @@ const JwtLogin = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+  // const { login } = useAuth();
 
-  const { login } = useAuth();
+  const handleresponseGoogle = (response) => {
+    // console.log("Encoded JWT ID toker: "+ response.credential);
+    var userObj = jwt_decode(response.credential)
+    sessionStorage.setItem("googleUserObj", response.credential)
+    // console.log("UserObj", userObj)
+  }
+
+  useEffect(() => {
+    /*global google*/
+    google.accounts.id.initialize({
+      client_id: "983869947959-6lsgr8ur9sfeoh9kdise23dn04n5vdgv.apps.googleusercontent.com",
+      callback: handleresponseGoogle
+    })
+
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"), {
+        theme: "outline", size: "large"
+      }
+    )
+  },[])
 
 
-  // useEffect(() => {
-  //   //Global Google
-  //   google.accounts.id.initialize({
-  //     client_id: "333302395939-90eii6bjop7bnq02sfvsp8t7ndc76kef.apps.googleusercontent.com",
-  //     callback: responseGoogle
-  //   })
-
-  //   google.accounts.id.renderButton(
-  //     document.getElementById("signInDiv"), {
-  //       theme: "outline", size: "large"
-  //     }
-  //   )
-  // },[])
 
   const handleFormSubmit = async (values) => {
-    setLoading(true);
     try {
-      await login(values.email, values.password);
-      navigate('/dashboard/default');
+      setLoading(true);
+      const responseFromApi = await getUserAuth(values)
+      console.log("resp", responseFromApi)
+      if (responseFromApi && responseFromApi.statusCode === 200) {
+        setLoading(false)
+        handleToastMessage(true, responseFromApi.message)
+        var payload = { userData: responseFromApi.data };
+        var secret = 'TU!tI0nW0R1d';
+        var token = jwt.encode(payload, secret);
+        sessionStorage.setItem('twSampleData', token)
+        navigate('/dashboard/default');
+      }
+      else{
+        handleToastMessage(false, responseFromApi.message)
+        setLoading(false)
+        navigate('/session/signin');
+      }
     } catch (e) {
+      handleToastMessage(false)
       setLoading(false);
+      navigate('/session/signin');
     }
   };
 
-  const responseGoogle = (response) => {
+  const handleToastMessage = (typeOfMsg, msg) => {
+    const failureMessage = 'Something went wrong :(';
+
+    enqueueSnackbar(msg ? msg : failureMessage, {
+      variant: typeOfMsg ? "success" : "error",
+      persist: false,
+      autoHideDuration: 2000
+    });
+  }
+
+  const handleLogout = (response) => {
     console.log(response);
   }
 
@@ -164,14 +202,8 @@ const JwtLogin = () => {
                     >
                       Login
                     </LoadingButton>
-                    {/* <GoogleLogin
-                      clientId="333302395939-90eii6bjop7bnq02sfvsp8t7ndc76kef.apps.googleusercontent.com"
-                      buttonText="Sign in with Google "
-                      onSuccess={responseGoogle}
-                      onFailure={responseGoogle}
-                      cookiePolicy={'single_host_origin'}
-                    /> */}
-
+                    <div id="signInDiv"></div>
+                    {/* <button onClick={handleLogout()}>Logout</button> */}
                     <Paragraph>
                       Don't have an account?
                       <NavLink
