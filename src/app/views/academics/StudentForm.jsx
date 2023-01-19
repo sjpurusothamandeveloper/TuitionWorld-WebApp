@@ -965,7 +965,6 @@ const StudentAdditionForm = (props) => {
                     render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Immunisation Remarks" variant="outlined" />)}
                   />
                 </Grid>
-
               </Grid>
             </Grid>
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >

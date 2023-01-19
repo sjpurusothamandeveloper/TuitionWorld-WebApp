@@ -73,6 +73,9 @@ const ClassroomSetup = (props) => {
   const [lastCreatedSection3, setLastCreatedSection3] = useState("A");
   const [lastCreatedSection2, setLastCreatedSection2] = useState("A");
   const [lastCreatedSection1, setLastCreatedSection1] = useState("A");
+  const [lastCreatedSectionUkg, setLastCreatedSectionUkg] = useState("A");
+  const [lastCreatedSectionLkg, setLastCreatedSectionLkg] = useState("A");
+  const [lastCreatedSectionPreKg, setLastCreatedSectionPreKg] = useState("A");
 
   const [createdSectionsArr12, setCreatedSectionsArr12] = useState(["A"]);
   const [createdSectionsArr11, setCreatedSectionsArr11] = useState(["A"]);
@@ -86,6 +89,9 @@ const ClassroomSetup = (props) => {
   const [createdSectionsArr3, setCreatedSectionsArr3] = useState(["A"]);
   const [createdSectionsArr2, setCreatedSectionsArr2] = useState(["A"]);
   const [createdSectionsArr1, setCreatedSectionsArr1] = useState(["A"]);
+  const [createdSectionsArrUkg, setCreatedSectionsArrUkg] = useState(["A"]);
+  const [createdSectionsArrLkg, setCreatedSectionsArrLkg] = useState(["A"]);
+  const [createdSectionsArrPreKg, setCreatedSectionsArrPreKg] = useState(["A"]);
  
 
 
@@ -103,7 +109,7 @@ const ClassroomSetup = (props) => {
   const sectionArr1 = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
   const sectionArrUkg = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
   const sectionArrLkg = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-  const sectionArrPrekg = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  const sectionArrPreKg = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
   
 
@@ -146,6 +152,116 @@ const ClassroomSetup = (props) => {
     setLastCreatedSection9(nextSection)
     setCreatedSectionsArr9(x)
   }
+
+  const createNxtNewSection8 = () => {
+    let indexOfLastSection = sectionArr8.indexOf(lastCreatedSection9)
+    let nextSection = sectionArr8[indexOfLastSection + 1]
+    let tempArr = []
+    tempArr.push(nextSection)
+    let x = [...createdSectionsArr8, ...tempArr]
+    setLastCreatedSection8(nextSection)
+    setCreatedSectionsArr8(x)
+  }
+
+  const createNxtNewSection7 = () => {
+    let indexOfLastSection = sectionArr7.indexOf(lastCreatedSection7)
+    let nextSection = sectionArr7[indexOfLastSection + 1]
+    let tempArr = []
+    tempArr.push(nextSection)
+    let x = [...createdSectionsArr7, ...tempArr]
+    setLastCreatedSection7(nextSection)
+    setCreatedSectionsArr7(x)
+  }
+
+  const createNxtNewSection6 = () => {
+    let indexOfLastSection = sectionArr6.indexOf(lastCreatedSection6)
+    let nextSection = sectionArr6[indexOfLastSection + 1]
+    let tempArr = []
+    tempArr.push(nextSection)
+    let x = [...createdSectionsArr6, ...tempArr]
+    setLastCreatedSection6(nextSection)
+    setCreatedSectionsArr6(x)
+  }
+
+  const createNxtNewSection5 = () => {
+    let indexOfLastSection = sectionArr5.indexOf(lastCreatedSection5)
+    let nextSection = sectionArr5[indexOfLastSection + 1]
+    let tempArr = []
+    tempArr.push(nextSection)
+    let x = [...createdSectionsArr5, ...tempArr]
+    setLastCreatedSection5(nextSection)
+    setCreatedSectionsArr5(x)
+  }
+
+  const createNxtNewSection4 = () => {
+    let indexOfLastSection = sectionArr4.indexOf(lastCreatedSection4)
+    let nextSection = sectionArr4[indexOfLastSection + 1]
+    let tempArr = []
+    tempArr.push(nextSection)
+    let x = [...createdSectionsArr4, ...tempArr]
+    setLastCreatedSection4(nextSection)
+    setCreatedSectionsArr4(x)
+  }
+
+  const createNxtNewSection3 = () => {
+    let indexOfLastSection = sectionArr3.indexOf(lastCreatedSection3)
+    let nextSection = sectionArr3[indexOfLastSection + 1]
+    let tempArr = []
+    tempArr.push(nextSection)
+    let x = [...createdSectionsArr3, ...tempArr]
+    setLastCreatedSection3(nextSection)
+    setCreatedSectionsArr3(x)
+  }
+
+  const createNxtNewSection2 = () => {
+    let indexOfLastSection = sectionArr2.indexOf(lastCreatedSection2)
+    let nextSection = sectionArr2[indexOfLastSection + 1]
+    let tempArr = []
+    tempArr.push(nextSection)
+    let x = [...createdSectionsArr2, ...tempArr]
+    setLastCreatedSection2(nextSection)
+    setCreatedSectionsArr2(x)
+  }
+
+  const createNxtNewSection1 = () => {
+    let indexOfLastSection = sectionArr1.indexOf(lastCreatedSection1)
+    let nextSection = sectionArr1[indexOfLastSection + 1]
+    let tempArr = []
+    tempArr.push(nextSection)
+    let x = [...createdSectionsArr1, ...tempArr]
+    setLastCreatedSection1(nextSection)
+    setCreatedSectionsArr1(x)
+  }
+
+  const createNxtNewSectionUkg = () => {
+    let indexOfLastSection = sectionArrUkg.indexOf(lastCreatedSectionUkg)
+    let nextSection = sectionArrUkg[indexOfLastSection + 1]
+    let tempArr = []
+    tempArr.push(nextSection)
+    let x = [...createdSectionsArrUkg, ...tempArr]
+    setLastCreatedSectionUkg(nextSection)
+    setCreatedSectionsArrUkg(x)
+  }
+
+  const createNxtNewSectionLkg = () => {
+    let indexOfLastSection = sectionArrLkg.indexOf(lastCreatedSectionLkg)
+    let nextSection = sectionArrLkg[indexOfLastSection + 1]
+    let tempArr = []
+    tempArr.push(nextSection)
+    let x = [...createdSectionsArrLkg, ...tempArr]
+    setLastCreatedSectionLkg(nextSection)
+    setCreatedSectionsArrLkg(x)
+  }
+
+  const createNxtNewSectionPreKg = () => {
+    let indexOfLastSection = sectionArrPreKg.indexOf(lastCreatedSectionPreKg)
+    let nextSection = sectionArrPreKg[indexOfLastSection + 1]
+    let tempArr = []
+    tempArr.push(nextSection)
+    let x = [...createdSectionsArrPreKg, ...tempArr]
+    setLastCreatedSectionPreKg(nextSection)
+    setCreatedSectionsArrPreKg(x)
+  }
  
   return (
 
@@ -173,7 +289,7 @@ const ClassroomSetup = (props) => {
                     <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
                   
                     <ClassCard>
-                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 11 - {sect}
+                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 12 - {sect}
                     </Typography>
                     <br />
                     <br />
@@ -288,6 +404,80 @@ const ClassroomSetup = (props) => {
           <Typography><Typography variant='h6'>Middle</Typography>  </Typography>
         </AccordionSummary>
         <AccordionDetails>
+        <StraightFlex>
+            <Typography  variant='h6'>Class 8</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection8} >+ Add New Section</Button>
+          </StraightFlex>
+        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+                  {
+            createdSectionsArr8.length > 0 && createdSectionsArr8.map((sect, i) => {
+              return (
+                    <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
+                  
+                    <ClassCard>
+                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 8 - {sect}
+                    </Typography>
+                    <br />
+                    <br />
+                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
+                      <ArrowForwardIosIcon fontSize='14px' />
+                    </span>
+                  </ClassCard>
+                 </Grid> 
+                   )
+                  })
+                }
+                  </Grid>
+
+                  <StraightFlex>
+            <Typography  variant='h6'>Class 7</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection7} >+ Add New Section</Button>
+          </StraightFlex>
+        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+                  {
+            createdSectionsArr7.length > 0 && createdSectionsArr7.map((sect, i) => {
+              return (
+                    <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
+                  
+                    <ClassCard>
+                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 7 - {sect}
+                    </Typography>
+                    <br />
+                    <br />
+                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
+                      <ArrowForwardIosIcon fontSize='14px' />
+                    </span>
+                  </ClassCard>
+                 </Grid> 
+                   )
+                  })
+                }
+                  </Grid>
+                 
+                  <StraightFlex>
+            <Typography  variant='h6'>Class 6</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection6} >+ Add New Section</Button>
+          </StraightFlex>
+        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+                  {
+            createdSectionsArr6.length > 0 && createdSectionsArr6.map((sect, i) => {
+              return (
+                    <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
+                  
+                    <ClassCard>
+                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 6 - {sect}
+                    </Typography>
+                    <br />
+                    <br />
+                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
+                      <ArrowForwardIosIcon fontSize='14px' />
+                    </span>
+                  </ClassCard>
+                 </Grid> 
+                   )
+                  })
+                }
+                  </Grid>
         </AccordionDetails></Accordion>
 
       <Accordion className='Accordion-main'>
@@ -299,13 +489,129 @@ const ClassroomSetup = (props) => {
           <Typography><Typography variant='h6'>Primary</Typography>  </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <ClassCard>
-            <Typography variant='p' >12 - </Typography>
-            <br />
-            <br />
-            <br />
-            <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}> <Typography variant='p'>View Class </Typography><ArrowForwardIosIcon fontSize='14px' /></span>
-          </ClassCard></AccordionDetails></Accordion>
+        <StraightFlex>
+            <Typography  variant='h6'>Class 5</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection5} >+ Add New Section</Button>
+          </StraightFlex>
+        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+                  {
+            createdSectionsArr5.length > 0 && createdSectionsArr5.map((sect, i) => {
+              return (
+                    <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
+                  
+                    <ClassCard>
+                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 6 - {sect}
+                    </Typography>
+                    <br />
+                    <br />
+                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
+                      <ArrowForwardIosIcon fontSize='14px' />
+                    </span>
+                  </ClassCard>
+                 </Grid> 
+                   )
+                  })
+                }
+                  </Grid>
+                  
+                  <StraightFlex>
+            <Typography  variant='h6'>Class 4</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection4} >+ Add New Section</Button>
+          </StraightFlex>
+        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+                  {
+            createdSectionsArr4.length > 0 && createdSectionsArr4.map((sect, i) => {
+              return (
+                    <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
+                  
+                    <ClassCard>
+                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 4 - {sect}
+                    </Typography>
+                    <br />
+                    <br />
+                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
+                      <ArrowForwardIosIcon fontSize='14px' />
+                    </span>
+                  </ClassCard>
+                 </Grid> 
+                   )
+                  })
+                }
+                  </Grid>
+                  
+                  <StraightFlex>
+            <Typography  variant='h6'>Class 3</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection3} >+ Add New Section</Button>
+          </StraightFlex>
+        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+                  {
+            createdSectionsArr3.length > 0 && createdSectionsArr3.map((sect, i) => {
+              return (
+                    <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
+                  
+                    <ClassCard>
+                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 3 - {sect}
+                    </Typography>
+                    <br />
+                    <br />
+                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
+                      <ArrowForwardIosIcon fontSize='14px' />
+                    </span>
+                  </ClassCard>
+                 </Grid> 
+                   )
+                  })
+                }
+                  </Grid>
+                  
+                  <StraightFlex>
+            <Typography  variant='h6'>Class 2</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection2} >+ Add New Section</Button>
+          </StraightFlex>
+        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+                  {
+            createdSectionsArr2.length > 0 && createdSectionsArr2.map((sect, i) => {
+              return (
+                    <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
+                  
+                    <ClassCard>
+                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 2 - {sect}
+                    </Typography>
+                    <br />
+                    <br />
+                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
+                      <ArrowForwardIosIcon fontSize='14px' />
+                    </span>
+                  </ClassCard>
+                 </Grid> 
+                   )
+                  })
+                }
+                  </Grid>
+                  <StraightFlex>
+            <Typography  variant='h6'>Class 1</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection1} >+ Add New Section</Button>
+          </StraightFlex>
+        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+                  {
+            createdSectionsArr1.length > 0 && createdSectionsArr1.map((sect, i) => {
+              return (
+                    <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
+                  
+                    <ClassCard>
+                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 1 - {sect}
+                    </Typography>
+                    <br />
+                    <br />
+                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
+                      <ArrowForwardIosIcon fontSize='14px' />
+                    </span>
+                  </ClassCard>
+                 </Grid> 
+                   )
+                  })
+                }
+                  </Grid></AccordionDetails></Accordion>
       <Accordion className='Accordion-main'>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -315,13 +621,79 @@ const ClassroomSetup = (props) => {
           <Typography><Typography variant='h6'>Pre-Primary</Typography>  </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <ClassCard>
-            <Typography variant='p' >12 - </Typography>
-            <br />
-            <br />
-            <br />
-            <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}> <Typography variant='p'>View Class </Typography><ArrowForwardIosIcon fontSize='14px' /></span>
-          </ClassCard></AccordionDetails></Accordion>
+        <StraightFlex>
+            <Typography  variant='h6'>Class UKG</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSectionUkg} >+ Add New Section</Button>
+          </StraightFlex>
+        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+                  {
+            createdSectionsArrUkg.length > 0 && createdSectionsArrUkg.map((sect, i) => {
+              return (
+                    <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
+                  
+                    <ClassCard>
+                    <Typography variant='p' fontWeight='bold' fontSize='16px' > UKG - {sect}
+                    </Typography>
+                    <br />
+                    <br />
+                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
+                      <ArrowForwardIosIcon fontSize='14px' />
+                    </span>
+                  </ClassCard>
+                 </Grid> 
+                   )
+                  })
+                }
+                  </Grid>
+                  <StraightFlex>
+            <Typography  variant='h6'>Class LKG</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSectionLkg} >+ Add New Section</Button>
+          </StraightFlex>
+        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+                  {
+            createdSectionsArrLkg.length > 0 && createdSectionsArrLkg.map((sect, i) => {
+              return (
+                    <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
+                  
+                    <ClassCard>
+                    <Typography variant='p' fontWeight='bold' fontSize='16px' > LKG - {sect}
+                    </Typography>
+                    <br />
+                    <br />
+                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
+                      <ArrowForwardIosIcon fontSize='14px' />
+                    </span>
+                  </ClassCard>
+                 </Grid> 
+                   )
+                  })
+                }
+                  </Grid>
+                  <StraightFlex>
+            <Typography  variant='h6'>Class PREKG</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSectionPreKg} >+ Add New Section</Button>
+          </StraightFlex>
+        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+                  {
+            createdSectionsArrPreKg.length > 0 && createdSectionsArrPreKg.map((sect, i) => {
+              return (
+                    <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
+                  
+                    <ClassCard>
+                    <Typography variant='p' fontWeight='bold' fontSize='16px' > PREKG - {sect}
+                    </Typography>
+                    <br />
+                    <br />
+                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography>
+                      <ArrowForwardIosIcon fontSize='14px' />
+                    </span>
+                  </ClassCard>
+                 </Grid> 
+                   )
+                  })
+                }
+                  </Grid>
+                  </AccordionDetails></Accordion>
 
     </div>
 
