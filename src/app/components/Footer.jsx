@@ -47,7 +47,7 @@ const Footer = () => {
             </a> */}
             <Span sx={{ m: 'auto' }}></Span>
             <Paragraph sx={{ m: 0 }}>
-              Design and Developed by <a href="https://instagram.com/sjpurusothaman">SJP</a>
+              Designed and Developed with &#10084; by <a href="https://instagram.com/sjpurusothaman">SJP</a>
             </Paragraph>
           </FooterContent>
         </AppFooter>

@@ -15,7 +15,7 @@ export const navigations = [
     name: 'HRMS',
     icon: 'person',
     children: [
-      { name: 'Staff Management', iconText: 'SM', path: '/hrms/staff-management' },
+      { name: 'Staff Management', iconText: 'SM', path: '/academic/new-staff' },
       { name: 'Leave Management', iconText: 'LM', path: '/hrms/leave-management' },
     ],
   },

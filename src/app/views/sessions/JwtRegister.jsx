@@ -8,6 +8,8 @@ import { Formik } from 'formik';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import { useSnackbar } from 'notistack';
+import { saveUser } from 'app/services/AppService';
 
 const FlexBox = styled(Box)(() => ({ display: 'flex', alignItems: 'center' }));
 
@@ -36,7 +38,7 @@ const JWTRegister = styled(JustifyBox)(() => ({
 const initialValues = {
   email: '',
   password: '',
-  username: '',
+  userName: '',
   remember: true,
 };
 
@@ -49,23 +51,55 @@ const validationSchema = Yup.object().shape({
 });
 
 const JwtRegister = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const theme = useTheme();
   const { register } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const handleFormSubmit = (values) => {
+  const handleFormSubmit = async (values) => {
     setLoading(true);
-
+    // console.log("submitStaff", staffData);
     try {
-      register(values.email, values.username, values.password);
-      navigate('/');
-      setLoading(false);
-    } catch (e) {
-      console.log(e);
-      setLoading(false);
+      const responseFromApi = await saveUser(values)
+      console.log("resp", responseFromApi)
+      if (responseFromApi && responseFromApi.statusCode === 200) {
+        setLoading(false)
+        handleToastMessage(true, responseFromApi.message)
+        navigate('/academic/classroom-setup');
+        // reset()
+      }
+      else {
+        setLoading(false)
+        handleToastMessage(false, responseFromApi.message)
+        navigate('/session/signup')
+      }
     }
+    catch (err) {
+      setLoading(false)
+      handleToastMessage(false, "Something Went Wrong :(")
+      console.log("Error in User Submit Method", err)
+      navigate('/session/signup')
+    }
+    // try {
+    //   register(values.email, values.userName, values.password);
+    //   navigate('/');
+    //   setLoading(false);
+    // } catch (e) {
+    //   console.log(e);
+    //   setLoading(false);
+    // }
   };
+
+  const handleToastMessage = (typeOfMsg, msg) => {
+    const failureMessage = 'Something went wrong :(';
+
+    enqueueSnackbar(msg ? msg : failureMessage, {
+      variant: typeOfMsg ? "success" : "error",
+      persist: false,
+      autoHideDuration: 2000
+    });
+  }
 
   return (
     <JWTRegister>
@@ -94,17 +128,30 @@ const JwtRegister = () => {
                       fullWidth
                       size="small"
                       type="text"
-                      name="username"
+                      name="userName"
                       label="Username"
                       variant="outlined"
                       onBlur={handleBlur}
-                      value={values.username}
+                      value={values.userName}
                       onChange={handleChange}
-                      helperText={touched.username && errors.username}
-                      error={Boolean(errors.username && touched.username)}
+                      helperText={touched.userName && errors.userName}
+                      error={Boolean(errors.userName && touched.userName)}
                       sx={{ mb: 3 }}
                     />
-
+                    <TextField
+                      fullWidth
+                      size="small"
+                      type="number"
+                      name="mobile"
+                      label="Mobile"
+                      variant="outlined"
+                      onBlur={handleBlur}
+                      value={values.mobile}
+                      onChange={handleChange}
+                      helperText={touched.mobile && errors.mobile}
+                      error={Boolean(errors.mobile && touched.mobile)}
+                      sx={{ mb: 3 }}
+                    />
                     <TextField
                       fullWidth
                       size="small"

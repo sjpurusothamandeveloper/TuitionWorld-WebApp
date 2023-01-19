@@ -1,6 +1,6 @@
 import  {React,useState,useEffect} from 'react';
 import { Grid, Box, Button,Radio,RadioGroup, FormControl,FormControlLabel, styled, Typography, Card, Collapse,DialogActions,DialogTitle,DialogContent,TextField,DialogContentText ,Paper,Table,TableBody,TableCell,TableContainer,TableHead,TableRow, Dialog} from '@mui/material';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -19,6 +19,9 @@ const SpaceBetwwenDiv = styled(`div`)(() => ({
   }));
 
 export default function SubjectManagement(props) {
+  const location = useLocation()
+  const { classDetails } = location.state
+  console.log("#####", classDetails)
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("compulsory");
   const usersData = [
@@ -103,11 +106,11 @@ export default function SubjectManagement(props) {
             alignItems="center">
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{padding:"20px"}} xs={12} sm={12} md={12} lg={12} xl={12}>
-             <SpaceBetwwenDiv> <Typography variant='h6'>12 - A &ensp;<EditIcon fontSize='18px' /></Typography><DeleteIcon /></SpaceBetwwenDiv></Card>
+             <SpaceBetwwenDiv> <Typography variant='h6'> {classDetails} &ensp;<EditIcon fontSize='18px' /></Typography><DeleteIcon /></SpaceBetwwenDiv></Card>
           </Grid>
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{padding:"20px"}} xs={12} sm={12} md={12} lg={12} xl={12}>
-             <SpaceBetwwenDiv> <Typography variant='h6'>Manage class teacher, attendance for 12 - A</Typography><Button>Manage Attendance</Button></SpaceBetwwenDiv>
+             <SpaceBetwwenDiv> <Typography variant='h6'>Manage class teacher, attendance for {classDetails}</Typography><Button>Manage Attendance</Button></SpaceBetwwenDiv>
              <Link to='/academic/new-staff'><Typography color="primary">+ Assign Class Teacher</Typography></Link></Card>
           </Grid>
 

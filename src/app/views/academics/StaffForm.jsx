@@ -99,7 +99,6 @@ const AdditionForm = (props) => {
   const submitStaff = async (staffData) => {
     setisLoading(true)
     // console.log("submitStaff", staffData);
-
     try {
       const responseFromApi = await saveStaff(staffData)
       console.log("resp", responseFromApi)
@@ -157,8 +156,8 @@ const AdditionForm = (props) => {
               variant="fullWidth"
               aria-label="full width tabs example"
             >
-              <Tab label="Teacher Directory" {...a11yProps(1)} />
-              <Tab label="Add Teacher" {...a11yProps(0)} />
+              <Tab label="Staff Directory" {...a11yProps(1)} />
+              <Tab label="Add Staff" {...a11yProps(0)} />
             </Tabs>
           </AppBar>
         </Box>
