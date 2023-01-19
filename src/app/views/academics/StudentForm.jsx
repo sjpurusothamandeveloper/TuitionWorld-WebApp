@@ -4,27 +4,62 @@ import {
   Grid, Box, Select,
   MenuItem,
   InputLabel,
-  FormControl, Button, TextField, styled, Typography, Card, Collapse, IconButton
+  FormControl, Button, TextField, Typography, Card
 } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { saveStudent } from 'app/services/AppService.js';
+import { useSnackbar } from 'notistack';
+import { LoadingButton } from '@mui/lab';
 
 const dateTday = new Date();
 
 
 const StudentAdditionForm = (props) => {
-
+  const [staffList, setStaffList] = useState([])
+  const [isLoading, setisLoading] = useState(false)
+  const { enqueueSnackbar } = useSnackbar();
   const {
     handleSubmit,
     reset,
     control,
     formState: { errors },
   } = useForm();
-  const submitStudent = (studentData) => {
-    console.log("submitStudent", studentData);
+
+  const handleToastMessage = (typeOfMsg, msg) => {
+    const failureMessage = 'Something went wrong :(';
+
+    enqueueSnackbar(msg ? msg : failureMessage, {
+      variant: typeOfMsg ? "success" : "error",
+      persist: false,
+      autoHideDuration: 2000
+    });
   }
+
+  const submitStudent = async (studentData) => {
+    setisLoading(true)
+    console.log("submitStudent", studentData);
+    try {
+      const responseFromApi = await saveStudent(studentData)
+      console.log("resp", responseFromApi)
+      if (responseFromApi && responseFromApi.statusCode === 200) {
+        setisLoading(false)
+        handleToastMessage(true, responseFromApi.message)
+        reset()
+      }
+      else {
+        setisLoading(false)
+        handleToastMessage(false, responseFromApi.message)
+      }
+    }
+    catch (err) {
+      setisLoading(false)
+      handleToastMessage(false, "Something Went Wrong :(")
+      console.log("Error in Staff Submit Method", err)
+    }
+  }
+
   return (
     <div>
       <Card style={{ padding: "15px" }}>
@@ -1037,7 +1072,16 @@ const StudentAdditionForm = (props) => {
                 </Grid>
                 <Grid item xs={10} sm={5} md={3} lg={2} xl={2} >
 
-                  <Button onClick={handleSubmit(submitStudent)} fullWidth variant='contained' color='warning'>Submit</Button>
+                <LoadingButton
+                        loading={isLoading}
+                        fullWidth
+                        loadingPosition="start"
+                        variant="contained"
+                        style={{ "backgroundColor": "#ed6c02", "color": "white" }}
+                        onClick={handleSubmit(submitStudent)}
+                      >
+                        Submit
+                </LoadingButton>
                 </Grid>
                 <Grid item xs={10} sm={5} md={3} lg={2} xl={2} >
 
