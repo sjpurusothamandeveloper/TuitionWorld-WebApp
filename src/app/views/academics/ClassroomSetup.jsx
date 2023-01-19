@@ -119,11 +119,10 @@ const ClassroomSetup = (props) => {
   const handleGetSections = async() => {
     let saveSection = await getSection()
     console.log("SectionsList", saveSection)
-    setSectionListArr(saveSection.data)
+    setSectionListArr(saveSection)
   }
 
   const createNxtNewSection12 = async () => {
-  
     let indexOfLastSection = sectionArr12.indexOf(lastCreatedSection12)
     let nextSection = sectionArr12[indexOfLastSection + 1]
     let tempArr = []

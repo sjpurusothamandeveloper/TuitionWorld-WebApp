@@ -9,7 +9,7 @@ export const saveStaff = async(payload) => {
                 return res.data;    
             })
             .catch(err => {
-                console(err)
+                console.log(err)
                 return err
             })
             return apiResp;
@@ -23,7 +23,7 @@ export const getStaffs = async(payload) => {
                 return res.data;    
             })
             .catch(err => {
-                console(err)
+                console.log(err)
                 return err
             })
             return apiResp;
@@ -37,7 +37,7 @@ export const saveStudent = async(payload) => {
                 return res.data;    
             })
             .catch(err => {
-                console(err)
+                console.log(err)
                 return err
             })
             return apiResp;
@@ -51,7 +51,7 @@ export const saveUser = async(payload) => {
                 return res.data;    
             })
             .catch(err => {
-                console(err)
+                console.log(err)
                 return err
             })
             return apiResp;
@@ -65,7 +65,7 @@ export const getUserAuth = async(payload) => {
                 return res.data;    
             })
             .catch(err => {
-                console(err)
+                console.log(err)
                 return err
             })
             return apiResp;
@@ -78,7 +78,7 @@ export const getSection = async() => {
                 return res.data;    
             })
             .catch(err => {
-                console(err)
+                console.log(err)
                 return err
             })
             return apiResp;
