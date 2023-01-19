@@ -1,6 +1,6 @@
 import  {React,useState,useEffect} from 'react';
 import { Grid, Box, Button,Radio,RadioGroup, FormControl,FormControlLabel, styled, Typography, Card, Collapse,DialogActions,DialogTitle,DialogContent,TextField,DialogContentText ,Paper,Table,TableBody,TableCell,TableContainer,TableHead,TableRow, Dialog} from '@mui/material';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -19,6 +19,9 @@ const SpaceBetwwenDiv = styled(`div`)(() => ({
   }));
 
 export default function SubjectManagement(props) {
+  const location = useLocation()
+  const { classDetails } = location.state
+  console.log("#####", classDetails)
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("compulsory");
   const usersData = [
