@@ -129,7 +129,7 @@ export default function SubjectManagement(props) {
             alignItems="center">
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{padding:"20px"}} xs={12} sm={12} md={12} lg={12} xl={12}>
-             <SpaceBetwwenDiv> <Typography variant='h6'>{classDetails}
+             <SpaceBetwwenDiv> <Typography variant='h6'>{classDetails && classDetails}
               {/* &ensp;<EditIcon fontSize='18px' /> */}
               </Typography>
              {/* <DeleteIcon /> */}
