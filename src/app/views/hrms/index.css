@@ -4,6 +4,13 @@
     box-shadow: none;
     background-color: inherit;
 }
+.apply-form-paper{
+    padding:20px;
+    height: auto;
+    box-shadow: none;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+}
 .profile-card-major{
     background: #000000;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
@@ -23,7 +30,13 @@ max-height: 100px;
     
 }
 .blue-card{
-    background-color: #FFFFFF;
-    
-
+    background-color: #FFFFFF;   
+}
+.submission-button{
+    background-color:rgba(52, 49, 76, 1);
+    color:#FFFFFF;
+}
+.submission-button:hover{
+    background-color:rgba(52, 49, 76, 1);
+    color:#FFFFFF;
 }

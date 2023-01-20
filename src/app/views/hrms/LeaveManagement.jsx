@@ -1,6 +1,6 @@
 import { Box, Button, styled,Card,Grid, Paper, Typography } from '@mui/material';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "./index.css";
 import pic1 from '../../assets/images/2.jpg'
 
@@ -14,9 +14,8 @@ const ProfileCard = styled(Card)(() => ({
   width: '100%',
   display:'flex',
   flexDirection:'row',
-  justifyContent:'flex-start',
-  gap:'20px',
-  alignItems:'flex-start',
+  justifyContent:'space-between',
+  alignItems:'flex-end',
   minHeight:'140px',
   padding:'20px'
 
@@ -36,9 +35,16 @@ const LeaveCard = styled(Card)(() => ({
 }));
 
 const JustifyBox = styled(FlexBox)(() => ({
-  maxWidth: 320,
+ 
   flexDirection: 'column',
   justifyContent: 'center',
+  alignItems:'flex-start'
+}));
+
+const SpaceBox = styled(FlexBox)(() => ({
+  flexDirection: 'row',
+  gap:'20px',
+  justifyContent:'flex-start',
   alignItems:'flex-start'
 }));
 
@@ -61,11 +67,14 @@ const LeaveManagement = () => {
    <React.Fragment>
      <Paper className='component-paper'>
      <ProfileCard className='profile-card-major'> 
+     <SpaceBox>
       <img className='img-rounded' src={pic1}></img>
+     
       <JustifyBox ><Typography variant="h6">Sabash , <strong>Purusothaman</strong></Typography>
       
       <Typography variant="subtitle1">Mail:<strong>dinesh@gmail.com</strong> &emsp;Designation : <strong>Tutor</strong></Typography>
-      </JustifyBox>
+      </JustifyBox></SpaceBox>
+      <Link to="/hrms/apply-leave"><Button variant="outlined" color="secondary" align="right">Apply</Button></Link>
      </ProfileCard>
      <br />
      <Grid container direction='row'  justifyContent="space-between" alignItems="center">

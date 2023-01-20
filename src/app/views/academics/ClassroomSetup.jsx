@@ -112,9 +112,9 @@ const ClassroomSetup = (props) => {
   const sectionArrLkg = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
   const sectionArrPreKg = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
-  useEffect(() => {
-    handleGetSections()
-  }, [])
+  // useEffect(() => {
+  //   handleGetSections()
+  // }, [])
 
   const handleGetSections = async() => {
     let saveSection = await getSection()

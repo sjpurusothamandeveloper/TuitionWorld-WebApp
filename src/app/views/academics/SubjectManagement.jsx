@@ -25,11 +25,11 @@ export default function SubjectManagement(props) {
   console.log("#####", classDetails)
   const [open, setOpen] = useState(false);
   const [assignOpen, setAssignOpen] = useState(false);
-  const [value, setValue] = useState("compulsory");
+  const [values, setValues] = useState("compulsory");
   const usersData = [
-    { id: 1, name: "Tamil" },
-    { id: 2, name: "English" },
-    { id: 3, name: "Mathematics" }
+    { id: 1, name: "Tamil" ,subtype :"compulsory" },
+    { id: 2, name: "English",subtype :"objective" },
+    { id: 3, name: "Mathematics",subtype :"objective" }
   ];
   
   const initialFormState = { id: null, name: "" };
@@ -89,8 +89,10 @@ export default function SubjectManagement(props) {
     setUsers(users.map(user => (user.id === id ? updatedUser : user)));
   };
 
- const handleChange =(e) =>{
-  setValue(e.target.value)
+  const handleChange = (type,event)=>{
+    const { name, value } = event.target;
+
+    setValues({ type, [name]: value });
  }
 
   const handleClickOpen = () => {
@@ -145,7 +147,7 @@ export default function SubjectManagement(props) {
         <TableHead>
           <TableRow>
             <TableCell>SUBJECT NAME</TableCell>
-            <TableCell>SUBJECT TYPE</TableCell>
+           
             <TableCell>SUBJECT TEACHER</TableCell>
             <TableCell>EDIT SUBJECT</TableCell>
             <TableCell>DELETE SUBJECT</TableCell>
@@ -157,21 +159,7 @@ export default function SubjectManagement(props) {
         users.map(user => (
           <TableRow key={user.id}>
             <TableCell>{user.name}</TableCell>
-            <TableCell>
-
-            <FormControl component="fieldset" className="formControl">      
-        <RadioGroup
-          value={value}
-          name="subtype"
-          className="group"
-         
-          onChange={handleChange}
-        >
-          <FormControlLabel name="compulsory" value="compulsory" control={<Radio />} label="compulsory" />
-          <FormControlLabel name="optional" value="optional" control={<Radio />} label="optional" />
-        </RadioGroup>
-      </FormControl>
-             </TableCell><TableCell></TableCell>
+            <TableCell></TableCell>
             <TableCell>
               <Button
                 
