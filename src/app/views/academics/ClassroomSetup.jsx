@@ -61,7 +61,7 @@ const NotFoundRoot = styled(FlexBox)(() => ({
 
 const ClassroomSetup = (props) => {
   const navigate = useNavigate();
- 
+
   const [lastCreatedSection12, setLastCreatedSection12] = useState("A");
   const [lastCreatedSection11, setLastCreatedSection11] = useState("A");
   const [lastCreatedSection10, setLastCreatedSection10] = useState("A");
@@ -116,7 +116,7 @@ const ClassroomSetup = (props) => {
     handleGetSections()
   }, [])
 
-  const handleGetSections = async() => {
+  const handleGetSections = async () => {
     let saveSection = await getSection()
     console.log("SectionsList", saveSection)
     setSectionListArr(saveSection)
@@ -141,7 +141,7 @@ const ClassroomSetup = (props) => {
     setLastCreatedSection11(nextSection)
     setCreatedSectionsArr11(x)
   }
-   
+
   const createNxtNewSection10 = () => {
     let indexOfLastSection = sectionArr10.indexOf(lastCreatedSection10)
     let nextSection = sectionArr10[indexOfLastSection + 1]
@@ -271,7 +271,7 @@ const ClassroomSetup = (props) => {
     setLastCreatedSectionPreKg(nextSection)
     setCreatedSectionsArrPreKg(x)
   }
- 
+
   return (
 
     <div style={{ padding: "15px" }}>
@@ -285,60 +285,59 @@ const ClassroomSetup = (props) => {
           <Typography><Typography variant='h6'>Senior Secondary</Typography>  </Typography>
         </AccordionSummary>
         <AccordionDetails>
-         
+
           <StraightFlex>
-            <Typography  variant='h6'>Class 12</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection12} >+ Add New Section</Button>
+            <Typography variant='h6'>Class 12</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection12} >+ Add New Section</Button>
           </StraightFlex>
-       
-                
-                  <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
-                  {
-            createdSectionsArr12.length > 0 && createdSectionsArr12.map((sect, i) => {
-              return (
-                    <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
-                  
+
+
+          <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+            {
+              createdSectionsArr12.length > 0 && createdSectionsArr12.map((sect, i) => {
+                return (
+                  <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
                     <ClassCard>
-                    <Typography variant='p' fontWeight='bold' fontSize='16px' > 12 - {sect}
-                    </Typography>
-                    <br />
-                    <br />
-                  <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link to='/academic/subject-management' state={{ classes:"12-" + sect }} ><Typography variant='p' style={{cursor:"pointer"}}>View Class </Typography></Link>
-                      <ArrowForwardIosIcon fontSize='14px' />
-                    </span>
-                  </ClassCard>
-                 </Grid> 
-                   )
-                  })
-                }
+                      <Typography variant='p' fontWeight='bold' fontSize='16px' > 12 - {sect}
+                      </Typography>
+                      <br />
+                      <br />
+                      <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+                      <Link to="/academic/subject-management" state={{ classDetails: '12 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <ArrowForwardIosIcon fontSize='14px' />
+                      </span>
+                    </ClassCard>
                   </Grid>
-                 
-                  <StraightFlex>
-            <Typography  variant='h6'>Class 11</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection11} >+ Add New Section</Button>
+                )
+              })
+            }
+          </Grid>
+
+          <StraightFlex>
+            <Typography variant='h6'>Class 11</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection11} >+ Add New Section</Button>
           </StraightFlex>
-       
-                
-                  <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
-                  {
-            createdSectionsArr11.length > 0 && createdSectionsArr11.map((sect, i) => {
-              return (
-                    <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
-                  
+
+
+          <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+            {
+              createdSectionsArr11.length > 0 && createdSectionsArr11.map((sect, i) => {
+                return (
+                  <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
+
                     <ClassCard>
                       <Typography variant='p' fontWeight='bold' fontSize='16px' > 11 - {sect}
                       </Typography>
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link to="/academic/subject-management" state= {{ classDetails : '11 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/subject-management" state={{ classDetails: '11 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
                   </Grid>
-                   )
-                  })
-                }
-            </Grid>
+                )
+              })
+            }
+          </Grid>
 
         </AccordionDetails>
       </Accordion>
@@ -352,54 +351,54 @@ const ClassroomSetup = (props) => {
           <Typography><Typography variant='h6'>Secondary</Typography>  </Typography>
         </AccordionSummary>
         <AccordionDetails>
-        <StraightFlex>
-            <Typography  variant='h6'>Class 10</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection10} >+ Add New Section</Button>
+          <StraightFlex>
+            <Typography variant='h6'>Class 10</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection10} >+ Add New Section</Button>
           </StraightFlex>
-        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
-                  {
-            createdSectionsArr10.length > 0 && createdSectionsArr10.map((sect, i) => {
-              return (
-                    <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
-                  
+          <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+            {
+              createdSectionsArr10.length > 0 && createdSectionsArr10.map((sect, i) => {
+                return (
+                  <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
+
                     <ClassCard>
                       <Typography variant='p' fontWeight='bold' fontSize='16px' > 10 - {sect}
                       </Typography>
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link to="/academic/subject-management" state= {{ classDetails : '10 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/subject-management" state={{ classDetails: '10 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
                   </Grid>
-                  )
-                })
-              }
+                )
+              })
+            }
           </Grid>
-                  <StraightFlex>
-            <Typography  variant='h6'>Class 9</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection9} >+ Add New Section</Button>
+          <StraightFlex>
+            <Typography variant='h6'>Class 9</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection9} >+ Add New Section</Button>
           </StraightFlex>
-        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
-                  {
-            createdSectionsArr9.length > 0 && createdSectionsArr9.map((sect, i) => {
-              return (
-                    <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
-                  
+          <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+            {
+              createdSectionsArr9.length > 0 && createdSectionsArr9.map((sect, i) => {
+                return (
+                  <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
+
                     <ClassCard>
                       <Typography variant='p' fontWeight='bold' fontSize='16px' > 9 - {sect}
                       </Typography>
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link to="/academic/subject-management" state= {{ classDetails : '9 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/subject-management" state={{ classDetails: '9 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
                   </Grid>)
-                  })
-                }
-            </Grid>
-         </AccordionDetails></Accordion>
+              })
+            }
+          </Grid>
+        </AccordionDetails></Accordion>
 
       <Accordion className='Accordion-main'>
         <AccordionSummary
@@ -410,77 +409,77 @@ const ClassroomSetup = (props) => {
           <Typography><Typography variant='h6'>Middle</Typography>  </Typography>
         </AccordionSummary>
         <AccordionDetails>
-        <StraightFlex>
-            <Typography  variant='h6'>Class 8</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection8} >+ Add New Section</Button>
+          <StraightFlex>
+            <Typography variant='h6'>Class 8</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection8} >+ Add New Section</Button>
           </StraightFlex>
-        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
-                  {
-            createdSectionsArr8.length > 0 && createdSectionsArr8.map((sect, i) => {
-              return (
-                    <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
-                  
+          <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+            {
+              createdSectionsArr8.length > 0 && createdSectionsArr8.map((sect, i) => {
+                return (
+                  <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
+
                     <ClassCard>
                       <Typography variant='p' fontWeight='bold' fontSize='16px' > 8 - {sect}
                       </Typography>
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link to="/academic/subject-management" state= {{ classDetails : '8 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/subject-management" state={{ classDetails: '8 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
                   </Grid>
-)
-})
-}
-</Grid>
-                  <StraightFlex>
-            <Typography  variant='h6'>Class 7</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection7} >+ Add New Section</Button>
+                )
+              })
+            }
+          </Grid>
+          <StraightFlex>
+            <Typography variant='h6'>Class 7</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection7} >+ Add New Section</Button>
           </StraightFlex>
-        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
-                  {
-            createdSectionsArr7.length > 0 && createdSectionsArr7.map((sect, i) => {
-              return (
-                    <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
-                  
+          <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+            {
+              createdSectionsArr7.length > 0 && createdSectionsArr7.map((sect, i) => {
+                return (
+                  <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
+
                     <ClassCard>
                       <Typography variant='p' fontWeight='bold' fontSize='16px' > 7 - {sect}
                       </Typography>
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link to="/academic/subject-management" state= {{ classDetails : '7 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/subject-management" state={{ classDetails: '7 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
                   </Grid>
-                 )
-                })
-              }
+                )
+              })
+            }
           </Grid>
-                  <StraightFlex>
-            <Typography  variant='h6'>Class 6</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection6} >+ Add New Section</Button>
+          <StraightFlex>
+            <Typography variant='h6'>Class 6</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection6} >+ Add New Section</Button>
           </StraightFlex>
-        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
-                  {
-            createdSectionsArr6.length > 0 && createdSectionsArr6.map((sect, i) => {
-              return (
-                    <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
-                  
+          <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+            {
+              createdSectionsArr6.length > 0 && createdSectionsArr6.map((sect, i) => {
+                return (
+                  <Grid key={i} item xs={6} sm={3} lg={3} xl={2} md={3} >
+
                     <ClassCard>
                       <Typography variant='p' fontWeight='bold' fontSize='16px' > 6 - {sect}
                       </Typography>
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link to="/academic/subject-management" state= {{ classDetails : '6 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/subject-management" state={{ classDetails: '6 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
                   </Grid>)
-                  })
-                }
-            </Grid>
+              })
+            }
+          </Grid>
         </AccordionDetails></Accordion>
 
       <Accordion className='Accordion-main'>
@@ -492,117 +491,117 @@ const ClassroomSetup = (props) => {
           <Typography><Typography variant='h6'>Primary</Typography>  </Typography>
         </AccordionSummary>
         <AccordionDetails>
-        <StraightFlex>
-            <Typography  variant='h6'>Class 5</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection5} >+ Add New Section</Button>
+          <StraightFlex>
+            <Typography variant='h6'>Class 5</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection5} >+ Add New Section</Button>
           </StraightFlex>
-        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
-                  {
-            createdSectionsArr5.length > 0 && createdSectionsArr5.map((sect, i) => {
-              return (
-                    <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
-                  
+          <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+            {
+              createdSectionsArr5.length > 0 && createdSectionsArr5.map((sect, i) => {
+                return (
+                  <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
+
                     <ClassCard>
                       <Typography variant='p' fontWeight='bold' fontSize='16px' > 6 - {sect}
                       </Typography>
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link to="/academic/subject-management" state= {{ classDetails : '5 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/subject-management" state={{ classDetails: '5 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
                   </Grid>
-                  )
-                })
-              }
+                )
+              })
+            }
           </Grid>
-                  <StraightFlex>
-            <Typography  variant='h6'>Class 4</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection4} >+ Add New Section</Button>
+          <StraightFlex>
+            <Typography variant='h6'>Class 4</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection4} >+ Add New Section</Button>
           </StraightFlex>
-        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
-                  {
-            createdSectionsArr4.length > 0 && createdSectionsArr4.map((sect, i) => {
-              return (
-                    <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
-                  
+          <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+            {
+              createdSectionsArr4.length > 0 && createdSectionsArr4.map((sect, i) => {
+                return (
+                  <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
+
                     <ClassCard>
                       <Typography variant='p' fontWeight='bold' fontSize='16px' > 4 - {sect}
                       </Typography>
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link to="/academic/subject-management" state= {{ classDetails : '4 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/subject-management" state={{ classDetails: '4 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
                   </Grid>
-                  )
-                })
-              }
+                )
+              })
+            }
           </Grid>
-                  <StraightFlex>
-            <Typography  variant='h6'>Class 3</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection3} >+ Add New Section</Button>
+          <StraightFlex>
+            <Typography variant='h6'>Class 3</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection3} >+ Add New Section</Button>
           </StraightFlex>
-        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
-                  {
-            createdSectionsArr3.length > 0 && createdSectionsArr3.map((sect, i) => {
-              return (
-                    <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
-                  
+          <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+            {
+              createdSectionsArr3.length > 0 && createdSectionsArr3.map((sect, i) => {
+                return (
+                  <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
+
                     <ClassCard>
                       <Typography variant='p' fontWeight='bold' fontSize='16px' > 3 - {sect}
                       </Typography>
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link to="/academic/subject-management" state= {{ classDetails : '3 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/subject-management" state={{ classDetails: '3 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
                   </Grid>
-                  )
-                })
-              }
+                )
+              })
+            }
           </Grid>
-                  <StraightFlex>
-            <Typography  variant='h6'>Class 2</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection2} >+ Add New Section</Button>
+          <StraightFlex>
+            <Typography variant='h6'>Class 2</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection2} >+ Add New Section</Button>
           </StraightFlex>
-        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
-                  {
-            createdSectionsArr2.length > 0 && createdSectionsArr2.map((sect, i) => {
-              return (
-                    <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
-                  
+          <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+            {
+              createdSectionsArr2.length > 0 && createdSectionsArr2.map((sect, i) => {
+                return (
+                  <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
+
                     <ClassCard>
                       <Typography variant='p' fontWeight='bold' fontSize='16px' > 2 - {sect}
                       </Typography>
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link to="/academic/subject-management" state= {{ classDetails : '2 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/subject-management" state={{ classDetails: '2 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
                   </Grid>)
-                  })
-                }
-            </Grid>
-                  <StraightFlex>
-            <Typography  variant='h6'>Class 1</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection1} >+ Add New Section</Button>
+              })
+            }
+          </Grid>
+          <StraightFlex>
+            <Typography variant='h6'>Class 1</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSection1} >+ Add New Section</Button>
           </StraightFlex>
-        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
-                  {
-            createdSectionsArr1.length > 0 && createdSectionsArr1.map((sect, i) => {
-              return (
-                    <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
-                  
+          <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+            {
+              createdSectionsArr1.length > 0 && createdSectionsArr1.map((sect, i) => {
+                return (
+                  <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
+
                     <ClassCard>
                       <Typography variant='p' fontWeight='bold' fontSize='16px' > 1 - {sect}
                       </Typography>
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link to="/academic/subject-management" state= {{ classDetails : '1 - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/subject-management" state={{ classDetails: '1 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
@@ -620,78 +619,78 @@ const ClassroomSetup = (props) => {
           <Typography><Typography variant='h6'>Pre-Primary</Typography>  </Typography>
         </AccordionSummary>
         <AccordionDetails>
-        <StraightFlex>
-            <Typography  variant='h6'>Class UKG</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSectionUkg} >+ Add New Section</Button>
+          <StraightFlex>
+            <Typography variant='h6'>Class UKG</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSectionUkg} >+ Add New Section</Button>
           </StraightFlex>
-        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
-                  {
-            createdSectionsArrUkg.length > 0 && createdSectionsArrUkg.map((sect, i) => {
-              return (
-                    <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
-                  
+          <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+            {
+              createdSectionsArrUkg.length > 0 && createdSectionsArrUkg.map((sect, i) => {
+                return (
+                  <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
+
                     <ClassCard>
                       <Typography variant='p' fontWeight='bold' fontSize='16px' > UKG - {sect}
                       </Typography>
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link to="/academic/subject-management" state= {{ classDetails : 'UKG - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/subject-management" state={{ classDetails: 'UKG - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
                   </Grid>
-                  )
-                })
-              }
+                )
+              })
+            }
           </Grid>
-                  <StraightFlex>
-            <Typography  variant='h6'>Class LKG</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSectionLkg} >+ Add New Section</Button>
+          <StraightFlex>
+            <Typography variant='h6'>Class LKG</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSectionLkg} >+ Add New Section</Button>
           </StraightFlex>
-        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
-                  {
-            createdSectionsArrLkg.length > 0 && createdSectionsArrLkg.map((sect, i) => {
-              return (
-                    <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
-                  
+          <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+            {
+              createdSectionsArrLkg.length > 0 && createdSectionsArrLkg.map((sect, i) => {
+                return (
+                  <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
+
                     <ClassCard>
                       <Typography variant='p' fontWeight='bold' fontSize='16px' > LKG - {sect}
                       </Typography>
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link to="/academic/subject-management" state= {{ classDetails : 'LKG - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/subject-management" state={{ classDetails: 'LKG - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
                   </Grid>
-                  )
-                })
-              }
+                )
+              })
+            }
           </Grid>
-                  <StraightFlex>
-            <Typography  variant='h6'>Class PREKG</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSectionPreKg} >+ Add New Section</Button>
+          <StraightFlex>
+            <Typography variant='h6'>Class PREKG</Typography> <Button style={{ float: "right" }} onClick={createNxtNewSectionPreKg} >+ Add New Section</Button>
           </StraightFlex>
-        <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
-                  {
-            createdSectionsArrPreKg.length > 0 && createdSectionsArrPreKg.map((sect, i) => {
-              return (
-                    <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
-                  
+          <Grid container direction="row" columnSpacing={2} rowSpacing={2} justifyContent="flex-start" alignContent="center" >
+            {
+              createdSectionsArrPreKg.length > 0 && createdSectionsArrPreKg.map((sect, i) => {
+                return (
+                  <Grid key={i} item xs={5} sm={3} lg={3} xl={2} md={3} >
+
                     <ClassCard>
                       <Typography variant='p' fontWeight='bold' fontSize='16px' > PREKG - {sect}
                       </Typography>
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link to="/academic/subject-management" state= {{ classDetails : 'PREKG - '+ sect}} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/subject-management" state={{ classDetails: 'PREKG - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
                   </Grid>)
-                  })
-                }
-            </Grid>
-                  </AccordionDetails></Accordion>
+              })
+            }
+          </Grid>
+        </AccordionDetails></Accordion>
 
     </div>
   );
