@@ -86,6 +86,10 @@ const AdditionForm = (props) => {
     formState: { errors },
   } = useForm();
 
+  const handleReset = () => {
+    reset();
+  };
+
   const handleToastMessage = (typeOfMsg, msg) => {
     const failureMessage = 'Something went wrong :(';
 
@@ -748,7 +752,7 @@ const AdditionForm = (props) => {
                       </LoadingButton>
                     </Grid>
                     <Grid item xs={10} sm={5} md={3} lg={2} xl={2} >
-                      <Button fullWidth variant='contained' color='inherit'>Cancel</Button>
+                    <Button color="warning" variant="outlined" onClick={handleReset}>Reset</Button>
                     </Grid>
                   </Grid>
                 </Grid>
