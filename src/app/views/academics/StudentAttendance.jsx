@@ -1,10 +1,7 @@
-import { Box, Button, styled, Typography,Grid,Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
+import { Box, Button, styled, Typography,Grid,
   Card,
   IconButton} from '@mui/material';
-import React from 'react';
+import React,{useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './index.css';
 import { studentsList } from './Constants';
@@ -13,6 +10,8 @@ import PanToolIcon from '@mui/icons-material/PanTool';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import FaceRetouchingOffIcon from '@mui/icons-material/FaceRetouchingOff';
 import FaceIcon from '@mui/icons-material/Face';
+import FaceOutlinedIcon from '@mui/icons-material/FaceOutlined';
+import FaceRetouchingOffOutlinedIcon from '@mui/icons-material/FaceRetouchingOffOutlined';
 import EventBusyIcon from '@mui/icons-material/EventBusy';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 
@@ -49,6 +48,32 @@ const NotFoundRoot = styled(FlexBox)(() => ({
 
 const StudentAttendance = () => {
   const navigate = useNavigate();
+
+  const [presented ,setPresented] = useState(null)
+  const [absented ,setAbsented] = useState(null)
+  
+  const handleStudentAtt = (stud,presence) =>{
+    
+  let obj={
+    "studentName":stud.name,
+    "presence":presence
+  }
+  let studAttArr = []
+  studAttArr.push(obj)
+  console.log(studAttArr)
+  
+  
+    if(presence === "present" ){
+      setAbsented(false)
+      setPresented(true)
+    }
+    if(presence === "absent" ){
+      setAbsented(true)
+      setPresented(false)
+    }
+    console.log(stud,presence)
+  } 
+  
  
 
   return (
@@ -59,12 +84,15 @@ const StudentAttendance = () => {
      
       <br />
       <Grid container columnSpacing={2} rowSpacing={2} display="row" alignItems="center" justifyContent="space-evenly">
-       {studentsList.map((student)=> 
+       {studentsList.map((student,index)=> 
         <Grid item md={2} lg={2} xl={2} sm={2} xs={5}>
           <Card className='card-student padding-15'>
              <img class="card-photo" src={student.image}></img>
           <Typography className='padding-15'>{student.name}</Typography> 
-          <StraightFlex><IconButton><FaceIcon className='present-color' /></IconButton><IconButton><FaceRetouchingOffIcon className='absent-color' /></IconButton></StraightFlex>
+          <StraightFlex>
+            <IconButton onClick={()=>handleStudentAtt(student,"present")}>{presented ? <FaceIcon  value="present" className='present-color' /> : <FaceOutlinedIcon className='present-color' />}</IconButton>
+            <IconButton onClick={()=>handleStudentAtt(student,"absent")}>{absented  ?  <FaceRetouchingOffIcon value="absent" className='absent-color' /> : <FaceRetouchingOffOutlinedIcon className='absent-color' />}</IconButton>
+            </StraightFlex>
            </Card>
         </Grid>
         )}

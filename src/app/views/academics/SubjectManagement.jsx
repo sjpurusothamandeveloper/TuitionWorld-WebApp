@@ -8,6 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import LabelledSwitch from '../material-kit/switch/LabelledSwitch';
 import './index.css';
 import pic1 from "../../assets/images/2.jpg"
+import { studentsList } from './Constants';
 
 const maxDialog="500px";
 
@@ -116,8 +117,10 @@ export default function SubjectManagement(props) {
     setIsAssignedTeacher(true)
     handleAssignClose(true)   
   }
-
-
+  
+  const capitalizeFirst = str => {
+    return str.charAt(0).toUpperCase();
+  }
     return (
       <div>
          <Card style={{padding:"15px"}}>
@@ -265,7 +268,13 @@ export default function SubjectManagement(props) {
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{padding:"20px"}} xs={12} sm={12} md={12} lg={12} xl={12}>
              <SpaceBetwwenDiv> <Typography variant='h6'>Manage students for 12 - A</Typography></SpaceBetwwenDiv>
-             <Link to='/academic/new-student'><Button>+ Add Students</Button></Link></Card>
+             <Link to='/academic/new-student'><Button>+ Add Students</Button></Link>
+             <br />
+             <Grid className='students-flex'  lg={12} xl={12} md={12} sm={12} xs={12}>
+             {studentsList.map((stud)=>(
+              <Chip  avatar={<Avatar>{capitalizeFirst(stud.name)}</Avatar>} label={stud.name}  variant="outlined" />
+            ) )}</Grid>
+             </Card>
           </Grid>
         </Grid>
         </Card>
