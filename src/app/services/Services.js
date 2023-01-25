@@ -6,3 +6,4 @@ export const studentCreationUrl = "http://localhost:"+ localServerPort + "/stude
 export const userCreationUrl = "http://localhost:"+ localServerPort + "/users"
 export const userAuthUrl = "http://localhost:"+ localServerPort + "/users/auth/login"
 export const sectionsListUrl = "http://localhost:"+ localServerPort + "/sections"
+export const leaveApplyUrl = "http://localhost:"+ localServerPort + "/leave"

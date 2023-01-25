@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import {
@@ -73,7 +73,7 @@ const AdditionForm = (props) => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    if(newValue === 0){
+    if (newValue === 0) {
       handleGetStaffList()
     }
   };
@@ -752,7 +752,7 @@ const AdditionForm = (props) => {
                       </LoadingButton>
                     </Grid>
                     <Grid item xs={10} sm={5} md={3} lg={2} xl={2} >
-                    <Button color="warning" variant="outlined" onClick={handleReset}>Reset</Button>
+                      <Button color="warning" variant="outlined" onClick={handleReset}>Reset</Button>
                     </Grid>
                   </Grid>
                 </Grid>
