@@ -1,10 +1,11 @@
 import { React, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import {
   Grid, Box, Select,
   MenuItem,
   InputLabel,
-  FormControl, Button, TextField, Typography, Card
+  FormControl, Button, TextField, Typography, Card, styled, AppBar, Tabs, Tab
 } from '@mui/material';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -12,11 +13,55 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { saveStudent } from 'app/services/AppService.js';
 import { useSnackbar } from 'notistack';
 import { LoadingButton } from '@mui/lab';
+import { studentsList } from './Constants';
+import '../academics/index.css';
 
 const dateTday = new Date();
 
+const SpaceBetwwenDiv = styled(`div`)(() => ({
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center'
+}));
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
 
 const StudentAdditionForm = (props) => {
+  const [value, setValue] = useState(0);
   const [staffList, setStaffList] = useState([])
   const [isLoading, setisLoading] = useState(false)
   const { enqueueSnackbar } = useSnackbar();
@@ -29,6 +74,10 @@ const StudentAdditionForm = (props) => {
 
   const handleReset = () => {
     reset();
+  };
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   const handleToastMessage = (typeOfMsg, msg) => {
@@ -66,6 +115,33 @@ const StudentAdditionForm = (props) => {
 
   return (
     <div>
+       <Box sx={{ width: '100%' }}>
+
+<Box sx={{ width: '100%', borderBottom: 1, borderColor: 'divider' }}>
+
+  <AppBar className="appbar" position="static">
+    <Tabs centered
+      value={value}
+      onChange={handleChange}
+      textColor="inherit"
+      variant="fullWidth"
+      aria-label="full width tabs example"
+    >
+      <Tab label="Student Directory" {...a11yProps(1)} />
+      <Tab label="Add Student" {...a11yProps(0)} />
+    </Tabs>
+  </AppBar>
+</Box>
+<TabPanel value={value} index={0}>
+<Grid container rowSpacing={2} direction="column" justifyContent="center">
+            {studentsList.map((student) =>
+              <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
+                <Card className='padding-15'>
+                  <SpaceBetwwenDiv><Typography variant='subtitle2' component='p'>{student.firstName + " " + student.lastName}</Typography><Button >Assign</Button></SpaceBetwwenDiv>
+                  <Typography variant='body2' component='p'>{student.emailId}</Typography></Card></Grid>)}</Grid>
+
+</TabPanel>
+<TabPanel value={value} index={1}>
       <Card style={{ padding: "15px" }}>
         <br />
         <Typography variant='h5' align='center'><b>Add Student</b></Typography>
@@ -1097,6 +1173,7 @@ const StudentAdditionForm = (props) => {
 
 
           </Grid></form ></Card>
+          </TabPanel></Box>
     </div>
   );
 
