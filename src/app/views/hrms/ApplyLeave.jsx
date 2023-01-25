@@ -128,7 +128,7 @@ const ApplyLeave = () => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    if (newValue === 0) {
+    if (newValue === 1) {
       handleGetLeaveList()
     }
   };
