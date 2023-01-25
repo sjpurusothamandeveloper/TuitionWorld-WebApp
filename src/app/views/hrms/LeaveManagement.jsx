@@ -21,6 +21,7 @@ const ProfileCard = styled(Card)(() => ({
 
 }));
 
+
 const LeaveCard = styled(Card)(() => ({
   width: '100%',
   display:'flex',
@@ -60,11 +61,13 @@ const NotFoundRoot = styled(FlexBox)(() => ({
   height: '100vh !important',
 }));
 
+
 const LeaveManagement = () => {
   const navigate = useNavigate();
-
+  
   return (
    <React.Fragment>
+    
      <Paper className='component-paper'>
      <ProfileCard className='profile-card-major'> 
      <SpaceBox>

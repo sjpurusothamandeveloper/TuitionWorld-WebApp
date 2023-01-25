@@ -11,6 +11,13 @@
     border-radius: 8px;
     background-color: #FFFFFF;
 }
+.appbar{
+    background-color: #ffffff !important;
+    color:rgba(52, 49, 76, 1);
+}
+.MuiTabs-indicator{
+    background-color: rgba(52, 49, 76, 1) !important;
+}
 .profile-card-major{
     background: #000000;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */

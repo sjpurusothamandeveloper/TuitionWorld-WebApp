@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import {
   Grid, Box, styled, Paper,
-   Button, TextField, Typography, Card
+   Button, TextField, Typography, Card, AppBar, Tabs, Tab
 } from '@mui/material';
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +12,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import "./index.css";
 import { useSnackbar } from 'notistack';
 import { saveLeave } from 'app/services/AppService.js';
+import { teacherslist } from '../academics/Constants';
 
 const dateTday = new Date();
 const dateNextday = dateTday + 1;
@@ -19,6 +21,14 @@ const FlexBox = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',
   color: '#FFFFFF'
+}));
+
+const SpaceBetwwenDiv = styled(`div`)(() => ({
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center'
 }));
 
 const ProfileCard = styled(Card)(() => ({
@@ -65,8 +75,43 @@ const NotFoundRoot = styled(FlexBox)(() => ({
   height: '100vh !important',
 }));
 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
+
 const ApplyLeave = () => {
   const navigate = useNavigate();
+  const [value, setValue] = React.useState(0);
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setisLoading] = useState(false)
   const {
@@ -78,6 +123,10 @@ const ApplyLeave = () => {
 
   const handleReset = () => {
     reset();
+  };
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   const submitLeave = async (leaveData) => {
@@ -113,13 +162,32 @@ const ApplyLeave = () => {
 
   return (
     <React.Fragment>
+
+<Box sx={{ width: '100%' }}>
+
+<Box sx={{ width: '100%', borderBottom: 1, borderColor: 'divider' }}>
+
+  <AppBar className="appbar" position="static">
+    <Tabs centered
+      value={value}
+      onChange={handleChange}
+      textColor="inherit"
+      variant="fullWidth"
+      aria-label="full width tabs example"
+    >
+      <Tab label="Apply Leave" {...a11yProps(1)} />
+      <Tab label="Manage Leave" {...a11yProps(0)} />
+    </Tabs>
+  </AppBar>
+</Box>
+<TabPanel value={value} index={0}>
       <Grid container justifyContent="center" >
 
         <Grid item md={12} lg={12} xl={12}>
           <Paper className='apply-form-paper'>
             <form >
               <Grid container columnSpacing={2} rowSpacing={2} direction='row' justifyContent="space-between" alignItems="center">
-                <Grid item md={12} lg={12} xl={12} ><Typography variant="h5" align="center"><strong>Apply for Leave</strong></Typography></Grid>
+              
                 <Grid item md={12} lg={12} xl={12} >
                   <Controller
                     control={control}
@@ -183,7 +251,16 @@ const ApplyLeave = () => {
                 <Button color="warning" variant="outlined" onClick={handleReset}>Reset</Button>
                 </Grid>
               </Grid></form></Paper></Grid>
-      </Grid>
+      </Grid></TabPanel>
+      <TabPanel value={value} index={1}>
+      <Grid container rowSpacing={2} direction="column" justifyContent="center">
+            {teacherslist.map((teacher) =>
+              <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
+                <Card className='padding-15'>
+                  <SpaceBetwwenDiv><Typography variant='subtitle2' component='p'>{teacher.firstName + " " + teacher.lastName}</Typography><Button >Assign</Button></SpaceBetwwenDiv>
+                  <Typography variant='body2' component='p'>{teacher.emailId}</Typography></Card></Grid>)}</Grid>
+
+       </TabPanel></Box>
     </React.Fragment>
   );
 };
