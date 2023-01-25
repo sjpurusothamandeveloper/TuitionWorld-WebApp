@@ -1,4 +1,4 @@
-import { leaveApplyUrl, sectionsListUrl, staffCreationUrl, staffListUrl, studentCreationUrl, userAuthUrl, userCreationUrl } from "app/services/Services";
+import { leaveListUrl, leaveApplyUrl, sectionsListUrl, staffCreationUrl, staffListUrl, studentCreationUrl, userAuthUrl, userCreationUrl } from "app/services/Services";
 import axios from "axios";
 
 export const saveStaff = async(payload) => {
@@ -73,6 +73,19 @@ export const getUserAuth = async(payload) => {
 
 export const getSection = async() => {
         let apiResp = await axios.get(sectionsListUrl)
+            .then(res => {
+                console.log("Data", res)
+                return res.data;    
+            })
+            .catch(err => {
+                console.log(err)
+                return err
+            })
+            return apiResp;
+}
+
+export const getLeaves = async () => {
+    let apiResp = await axios.get(leaveListUrl)
             .then(res => {
                 console.log("Data", res)
                 return res.data;    
