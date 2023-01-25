@@ -13,7 +13,7 @@ export const navigations = [
   },
   {
     name: 'HRMS',
-    icon: 'person',
+    icon: 'assignmentind',
     children: [
       { name: 'Staff Management', iconText: 'SM', path: '/academic/new-staff' },
       { name: 'Leave Management', iconText: 'LM', path: '/hrms/leave-management' },
@@ -21,7 +21,7 @@ export const navigations = [
   },
   {
     name: 'Student management',
-    icon: 'room',
+    icon: 'people',
     children: [
       { name: 'Student', iconText: 'ST', path: '/academic/new-student' },
     ],
