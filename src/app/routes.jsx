@@ -10,6 +10,7 @@ import MatxLayout from './components/MatxLayout/MatxLayout';
 import hrmsRoutes from 'app/views/hrms/HrmsRoutes';
 import administrationRoutes from './views/administration/AdministrationRoutes';
 import resultRoutes from './views/result/ResultRoutes';
+import ProfileRoutes from './views/profile/ProfileRoutes';
 
 const routes = [
   {
@@ -18,7 +19,7 @@ const routes = [
         <MatxLayout />
       </AuthGuard>
     ),
-    children: [...dashboardRoutes, ...chartsRoute, ...materialRoutes, ...academicRoutes, ...hrmsRoutes, ...administrationRoutes, ...resultRoutes],
+    children: [...dashboardRoutes, ...chartsRoute, ...materialRoutes, ...academicRoutes, ...hrmsRoutes, ...administrationRoutes, ...resultRoutes, ...ProfileRoutes],
   },
   ...sessionRoutes, 
   { path: '/', element: <Navigate to="/session/signin" /> },

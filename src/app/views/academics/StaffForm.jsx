@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useForm, Controller, useFieldArray } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import {
   Grid, Button, MenuItem,
   InputLabel,
-  Select, FormControl, TextField, styled, Typography, Card, Tabs, Tab, Box, AppBar, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
+  Select, FormControl, TextField, styled, Typography, Card, Tabs, Tab, Box, AppBar
 } from '@mui/material';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import useFetch from '../../hooks/useFetch.js';
 import '../academics/index.css';
-import { teacherslist } from './Constants';
 import { getStaffs, saveStaff } from 'app/services/AppService.js';
 import LoadingButton from '@mui/lab/LoadingButton';
-import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
 import { useSnackbar } from 'notistack';
+import { Link } from 'react-router-dom';
 
 const dateTday = new Date();
 
@@ -172,7 +169,9 @@ const AdditionForm = (props) => {
             {staffList.map((teacher) =>
               <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
                 <Card className='padding-15'>
-                  <SpaceBetwwenDiv><Typography variant='subtitle2' component='p'>{teacher.firstName + " " + teacher.lastName}</Typography><Button >Assign</Button></SpaceBetwwenDiv>
+                  <SpaceBetwwenDiv><Typography variant='subtitle2' component='p'>{teacher.firstName + " " + teacher.lastName}</Typography>
+                  <Link to={"/profile/view/"+ teacher._id} style={{color:"orangered"}} state={{ studentId: teacher }} >View profile</Link>
+                  </SpaceBetwwenDiv>
                   <Typography variant='body2' component='p'>{teacher.emailId}</Typography></Card></Grid>)}</Grid>
 
         </TabPanel>

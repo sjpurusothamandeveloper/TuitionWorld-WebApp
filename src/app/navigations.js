@@ -34,6 +34,7 @@ export const navigations = [
     ],
   },
   { name: 'Result', path: '/result', icon: 'handshake'  },
+  // { name: 'Profile', path: '/profile/view/:id', icons: 'user'}
   // {
   //   name: 'Session/Auth',
   //   icon: 'security',
