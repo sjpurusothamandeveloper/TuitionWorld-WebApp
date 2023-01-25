@@ -11,6 +11,9 @@
     border-radius: 8px;
     background-color: #FFFFFF;
 }
+.padding-15 {
+    padding:15px
+}
 .appbar{
     background-color: #ffffff !important;
     color:rgba(52, 49, 76, 1);
