@@ -10,8 +10,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import "./index.css";
 
-
-
 const dateTday = new Date();
 const dateNextday = dateTday + 1;
 
@@ -85,7 +83,7 @@ const ApplyLeave = () => {
     <React.Fragment>
       <Grid container justifyContent="center" >
 
-        <Grid item md={8} lg={8} xl={8}>
+        <Grid item md={12} lg={12} xl={12}>
           <Paper className='apply-form-paper'>
             <form >
               <Grid container columnSpacing={2} rowSpacing={2} direction='row' justifyContent="space-between" alignItems="center">
