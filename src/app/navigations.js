@@ -20,6 +20,13 @@ export const navigations = [
     ],
   },
   {
+    name: 'Student management',
+    icon: 'room',
+    children: [
+      { name: 'Student', iconText: 'ST', path: '/academic/new-student' },
+    ],
+  },
+  {
     name: 'Administration',
     icon: 'money',
     children: [
