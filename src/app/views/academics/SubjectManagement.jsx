@@ -1,5 +1,5 @@
 import  {React,useState,useEffect} from 'react';
-import { Grid, Box, Button,Radio,RadioGroup, FormControl,FormControlLabel, styled, Typography, Card, Collapse,DialogActions,DialogTitle,DialogContent,TextField,DialogContentText ,Paper,Table,TableBody,TableCell,TableContainer,TableHead,TableRow, Dialog, Chip, Avatar} from '@mui/material';
+import { Grid,List,ListItem,ListItemButton,ListItemIcon,ListItemText,Checkbox,CommentIcon, IconButton,Box, Button,Radio,RadioGroup, FormControl,FormControlLabel, styled, Typography, Card, Collapse,DialogActions,DialogTitle,DialogContent,TextField,DialogContentText ,Paper,Table,TableBody,TableCell,TableContainer,TableHead,TableRow, Dialog, Chip, Avatar} from '@mui/material';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -9,6 +9,7 @@ import LabelledSwitch from '../material-kit/switch/LabelledSwitch';
 import './index.css';
 import pic1 from "../../assets/images/2.jpg"
 import { studentsList } from './Constants';
+
 
 const maxDialog="500px";
 
@@ -40,6 +41,7 @@ export default function SubjectManagement(props) {
   const [currentUser, setCurrentUser] = useState(initialFormState);
   const [assignedTeacher,setAssignedTeacher]=useState("");
   const [isAssignedTeacher,setIsAssignedTeacher]=useState(false);
+  const [studentList,setStudentList]=useState([]);
   
  
   const [user, setUser] = useState(
@@ -90,11 +92,7 @@ export default function SubjectManagement(props) {
     setUsers(users.map(user => (user.id === id ? updatedUser : user)));
   };
 
-  const handleChange = (type,event)=>{
-    const { name, value } = event.target;
 
-    setValues({ type, [name]: value });
- }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -152,8 +150,8 @@ export default function SubjectManagement(props) {
             <TableCell>SUBJECT NAME</TableCell>
            
             <TableCell>SUBJECT TEACHER</TableCell>
-            <TableCell>EDIT SUBJECT</TableCell>
-            <TableCell>DELETE SUBJECT</TableCell>
+            <TableCell align="center">EDIT SUBJECT</TableCell>
+            <TableCell align="center">DELETE SUBJECT</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>  
@@ -163,22 +161,22 @@ export default function SubjectManagement(props) {
           <TableRow key={user.id}>
             <TableCell>{user.name}</TableCell>
             <TableCell></TableCell>
-            <TableCell>
+            <TableCell align="center">
               <Button
                 
                 onClick={() => {
                   editRow(user);
                 }}
               >
-                Edit
+                <EditIcon />
               </Button>
               </TableCell>
-               <TableCell>
+               <TableCell align="center">
               <Button
                
                 onClick={() => deleteUser(user.id)}
               >
-                Delete
+               <DeleteIcon color="warning" />
               </Button>
             </TableCell>
           </TableRow>
@@ -271,7 +269,7 @@ export default function SubjectManagement(props) {
              <Link to='/academic/new-student'><Button>+ Add Students</Button></Link>
              <br />
              <Grid className='students-flex'  lg={12} xl={12} md={12} sm={12} xs={12}>
-             {studentsList.map((stud)=>(
+               {studentList.map((stud)=>(
               <Chip  avatar={<Avatar>{capitalizeFirst(stud.name)}</Avatar>} label={stud.name}  variant="outlined" />
             ) )}</Grid>
              </Card>
@@ -296,6 +294,33 @@ export default function SubjectManagement(props) {
         </TableHead>
         <TableBody>
         {staffData.map((staff,i)=> (
+ <TableRow key={staff.id}>
+ <TableCell>{staff.name}</TableCell>
+ <TableCell align="center">
+  <Button  onClick={() => {
+                  assigningTeacher(staff.name);
+               }}>Assign</Button></TableCell>
+</TableRow>
+          ))} </TableBody></Table></TableContainer>
+          </DialogContent>
+        </Dialog>
+        <Dialog fullWidth maxWidth="sm" open={assignOpen} onClose={handleAssignClose}>
+          <DialogTitle><SpaceBetwwenDiv>Assign Student <span onClick={handleAssignClose}><CloseIcon /></span></SpaceBetwwenDiv></DialogTitle>
+          <DialogContent>
+          <TableContainer  style={{padding:"10px"}} component={Paper}>
+      <Table  aria-label="simple table">
+        <TableHead>
+       
+ <TableRow>
+ <TableCell>STUDENT</TableCell>
+ <TableCell align="center">ACTION</TableCell>
+ 
+</TableRow>
+          
+         
+        </TableHead>
+        <TableBody>
+        {studentsList.map((staff,i)=> (
  <TableRow key={staff.id}>
  <TableCell>{staff.name}</TableCell>
  <TableCell align="center">
