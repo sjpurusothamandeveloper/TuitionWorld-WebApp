@@ -302,7 +302,7 @@ const ClassroomSetup = (props) => {
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link to="/academic/subject-management" state={{ classDetails: '12 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                      <Link to="/academic/class-management" state={{ classDetails: '12 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
@@ -329,7 +329,7 @@ const ClassroomSetup = (props) => {
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                        <Link to="/academic/subject-management" state={{ classDetails: '11 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/class-management" state={{ classDetails: '11 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
@@ -366,7 +366,7 @@ const ClassroomSetup = (props) => {
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                        <Link to="/academic/subject-management" state={{ classDetails: '10 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/class-management" state={{ classDetails: '10 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
@@ -390,7 +390,7 @@ const ClassroomSetup = (props) => {
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                        <Link to="/academic/subject-management" state={{ classDetails: '9 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/class-management" state={{ classDetails: '9 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
@@ -424,7 +424,7 @@ const ClassroomSetup = (props) => {
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                        <Link to="/academic/subject-management" state={{ classDetails: '8 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/class-management" state={{ classDetails: '8 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
@@ -448,7 +448,7 @@ const ClassroomSetup = (props) => {
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                        <Link to="/academic/subject-management" state={{ classDetails: '7 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/class-management" state={{ classDetails: '7 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
@@ -472,7 +472,7 @@ const ClassroomSetup = (props) => {
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                        <Link to="/academic/subject-management" state={{ classDetails: '6 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/class-management" state={{ classDetails: '6 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
@@ -506,7 +506,7 @@ const ClassroomSetup = (props) => {
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                        <Link to="/academic/subject-management" state={{ classDetails: '5 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/class-management" state={{ classDetails: '5 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
@@ -530,7 +530,7 @@ const ClassroomSetup = (props) => {
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                        <Link to="/academic/subject-management" state={{ classDetails: '4 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/class-management" state={{ classDetails: '4 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
@@ -554,7 +554,7 @@ const ClassroomSetup = (props) => {
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                        <Link to="/academic/subject-management" state={{ classDetails: '3 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/class-management" state={{ classDetails: '3 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
@@ -578,7 +578,7 @@ const ClassroomSetup = (props) => {
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                        <Link to="/academic/subject-management" state={{ classDetails: '2 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/class-management" state={{ classDetails: '2 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
@@ -601,7 +601,7 @@ const ClassroomSetup = (props) => {
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                        <Link to="/academic/subject-management" state={{ classDetails: '1 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/class-management" state={{ classDetails: '1 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
@@ -634,7 +634,7 @@ const ClassroomSetup = (props) => {
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                        <Link to="/academic/subject-management" state={{ classDetails: 'UKG - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/class-management" state={{ classDetails: 'UKG - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
@@ -658,7 +658,7 @@ const ClassroomSetup = (props) => {
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                        <Link to="/academic/subject-management" state={{ classDetails: 'LKG - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/class-management" state={{ classDetails: 'LKG - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>
@@ -682,7 +682,7 @@ const ClassroomSetup = (props) => {
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                        <Link to="/academic/subject-management" state={{ classDetails: 'PREKG - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/class-management" state={{ classDetails: 'PREKG - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>

@@ -25,7 +25,6 @@ const SpaceBetwwenDiv = styled(`div`)(() => ({
 export default function SubjectManagement(props) {
   const location = useLocation()
   const { classDetails } = location.state
-  console.log("#####", classDetails)
   const [open, setOpen] = useState(false);
   const [assignOpen, setAssignOpen] = useState(false);
   const [values, setValues] = useState("compulsory");
@@ -126,7 +125,6 @@ export default function SubjectManagement(props) {
 
   const getStaffList = async () => {
     let staffListResp = await getStaffs()
-    console.log("stafffff", staffListResp)
     if (staffListResp.statusCode === 200) {
       setStaffList(staffListResp.data)
     }
@@ -151,31 +149,26 @@ export default function SubjectManagement(props) {
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
               <SpaceBetwwenDiv> <Typography variant='h6'>{classDetails && classDetails}
-                {/* &ensp;<EditIcon fontSize='18px' /> */}
               </Typography>
-                {/* <DeleteIcon /> */}
               </SpaceBetwwenDiv></Card>
           </Grid>
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
-              <SpaceBetwwenDiv> <Typography variant='h6'>Manage class teacher, attendance for {classDetails}</Typography><Button>Manage Attendance</Button></SpaceBetwwenDiv>
-              {isAssignedTeacher ? <Chip avatar={<Avatar alt="Natacha" src={pic1} />} label={assignedTeacher} variant="outlined" /> : <Button onClick={handleAssignOpen}><Typography color="primary">+ Assign Class Teacher</Typography></Button>}</Card>
+              <SpaceBetwwenDiv> <Typography variant='h6'>{`Manage class teacher, attendance for`} {classDetails}</Typography><Button>{`Manage Attendance`}</Button></SpaceBetwwenDiv>
+              {isAssignedTeacher ? <Chip avatar={<Avatar alt="Natacha" src={pic1} />} label={assignedTeacher} variant="outlined" /> : <Button onClick={handleAssignOpen}><Typography color="primary">{`+ Assign Class Teacher`}</Typography></Button>}</Card>
           </Grid>
-
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <TableContainer style={{ padding: "10px" }} component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>SUBJECT NAME</TableCell>
-
-                    <TableCell>SUBJECT TEACHER</TableCell>
-                    <TableCell>EDIT SUBJECT</TableCell>
-                    <TableCell>DELETE SUBJECT</TableCell>
+                    <TableCell>{`SUBJECT NAME`}</TableCell>
+                    <TableCell>{`SUBJECT TEACHER`}</TableCell>
+                    <TableCell>{`EDIT SUBJECT`}</TableCell>
+                    <TableCell>{`DELETE SUBJECT`}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-
                   {users.length > 0 ? (
                     users.map(user => (
                       <TableRow key={user.id}>
@@ -188,7 +181,7 @@ export default function SubjectManagement(props) {
                               editRow(user);
                             }}
                           >
-                            Edit
+                            {`Edit`}
                           </Button>
                         </TableCell>
                         <TableCell>
@@ -196,20 +189,20 @@ export default function SubjectManagement(props) {
 
                             onClick={() => deleteUser(user.id)}
                           >
-                            Delete
+                            {`Delete`}
                           </Button>
                         </TableCell>
                       </TableRow>
                     ))
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={3}>No users</TableCell>
+                      <TableCell colSpan={3}>{`No Subject available :(`}</TableCell>
                     </TableRow>
                   )}
                 </TableBody>
               </Table>
             </TableContainer>
-            <Button onClick={handleClickOpen}>+ Add Subject</Button>
+            <Button onClick={handleClickOpen}>{`+ Add Subject`}</Button>
             <Dialog fullWidth maxWidth="sm" open={open} onClose={handleClose}>
               <DialogTitle>{editing ? "Edit Subject" : "Add Subject"}</DialogTitle>
               <DialogContent>
@@ -217,7 +210,6 @@ export default function SubjectManagement(props) {
                   onSubmit={event => {
                     event.preventDefault();
                     if (!user.name) return;
-
                     editing ? updateUser(user.id, user) : addUser(user);
                     resetAddUser();
                   }}
@@ -236,7 +228,7 @@ export default function SubjectManagement(props) {
                   <Button style={{ backgroundColor: "#34314c" }} variant="contained" type="submit">{editing ? "Update" : "Add"}</Button>
                   {editing && (
                     <Button onClick={resetAddUser} >
-                      Cancel
+                      {`Cancel`}
                     </Button>
                   )}
                 </form>
@@ -248,8 +240,8 @@ export default function SubjectManagement(props) {
 
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
-              <SpaceBetwwenDiv> <Typography variant='h6'>Manage students for 12 - A</Typography></SpaceBetwwenDiv>
-              <Link to='/academic/new-student'><Button>+ Add Students</Button></Link>
+              <SpaceBetwwenDiv> <Typography variant='h6'>{`Manage students for 12 - A`}</Typography></SpaceBetwwenDiv>
+              <Link to='/academic/new-student'><Button>{`+ Add Students`}</Button></Link>
               <br />
               <Grid className='students-flex' lg={12} xl={12} md={12} sm={12} xs={12}>
                 {studentsList.map((stud) => (
@@ -261,14 +253,14 @@ export default function SubjectManagement(props) {
       </Card>
 
       <Dialog fullWidth maxWidth="sm" open={assignOpen} onClose={handleAssignClose}>
-        <DialogTitle><SpaceBetwwenDiv>Assign Staff <span onClick={handleAssignClose}><CloseIcon /></span></SpaceBetwwenDiv></DialogTitle>
+        <DialogTitle><SpaceBetwwenDiv>{`Assign Staff`} <span onClick={handleAssignClose}><CloseIcon /></span></SpaceBetwwenDiv></DialogTitle>
         <DialogContent>
           <TableContainer style={{ padding: "10px" }} component={Paper}>
             <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>STAFF</TableCell>
-                  <TableCell align="center">ACTION</TableCell>
+                  <TableCell>{`STAFF`}</TableCell>
+                  <TableCell align="center">{`ACTION`}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -278,7 +270,7 @@ export default function SubjectManagement(props) {
                     <TableCell align="center">
                       <Button onClick={() => {
                         assigningTeacher(staff.firstName + " " + staff.lastName);
-                      }}>Assign</Button></TableCell>
+                      }}>{`Assign`}</Button></TableCell>
                   </TableRow>
                 ))} </TableBody></Table></TableContainer>
         </DialogContent>
