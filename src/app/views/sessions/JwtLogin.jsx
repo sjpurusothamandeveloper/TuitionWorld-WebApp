@@ -60,10 +60,11 @@ const JwtLogin = () => {
   const { enqueueSnackbar } = useSnackbar();
   // const { login } = useAuth();
 
-  const handleresponseGoogle = (response) => {
-    var userObj = jwt_decode(response.credential)
+  const handleresponseGoogle = async (response) => {
+    var userObj = await jwt_decode(response.credential)
     sessionStorage.setItem("googleUserObj", response.credential)
-    if(userObj){
+    console.log("UserObj", Object.keys(userObj).length)
+    if(Object.keys(userObj).length > 0){
       navigate('/dashboard/default')
     }
     else{
