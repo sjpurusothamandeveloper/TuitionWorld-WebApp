@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Grid, Box, styled, Paper,
    Button, TextField, Typography, Card
@@ -9,6 +9,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import "./index.css";
+import { useSnackbar } from 'notistack';
+import { saveLeave } from 'app/services/AppService.js';
 
 const dateTday = new Date();
 const dateNextday = dateTday + 1;
@@ -65,6 +67,8 @@ const NotFoundRoot = styled(FlexBox)(() => ({
 
 const ApplyLeave = () => {
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
+  const [isLoading, setisLoading] = useState(false)
   const {
     handleSubmit,
     reset,
@@ -78,7 +82,35 @@ const ApplyLeave = () => {
 
   const submitLeave = async (leaveData) => {
     console.log(leaveData)
+    setisLoading(true)
+    try {
+      const responseFromApi = await saveLeave(leaveData)
+      console.log("resp", responseFromApi)
+      if (responseFromApi && responseFromApi.statusCode === 200) {
+        setisLoading(false)
+        handleToastMessage(true, responseFromApi.message)
+        reset()
+      }
+      else {
+        setisLoading(false)
+        handleToastMessage(false, responseFromApi.message)
+      }
+    }
+    catch (err) {
+      console.log(err)
+    }
   }
+
+  const handleToastMessage = (typeOfMsg, msg) => {
+    const failureMessage = 'Something went wrong :(';
+
+    enqueueSnackbar(msg ? msg : failureMessage, {
+      variant: typeOfMsg ? "success" : "error",
+      persist: false,
+      autoHideDuration: 2000
+    });
+  }
+
   return (
     <React.Fragment>
       <Grid container justifyContent="center" >
@@ -144,9 +176,11 @@ const ApplyLeave = () => {
                     name="reasonForLeave"
                     defaultValue=""
                     render={({ field }) => (<TextField multiline rows={4} {...field} fullWidth id="outlined-basic" label="Reason For Leave" variant="outlined" />)}
-                  /></Grid>
+                  />
+                </Grid>
                 <Grid align="right" item md={12} lg={12} xl={12} >
-                  <Button color="warning" variant="outlined" onClick={handleReset}>Reset</Button>&emsp;<Button className='submission-button' disableRipple={true} onClick={handleSubmit(submitLeave)}>Submit</Button>
+                <Button className='submission-button' style={{ "backgroundColor": "#ed6c02", "color": "white" }} disableRipple={true} onClick={handleSubmit(submitLeave)}>Submit</Button>&emsp;
+                <Button color="warning" variant="outlined" onClick={handleReset}>Reset</Button>
                 </Grid>
               </Grid></form></Paper></Grid>
       </Grid>
