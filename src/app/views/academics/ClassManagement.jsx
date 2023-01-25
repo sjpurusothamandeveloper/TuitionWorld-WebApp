@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Grid, Box, Button, Radio, RadioGroup, FormControl, FormControlLabel, styled, Typography, Card, Collapse, DialogActions, DialogTitle, DialogContent, TextField, DialogContentText, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Dialog, Chip, Avatar } from '@mui/material';
+import { Grid, Box, Button, Radio, RadioGroup, FormControl, FormControlLabel, styled, Typography, Card, Collapse, DialogActions, DialogTitle, DialogContent, TextField, DialogContentText, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Dialog, Chip, Avatar, List, ListItem, Checkbox, ListItemButton, ListItemAvatar, ListItemText } from '@mui/material';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -26,25 +26,28 @@ export default function SubjectManagement(props) {
   const location = useLocation()
   const { classDetails } = location.state
   const [open, setOpen] = useState(false);
-  const [assignOpen, setAssignOpen] = useState(false);
+  const [staffModel, setStaffModel] = useState(false);
+  const [studentModel, setStudentModel] = useState(false);
+
   const [values, setValues] = useState("compulsory");
-  const usersData = [
-    { id: 1, name: "Tamil", subtype: "compulsory" },
-    { id: 2, name: "English", subtype: "objective" },
-    { id: 3, name: "Mathematics", subtype: "objective" }
+  const subjectsData = [
+    { id: 1, name: "Tamil" },
+    { id: 2, name: "English" },
+    { id: 3, name: "Mathematics" }
   ];
 
   const initialFormState = { id: null, name: "" };
 
-  const [users, setUsers] = useState(usersData);
+  const [subjects, setSubjects] = useState(subjectsData);
   const [editing, setEditing] = useState(false);
-  const [currentUser, setCurrentUser] = useState(initialFormState);
+  const [currentSubject, setCurrentSubject] = useState(initialFormState);
   const [assignedTeacher, setAssignedTeacher] = useState("");
   const [isAssignedTeacher, setIsAssignedTeacher] = useState(false);
   const [staffList, setStaffList] = useState([])
+  const [studentList, setStudentList] = useState([])
 
-  const [user, setUser] = useState(
-    editing ? currentUser : initialFormState
+  const [subject, setSubject] = useState(
+    editing ? currentSubject : initialFormState
   );
   const staffData = [
     { id: 1, name: "Purus" },
@@ -54,41 +57,41 @@ export default function SubjectManagement(props) {
   const handleInputChange = event => {
     const { name, value } = event.target;
 
-    setUser({ ...user, [name]: value });
+    setSubject({ ...subject, [name]: value });
   };
 
   useEffect(() => {
-    setUser(currentUser);
-  }, [currentUser]);
+    setSubject(currentSubject);
+  }, [currentSubject]);
 
-  const resetAddUser = () => {
+  const resetAddSubject = () => {
     setEditing(false);
     setOpen(!true)
-    setUser(initialFormState);
-    setCurrentUser(initialFormState);
+    setSubject(initialFormState);
+    setCurrentSubject(initialFormState);
   };
 
-  const addUser = user => {
-    user.id = users.length + 1;
-    setUsers([...users, user]);
+  const addSubject = subject => {
+    subject.id = subjects.length + 1;
+    setSubjects([...subjects, subject]);
     setOpen(!true)
   };
 
-  const deleteUser = id => {
+  const deleteSubject = id => {
     setEditing(false);
-    setUsers(users.filter(user => user.id !== id));
+    setSubjects(subjects.filter(subject => subject.id !== id));
   };
 
-  const editRow = user => {
+  const editRow = subject => {
     setEditing(true);
     setOpen(true)
-    setCurrentUser(user);
+    setCurrentSubject(subject);
   };
 
-  const updateUser = (id, updatedUser) => {
+  const updateSubject = (id, updatedSubject) => {
     setEditing(false);
     setOpen(false)
-    setUsers(users.map(user => (user.id === id ? updatedUser : user)));
+    setSubjects(subjects.map(subject => (subject.id === id ? updatedSubject : subject)));
   };
 
   const handleChange = (type, event) => {
@@ -105,18 +108,26 @@ export default function SubjectManagement(props) {
     setOpen(false);
   };
 
-  const handleAssignOpen = () => {
-    setAssignOpen(true);
+  const StaffModelOpen = () => {
+    setStaffModel(true);
   };
 
-  const handleAssignClose = () => {
-    setAssignOpen(false);
+  const StaffModelClose = () => {
+    setStaffModel(false);
+  };
+
+  const StudentModelOpen = () => {
+    setStudentModel(true);
+  };
+
+  const StudentModelClose = () => {
+    setStudentModel(false);
   };
 
   const assigningTeacher = (name) => {
     setAssignedTeacher(name)
     setIsAssignedTeacher(true)
-    handleAssignClose(true)
+    StaffModelClose(true)
   }
 
   useEffect(() => {
@@ -137,6 +148,37 @@ export default function SubjectManagement(props) {
     return str.charAt(0).toUpperCase();
   }
 
+  const [checked, setChecked] = useState([1]);
+
+  const handleToggle = (value) => () => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+    let filteredObject = studentsList.filter((obj)=> {
+      return(
+      obj.id === value
+      );
+    })
+   //API goes here
+    setStudentList([...studentList,filteredObject]);
+    console.log(studentList)
+    setChecked(newChecked);
+  };
+  useEffect(()=>{
+    console.log(checked)
+    },[checked])
+  
+  const addStudentsList = () =>{
+   let getList = []
+   
+  } 
+
+
   return (
     <div>
       <Card style={{ padding: "15px" }}>
@@ -155,7 +197,7 @@ export default function SubjectManagement(props) {
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
               <SpaceBetwwenDiv> <Typography variant='h6'>{`Manage class teacher, attendance for`} {classDetails}</Typography><Button>{`Manage Attendance`}</Button></SpaceBetwwenDiv>
-              {isAssignedTeacher ? <Chip avatar={<Avatar alt="Natacha" src={pic1} />} label={assignedTeacher} variant="outlined" /> : <Button onClick={handleAssignOpen}><Typography color="primary">{`+ Assign Class Teacher`}</Typography></Button>}</Card>
+              {isAssignedTeacher ? <Chip avatar={<Avatar alt="Natacha" src={pic1} />} label={assignedTeacher} variant="outlined" /> : <Button onClick={StaffModelOpen}><Typography color="primary">{`+ Assign Class Teacher`}</Typography></Button>}</Card>
           </Grid>
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <TableContainer style={{ padding: "10px" }} component={Paper}>
@@ -169,16 +211,16 @@ export default function SubjectManagement(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {users.length > 0 ? (
-                    users.map(user => (
-                      <TableRow key={user.id}>
-                        <TableCell>{user.name}</TableCell>
+                  {subjects.length > 0 ? (
+                    subjects.map(subject => (
+                      <TableRow key={subject.id}>
+                        <TableCell>{subject.name}</TableCell>
                         <TableCell></TableCell>
                         <TableCell>
                           <Button
 
                             onClick={() => {
-                              editRow(user);
+                              editRow(subject);
                             }}
                           >
                             {`Edit`}
@@ -187,7 +229,7 @@ export default function SubjectManagement(props) {
                         <TableCell>
                           <Button
 
-                            onClick={() => deleteUser(user.id)}
+                            onClick={() => deleteSubject(subject.id)}
                           >
                             {`Delete`}
                           </Button>
@@ -209,9 +251,9 @@ export default function SubjectManagement(props) {
                 <form
                   onSubmit={event => {
                     event.preventDefault();
-                    if (!user.name) return;
-                    editing ? updateUser(user.id, user) : addUser(user);
-                    resetAddUser();
+                    if (!subject.name) return;
+                    editing ? updateSubject(subject.id, subject) : addSubject(subject);
+                    resetAddSubject();
                   }}
                 >
                   <br />
@@ -221,13 +263,13 @@ export default function SubjectManagement(props) {
                     name="name"
                     label="Subject"
                     variant="outlined"
-                    value={user.name}
+                    value={subject.name}
                     onChange={handleInputChange}
                   />
                   <br /><br />
                   <Button style={{ backgroundColor: "#34314c" }} variant="contained" type="submit">{editing ? "Update" : "Add"}</Button>
                   {editing && (
-                    <Button onClick={resetAddUser} >
+                    <Button onClick={resetAddSubject} >
                       {`Cancel`}
                     </Button>
                   )}
@@ -241,7 +283,7 @@ export default function SubjectManagement(props) {
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
               <SpaceBetwwenDiv> <Typography variant='h6'>{`Manage students for 12 - A`}</Typography></SpaceBetwwenDiv>
-              <Link to='/academic/new-student'><Button>{`+ Add Students`}</Button></Link>
+              <Button onClick={StudentModelOpen}>{`+ Add Students`}</Button>
               <br />
               <Grid className='students-flex' lg={12} xl={12} md={12} sm={12} xs={12}>
                 {studentsList.map((stud) => (
@@ -252,8 +294,8 @@ export default function SubjectManagement(props) {
         </Grid>
       </Card>
 
-      <Dialog fullWidth maxWidth="sm" open={assignOpen} onClose={handleAssignClose}>
-        <DialogTitle><SpaceBetwwenDiv>{`Assign Staff`} <span onClick={handleAssignClose}><CloseIcon /></span></SpaceBetwwenDiv></DialogTitle>
+      <Dialog fullWidth maxWidth="sm" open={staffModel} onClose={StaffModelClose}>
+        <DialogTitle><SpaceBetwwenDiv>{`Assign Staff`} <span onClick={StaffModelClose}><CloseIcon /></span></SpaceBetwwenDiv></DialogTitle>
         <DialogContent>
           <TableContainer style={{ padding: "10px" }} component={Paper}>
             <Table aria-label="simple table">
@@ -275,6 +317,54 @@ export default function SubjectManagement(props) {
                 ))} </TableBody></Table></TableContainer>
         </DialogContent>
       </Dialog>
+      <Dialog fullWidth maxWidth="xs" open={studentModel} onClose={StudentModelClose}>
+          <DialogTitle><SpaceBetwwenDiv>Assign Student <span onClick={StudentModelClose}><CloseIcon /></span></SpaceBetwwenDiv></DialogTitle>
+          <DialogContent>
+          <TableContainer  style={{padding:"10px",maxWidth:"500px"}} component={Paper}>
+      <Table  aria-label="simple table">
+        <TableHead>
+       
+ <TableRow>
+ <TableCell align="center">STUDENT</TableCell>
+ 
+ 
+</TableRow>
+          
+         
+        </TableHead>
+        <TableBody>
+        <List>
+       {studentsList.map((student) => {
+        const labelId = `checkbox-list-secondary-label-${student.id}`;
+        return (
+          <ListItem
+            key={student.id}
+            secondaryAction={
+              <Checkbox
+                edge="end"
+                onChange={handleToggle(student.id)}
+                checked={checked.indexOf(student.id) !== -1}
+                inputProps={{ 'aria-labelledby': labelId }}
+              />
+            }
+            disablePadding
+          >
+            <ListItemButton>
+              <ListItemAvatar>
+                <Avatar
+                  alt={capitalizeFirst(`${student.name}`)}
+                  src={`/static/images/avatar/${student.id + 1}.jpg`}
+                />
+              </ListItemAvatar>
+              <ListItemText id={labelId} primary={`${student.name}`} />
+            </ListItemButton>
+          </ListItem>
+        );
+      })}
+    </List> </TableBody></Table></TableContainer>
+          </DialogContent>
+          <DialogActions><Button onClick={addStudentsList} className='submit-btn' variant="contained">Add Students</Button></DialogActions>
+        </Dialog>
     </div>
   );
 }
