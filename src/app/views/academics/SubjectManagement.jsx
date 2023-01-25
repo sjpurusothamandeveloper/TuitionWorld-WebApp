@@ -9,7 +9,10 @@ import LabelledSwitch from '../material-kit/switch/LabelledSwitch';
 import './index.css';
 import pic1 from "../../assets/images/2.jpg"
 import { getStaffs } from "../../services/AppService"
+import { studentsList } from './Constants';
+
 const maxDialog = "500px";
+
 
 const SpaceBetwwenDiv = styled(`div`)(() => ({
   width: '100%',
@@ -25,11 +28,11 @@ export default function SubjectManagement(props) {
   console.log("#####", classDetails)
   const [open, setOpen] = useState(false);
   const [assignOpen, setAssignOpen] = useState(false);
-  const [value, setValue] = useState("compulsory");
+  const [values, setValues] = useState("compulsory");
   const usersData = [
-    { id: 1, name: "Tamil" },
-    { id: 2, name: "English" },
-    { id: 3, name: "Mathematics" }
+    { id: 1, name: "Tamil", subtype: "compulsory" },
+    { id: 2, name: "English", subtype: "objective" },
+    { id: 3, name: "Mathematics", subtype: "objective" }
   ];
 
   const initialFormState = { id: null, name: "" };
@@ -89,8 +92,10 @@ export default function SubjectManagement(props) {
     setUsers(users.map(user => (user.id === id ? updatedUser : user)));
   };
 
-  const handleChange = (e) => {
-    setValue(e.target.value)
+  const handleChange = (type, event) => {
+    const { name, value } = event.target;
+
+    setValues({ type, [name]: value });
   }
 
   const handleClickOpen = () => {
@@ -130,6 +135,9 @@ export default function SubjectManagement(props) {
     }
   }
 
+  const capitalizeFirst = str => {
+    return str.charAt(0).toUpperCase();
+  }
 
   return (
     <div>
@@ -160,7 +168,7 @@ export default function SubjectManagement(props) {
                 <TableHead>
                   <TableRow>
                     <TableCell>SUBJECT NAME</TableCell>
-                    <TableCell>SUBJECT TYPE</TableCell>
+
                     <TableCell>SUBJECT TEACHER</TableCell>
                     <TableCell>EDIT SUBJECT</TableCell>
                     <TableCell>DELETE SUBJECT</TableCell>
@@ -172,21 +180,7 @@ export default function SubjectManagement(props) {
                     users.map(user => (
                       <TableRow key={user.id}>
                         <TableCell>{user.name}</TableCell>
-                        <TableCell>
-
-                          <FormControl component="fieldset" className="formControl">
-                            <RadioGroup
-                              value={value}
-                              name="subtype"
-                              className="group"
-
-                              onChange={handleChange}
-                            >
-                              <FormControlLabel name="compulsory" value="compulsory" control={<Radio />} label="compulsory" />
-                              <FormControlLabel name="optional" value="optional" control={<Radio />} label="optional" />
-                            </RadioGroup>
-                          </FormControl>
-                        </TableCell><TableCell></TableCell>
+                        <TableCell></TableCell>
                         <TableCell>
                           <Button
 
@@ -255,7 +249,13 @@ export default function SubjectManagement(props) {
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
               <SpaceBetwwenDiv> <Typography variant='h6'>Manage students for 12 - A</Typography></SpaceBetwwenDiv>
-              <Link to='/academic/new-student'><Button>+ Add Students</Button></Link></Card>
+              <Link to='/academic/new-student'><Button>+ Add Students</Button></Link>
+              <br />
+              <Grid className='students-flex' lg={12} xl={12} md={12} sm={12} xs={12}>
+                {studentsList.map((stud) => (
+                  <Chip avatar={<Avatar>{capitalizeFirst(stud.name)}</Avatar>} label={stud.name} variant="outlined" />
+                ))}</Grid>
+            </Card>
           </Grid>
         </Grid>
       </Card>
