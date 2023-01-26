@@ -1,5 +1,6 @@
 // import { Google } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
+import { useForm, Controller } from "react-hook-form";
 import { Button, Card, Checkbox, Grid, TextField } from '@mui/material';
 import { Box, styled, useTheme } from '@mui/system';
 import { Paragraph } from 'app/components/Typography';
@@ -44,6 +45,8 @@ const initialValues = {
   password: '',
   remember: false,
 };
+
+
 
 // form field validation schema
 const validationSchema = Yup.object().shape({
@@ -123,6 +126,13 @@ const JwtLogin = () => {
       autoHideDuration: 2000
     });
   }
+  const {
+    handleSubmit,
+    register,
+    reset,
+    control,
+    formState: { errors },
+  } = useForm();
 
   const handleLogout = (response) => {
     console.log(response);
@@ -140,7 +150,62 @@ const JwtLogin = () => {
 
           <Grid item sm={6} xs={12}>
             <ContentBox>
-              <Formik
+              <form>
+              <Controller
+                        control={control}
+                        name="email"
+                        defaultValue=""
+                        render={({ field }) => (<TextField size="small"  {...field} fullWidth id="outlined-basic" type="email" label="Email" variant="outlined" />)}
+                      /><br /><br />
+                       <Controller
+                        control={control}
+                        name="password"
+                        defaultValue=""
+                        render={({ field }) => (<TextField size="small"  {...field} fullWidth id="outlined-basic" type="password" label="Password" variant="outlined" />)}
+                      /><br /><br />
+
+<FlexBox justifyContent="space-between">
+                      <FlexBox gap={1}>
+                        <Checkbox
+                          size="small"
+                          name="remember"
+                        
+                          sx={{ padding: 0 }}
+                        />
+
+                        <Paragraph>Remember Me</Paragraph>
+                      </FlexBox>
+
+                      <NavLink
+                        to="/session/forgot-password"
+                        style={{ color: theme.palette.primary.main }}
+                      >
+                        Forgot password?
+                      </NavLink>
+                    </FlexBox>
+
+                    <LoadingButton
+                      type="submit"
+                      color="primary"
+                      loading={loading}
+                      variant="contained"
+                      sx={{ my: 2 }}
+                    >
+                      Login
+                    </LoadingButton>
+                    <div id="signInDiv"></div>
+                    <Paragraph>
+                      Don't have an account?
+                      <NavLink
+                        to="/session/signup"
+                        style={{ color: theme.palette.primary.main, marginLeft: 5 }}
+                      >
+                        Register
+                      </NavLink>
+                    </Paragraph>
+              </form>
+              
+              {/* <Formik
                 onSubmit={handleFormSubmit}
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -219,7 +284,7 @@ const JwtLogin = () => {
                     </Paragraph>
                   </form>
                 )}
-              </Formik>
+              </Formik> */}
             </ContentBox>
           </Grid>
         </Grid>
