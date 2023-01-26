@@ -8,7 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import LabelledSwitch from '../material-kit/switch/LabelledSwitch';
 import './index.css';
 import pic1 from "../../assets/images/2.jpg"
-import { getStaffs } from "../../services/AppService"
+import { getSection, getStaffs } from "../../services/AppService"
 import { studentsList } from './Constants';
 
 const maxDialog = "500px";
@@ -144,6 +144,7 @@ export default function SubjectManagement(props) {
     }
   }
 
+
   const capitalizeFirst = str => {
     return str.charAt(0).toUpperCase();
   }
@@ -169,6 +170,7 @@ export default function SubjectManagement(props) {
     console.log(studentList)
     setChecked(newChecked);
   };
+
   useEffect(()=>{
     console.log(checked)
     },[checked])

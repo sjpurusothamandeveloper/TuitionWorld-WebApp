@@ -94,7 +94,7 @@ const ClassroomSetup = (props) => {
   const [createdSectionsArrLkg, setCreatedSectionsArrLkg] = useState(["A"]);
   const [createdSectionsArrPreKg, setCreatedSectionsArrPreKg] = useState(["A"]);
   const [sectionListArr, setSectionListArr] = useState([])
-
+  const [sectionDefList, setSectionDefList] = useState([])
 
   const sectionArr12 = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
   const sectionArr11 = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
@@ -112,15 +112,15 @@ const ClassroomSetup = (props) => {
   const sectionArrLkg = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
   const sectionArrPreKg = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
-  // useEffect(() => {
-  //   handleGetSections()
-  // }, [])
+  useEffect(() => {
+    getInitialSections()
+  }, [])
 
-  const handleGetSections = async () => {
-    let saveSection = await getSection()
-    console.log("SectionsList", saveSection)
-    setSectionListArr(saveSection)
-  }
+  // const handleGetSections = async () => {
+  //   let saveSection = await getSection()
+  //   console.log("SectionsList", saveSection)
+  //   setSectionListArr(saveSection)
+  // }
 
   const createNxtNewSection12 = async () => {
     let indexOfLastSection = sectionArr12.indexOf(lastCreatedSection12)
@@ -270,6 +270,17 @@ const ClassroomSetup = (props) => {
     let x = [...createdSectionsArrPreKg, ...tempArr]
     setLastCreatedSectionPreKg(nextSection)
     setCreatedSectionsArrPreKg(x)
+  }
+  
+  const getInitialSections = async () => {
+    // let defSectionListResp = await getSectionByClass()
+    // console.log("Sect -->", defSectionListResp)
+    // if (defSectionListResp.statusCode === 200) {
+    //   setSectionDefList(defSectionListResp.data)
+    // }
+    // else {
+    //   setSectionDefList([])
+    // }
   }
 
   return (

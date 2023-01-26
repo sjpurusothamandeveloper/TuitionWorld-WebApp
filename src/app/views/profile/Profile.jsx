@@ -32,12 +32,12 @@ const StraightFlex = styled(`div`)(() => ({
 const Profile = (props) => {
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
-    const [staffDetails, setStaffDetails] = useState([])
+    const [staffDetails, setStaffDetails] = useState()
+
     useEffect(() => {
         if (window.location.pathname.split('/').length >= 4) {
             getParticularStaffById(window.location.pathname)
         }
-
     }, [])
 
     const getParticularStaffById = async (urlValue) => {
@@ -71,16 +71,26 @@ const Profile = (props) => {
         });
     }
 
+    useEffect(() => {
+        console.log("@@@@@", staffDetails)
+    }, [staffDetails])
+
 
 
 
     return (
         <React.Fragment>
+            {Object.keys(staffDetails).length > 0 && 
             <div className='padding-15'>
-                <StraightFlex ><Typography variant="h6">Profile</Typography></StraightFlex>
+                <StraightFlex >
+                    <Typography variant="h6">Profile</Typography>
+                </StraightFlex>
                 <Grid container columnSpacing={2} rowSpacing={2} display="row" alignItems="center" justifyContent="space-evenly">
+                    <Typography>{staffDetails?.firstName ? staffDetails.firstName : "NA"}</Typography>
+                    <Typography>{staffDetails?.lastName ? staffDetails?.lastName : "NA"}</Typography>
+                    
                 </Grid>
-            </div>
+            </div>}
         </React.Fragment>
     );
 }
