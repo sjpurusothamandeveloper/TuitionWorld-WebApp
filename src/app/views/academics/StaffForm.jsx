@@ -177,8 +177,7 @@ const AdditionForm = (props) => {
         </TabPanel>
         <TabPanel value={value} index={1}>
           <Card style={{ padding: "15px" }}>
-            <br />
-            <Typography variant='h5' align='center'><b>Add Staff</b></Typography>
+           
 
             <form>
               <Grid
@@ -189,9 +188,9 @@ const AdditionForm = (props) => {
                 alignItems="center"
               >
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-                  <Typography>
-                    <Typography variant='h6'>Basic Details</Typography>
-                  </Typography>
+                 
+                    <Typography marginBottom={0.5} variant='h6'>Basic Details</Typography>
+                  
                   <Grid container
                     direction="row"
                     rowSpacing={2}
@@ -317,7 +316,7 @@ const AdditionForm = (props) => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
 
-                  <Typography variant='h6'>Address Details</Typography>
+                  <Typography marginBottom={0.5} variant='h6'>Address Details</Typography>
 
                   <Grid container
                     direction="row"
@@ -377,7 +376,7 @@ const AdditionForm = (props) => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
 
-                  <Typography variant='h6'>Employment Details</Typography>
+                  <Typography marginBottom={0.5} variant='h6'>Employment Details</Typography>
 
                   <Grid container
                     direction="row"
@@ -462,7 +461,7 @@ const AdditionForm = (props) => {
 
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
 
-                  <Typography variant='h6'>Additional Details</Typography>
+                  <Typography marginBottom={0.5} variant='h6'>Additional Details</Typography>
 
                   <Grid container
                     direction="row"
@@ -610,7 +609,7 @@ const AdditionForm = (props) => {
                   </Grid>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-                  <Typography variant='h6'>Previous Experience</Typography>
+                  <Typography marginBottom={0.5} variant='h6'>Previous Experience</Typography>
                   <Grid container
                     direction="row"
                     rowSpacing={2}
@@ -694,7 +693,7 @@ const AdditionForm = (props) => {
                   </Grid>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-                  <Typography variant='h6'>Bank Details</Typography>
+                  <Typography marginBottom={0.5} variant='h6'>Bank Details</Typography>
                   <Grid container
                     direction="row"
                     rowSpacing={2}
