@@ -4,7 +4,8 @@ import {
     InputLabel,
     FormControl,
     Card,
-    IconButton
+    IconButton,
+    Paper
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -13,10 +14,6 @@ import { studentsList } from '../academics/Constants';
 import HdrAutoIcon from '@mui/icons-material/HdrAuto';
 import PanToolIcon from '@mui/icons-material/PanTool';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
-import FaceRetouchingOffIcon from '@mui/icons-material/FaceRetouchingOff';
-import FaceIcon from '@mui/icons-material/Face';
-import EventBusyIcon from '@mui/icons-material/EventBusy';
-import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import { getStaffById } from 'app/services/AppService';
 import { useSnackbar } from 'notistack';
 
@@ -33,12 +30,16 @@ const Profile = (props) => {
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
     const [staffDetails, setStaffDetails] = useState()
-
     useEffect(() => {
         if (window.location.pathname.split('/').length >= 4) {
             getParticularStaffById(window.location.pathname)
         }
+
     }, [])
+
+    useEffect(()=>{
+     console.log(staffDetails)
+    },[staffDetails])
 
     const getParticularStaffById = async (urlValue) => {
         console.log(urlValue.split('/'))
@@ -71,26 +72,24 @@ const Profile = (props) => {
         });
     }
 
-    useEffect(() => {
-        console.log("@@@@@", staffDetails)
-    }, [staffDetails])
-
 
 
 
     return (
         <React.Fragment>
-            {Object.keys(staffDetails).length > 0 && 
-            <div className='padding-15'>
-                <StraightFlex >
-                    <Typography variant="h6">Profile</Typography>
-                </StraightFlex>
-                <Grid container columnSpacing={2} rowSpacing={2} display="row" alignItems="center" justifyContent="space-evenly">
-                    <Typography>{staffDetails?.firstName ? staffDetails.firstName : "NA"}</Typography>
-                    <Typography>{staffDetails?.lastName ? staffDetails?.lastName : "NA"}</Typography>
-                    
-                </Grid>
-            </div>}
+           <Paper >
+            
+           {Object.keys(staffDetails).length>0 && 
+           <Grid container md={12}>
+             <Grid item md={12}>
+             <Card>
+                
+               <Typography>{staffDetails.firstName}</Typography>
+             </Card>
+             </Grid>
+            </Grid>}
+            
+           </Paper>
         </React.Fragment>
     );
 }

@@ -177,7 +177,7 @@ const StudentAdditionForm = (props) => {
               >
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
 
-                  <Typography variant='h6'>Basic Details</Typography>
+                  <Typography variant='h6' marginBottom={0.5}>Basic Details</Typography>
 
                   <Grid container
                     direction="row"
@@ -317,7 +317,7 @@ const StudentAdditionForm = (props) => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
 
-                  <Typography variant='h6'>Address Details</Typography>
+                  <Typography variant='h6' marginBottom={0.5}>Address Details</Typography>
 
                   <Grid container
                     direction="row"
@@ -371,7 +371,7 @@ const StudentAdditionForm = (props) => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
 
-                  <Typography variant='h6'>Father Details</Typography>
+                  <Typography variant='h6' marginBottom={0.5}>Father Details</Typography>
 
                   <Grid container
                     direction="row"
@@ -459,7 +459,7 @@ const StudentAdditionForm = (props) => {
 
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
 
-                  <Typography variant='h6'>Mother Details</Typography>
+                  <Typography variant='h6' marginBottom={0.5}>Mother Details</Typography>
 
                   <Grid container
                     direction="row"
@@ -546,7 +546,7 @@ const StudentAdditionForm = (props) => {
 
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
 
-                  <Typography variant='h6'>Guardian Details</Typography>
+                  <Typography variant='h6' marginBottom={0.5}>Guardian Details</Typography>
 
                   <Grid container
                     direction="row"
@@ -643,7 +643,7 @@ const StudentAdditionForm = (props) => {
 
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
 
-                  <Typography variant='h6'>Parents Bank Details</Typography>
+                  <Typography variant='h6' marginBottom={0.5}>Parents Bank Details</Typography>
 
                   <Grid container
                     direction="row"
@@ -697,7 +697,7 @@ const StudentAdditionForm = (props) => {
 
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
 
-                  <Typography variant='h6'>Additional Details</Typography>
+                  <Typography variant='h6' marginBottom={0.5}>Additional Details</Typography>
 
                   <Grid container
                     direction="row"
@@ -992,7 +992,7 @@ const StudentAdditionForm = (props) => {
                   </Grid>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-                  <Typography variant='h6'>Medical Records</Typography>
+                  <Typography variant='h6' marginBottom={0.5}>Medical Records</Typography>
                   <Grid container
                     direction="row"
                     rowSpacing={2}
@@ -1105,7 +1105,7 @@ const StudentAdditionForm = (props) => {
                   </Grid>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-                  <Typography variant='h6'>Previous School Details</Typography>
+                  <Typography variant='h6' marginBottom={0.5}>Previous School Details</Typography>
                   <Grid container
                     direction="row"
                     rowSpacing={2}

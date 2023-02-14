@@ -293,6 +293,9 @@ export default function SubjectManagement(props) {
                 ))}</Grid>
             </Card>
           </Grid>
+          <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
+            <Button className='submit-btn' variant="contained">Submit</Button>
+          </Grid>
         </Grid>
       </Card>
 
