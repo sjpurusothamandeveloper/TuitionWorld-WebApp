@@ -284,7 +284,7 @@ export default function SubjectManagement(props) {
 
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
-              <SpaceBetwwenDiv> <Typography variant='h6'>{`Manage students for 12 - A`}</Typography></SpaceBetwwenDiv>
+              <SpaceBetwwenDiv> <Typography variant='h6'>{`Manage students for `}{classDetails && classDetails}</Typography></SpaceBetwwenDiv>
               <Button onClick={StudentModelOpen}>{`+ Add Students`}</Button>
               <br />
               <Grid className='students-flex' lg={12} xl={12} md={12} sm={12} xs={12}>
