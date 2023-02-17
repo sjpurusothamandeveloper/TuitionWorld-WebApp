@@ -7,9 +7,9 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { indexOf } from 'lodash';
-import { getSection } from 'app/services/AppService';
-
-
+import { createSection, getSection, getSectionByClass, getUserAuth } from 'app/services/AppService';
+import { useSnackbar } from 'notistack';
+import jwt from "jwt-simple";
 
 
 const FlexBox = styled(Box)(() => ({
@@ -61,7 +61,8 @@ const NotFoundRoot = styled(FlexBox)(() => ({
 
 const ClassroomSetup = (props) => {
   const navigate = useNavigate();
-
+  const { enqueueSnackbar } = useSnackbar();
+  const [createdBy, setCreatedBy] = useState("")
   const [lastCreatedSection12, setLastCreatedSection12] = useState("A");
   const [lastCreatedSection11, setLastCreatedSection11] = useState("A");
   const [lastCreatedSection10, setLastCreatedSection10] = useState("A");
@@ -113,14 +114,67 @@ const ClassroomSetup = (props) => {
   const sectionArrPreKg = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
   useEffect(() => {
-    getInitialSections()
+    handleGetInititalSection()
+    getCreatedBy()
   }, [])
+
+  const getCreatedBy = () => {
+    let sessionEncToken = sessionStorage.getItem("twSampleData")
+    // console.log(decoded, "sessEncToken", sessionEncToken);
+    var secret = 'TU!tI0nW0R1d';
+      // decode
+      var decoded = jwt.decode(sessionEncToken, secret);
+      console.log(decoded?.userData?.email, "decoded");
+      setCreatedBy(decoded?.userData?.email)
+  }
 
   // const handleGetSections = async () => {
   //   let saveSection = await getSection()
   //   console.log("SectionsList", saveSection)
   //   setSectionListArr(saveSection)
   // }
+
+  const handleToastMessage = (typeOfMsg, msg) => {
+    const failureMessage = 'Something went wrong :(';
+
+    enqueueSnackbar(msg ? msg : failureMessage, {
+      variant: typeOfMsg ? "success" : "error",
+      persist: false,
+      autoHideDuration: 2000
+    });
+  }
+
+  const handleCreateSection = async (sectionObj) => {
+    console.log("Section Obj", sectionObj)
+    try {
+      const responseFromApi = await createSection(sectionObj)
+      console.log("resp", responseFromApi)
+      if (responseFromApi && responseFromApi.statusCode === 200) {
+        handleToastMessage(true, responseFromApi.message)
+      }
+      else {
+        handleToastMessage(false, responseFromApi.message)
+      }
+    } catch (e) {
+      handleToastMessage(false)
+    }
+  }
+
+  const handleGetInititalSection = async (sectionObj) => {
+    console.log("Section Obj", sectionObj)
+    try {
+      const responseFromApi = await getSectionByClass(sectionObj)
+      console.log("resp", responseFromApi)
+      if (responseFromApi && responseFromApi.statusCode === 200) {
+        handleToastMessage(true, responseFromApi.message)
+      }
+      else {
+        handleToastMessage(false, responseFromApi.message)
+      }
+    } catch (e) {
+      handleToastMessage(false)
+    }
+  }
 
   const createNxtNewSection12 = async () => {
     let indexOfLastSection = sectionArr12.indexOf(lastCreatedSection12)
@@ -130,6 +184,14 @@ const ClassroomSetup = (props) => {
     let x = [...createdSectionsArr12, ...tempArr]
     setLastCreatedSection12(nextSection)
     setCreatedSectionsArr12(x)
+    console.log("last CreatedSec 12", nextSection)
+    console.log("CreatedSec Arr 12", x)
+    let sectionObj = await {
+      "class": "12",
+      "section": x,
+      "createdBy": createdBy
+    }
+    await handleCreateSection(sectionObj)
   }
 
   const createNxtNewSection11 = () => {
@@ -271,17 +333,17 @@ const ClassroomSetup = (props) => {
     setLastCreatedSectionPreKg(nextSection)
     setCreatedSectionsArrPreKg(x)
   }
-  
-  const getInitialSections = async () => {
-    // let defSectionListResp = await getSectionByClass()
-    // console.log("Sect -->", defSectionListResp)
-    // if (defSectionListResp.statusCode === 200) {
-    //   setSectionDefList(defSectionListResp.data)
-    // }
-    // else {
-    //   setSectionDefList([])
-    // }
-  }
+
+  // const getInitialSections = async () => {
+  //   let defSectionListResp = await getSections()
+  //   console.log("Sect -->", defSectionListResp)
+  //   if (defSectionListResp.statusCode === 200) {
+  //     setSectionDefList(defSectionListResp.data)
+  //   }
+  //   else {
+  //     setSectionDefList([])
+  //   }
+  // }
 
   return (
 
@@ -313,7 +375,7 @@ const ClassroomSetup = (props) => {
                       <br />
                       <br />
                       <span style={{ display: "flex", color: "#1DA1F2", flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
-                      <Link to="/academic/class-management" state={{ classDetails: '12 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
+                        <Link to="/academic/class-management" state={{ classDetails: '12 - ' + sect }} ><Typography variant='p' style={{ cursor: "pointer" }}>View Class </Typography></Link>
                         <ArrowForwardIosIcon fontSize='14px' />
                       </span>
                     </ClassCard>

@@ -125,6 +125,19 @@ export const getSectionByClass = async() => {
         return apiResp;
 } 
 
+export const createSection = async(payload) => {
+    let apiResp = await axios.post(sectionsListUrl, payload)
+        .then(res => {
+            console.log("Data", res)
+            return res.data;    
+        })
+        .catch(err => {
+            console.log(err)
+            return err
+        })
+        return apiResp;
+} 
+
 export const getLeaves = async () => {
     let apiResp = await axios.get(leaveListUrl)
             .then(res => {
