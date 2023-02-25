@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useReducer } from 'react'
 import jwtDecode from 'jwt-decode'
 import axios from 'axios.js'
 import { MatxLoading } from 'app/components'
+import { userAuthUrl } from 'app/services/Services'
 
 const initialState = {
     isAuthenticated: false,
@@ -75,7 +76,22 @@ const reducer = (state, action) => {
 const AuthContext = createContext({
     ...initialState,
     method: 'JWT',
-    login: () => Promise.resolve(),
+    login: (data) => {
+        console.log(data, "IS......");
+        console.log(initialState, "IS...xxxxxx...");
+        Promise.resolve()
+        //  axios.post(userAuthUrl, payloadObj)
+        //     .then(res => {
+        //         console.log("Data", res)
+        //         Promise.resolve()
+        //         return res.data;    
+        //     })
+        //     .catch(err => {
+        //         console.log(err)
+        //         Promise.reject()
+        //         return err
+        //     })
+    },
     logout: () => { },
     register: () => Promise.resolve(),
 })
@@ -84,10 +100,12 @@ export const AuthProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
     const login = async (email, password) => {
-        const response = await axios.post('/api/auth/login', {
+        // console.log("eeeeee", email, "pppppp", password)
+        const response = await axios.post(userAuthUrl, {
             email,
             password,
         })
+        // console.log("responseeeeeeeeeeee", response)
         const { accessToken, user } = response.data
 
         setSession(accessToken)
@@ -98,6 +116,7 @@ export const AuthProvider = ({ children }) => {
                 user,
             },
         })
+        return response;
     }
 
     const register = async (email, username, password) => {
