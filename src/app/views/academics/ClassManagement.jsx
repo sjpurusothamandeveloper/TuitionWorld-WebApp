@@ -8,9 +8,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import LabelledSwitch from '../material-kit/switch/LabelledSwitch';
 import './index.css';
 import pic1 from "../../assets/images/2.jpg"
-import { getSection, getStaffs } from "../../services/AppService"
+import {  getStaffs, getStudents } from "../../services/AppService"
 import { studentsList } from './Constants';
-
+import { useSnackbar } from 'notistack';
 const maxDialog = "500px";
 
 
@@ -28,14 +28,14 @@ export default function SubjectManagement(props) {
   const [open, setOpen] = useState(false);
   const [staffModel, setStaffModel] = useState(false);
   const [studentModel, setStudentModel] = useState(false);
-
+  const [studentDb, setStudentDb] = useState([]);
   const [values, setValues] = useState("compulsory");
   const subjectsData = [
     { id: 1, name: "Tamil" },
     { id: 2, name: "English" },
     { id: 3, name: "Mathematics" }
   ];
-
+  const { enqueueSnackbar } = useSnackbar();
   const initialFormState = { id: null, name: "" };
 
   const [subjects, setSubjects] = useState(subjectsData);
@@ -63,6 +63,54 @@ export default function SubjectManagement(props) {
   useEffect(() => {
     setSubject(currentSubject);
   }, [currentSubject]);
+
+  useEffect(() => {
+    getStaffList()
+  }, [])
+
+  const getStaffList = async () => {
+    let staffListResp = await getStaffs()
+    if (staffListResp.statusCode === 200) {
+      setStaffList(staffListResp.data)
+    }
+    else {
+      setStaffList([])
+    }
+  }
+
+  useEffect(() => {
+    getAllStudentsDetails()
+  }, []);
+
+  const getAllStudentsDetails = async () => {
+    try {
+      const studListResp = await getStudents()
+      console.log("resp", studListResp)
+      if (studListResp && studListResp.statusCode === 200) {
+        handleToastMessage(true, studListResp.message)
+        if(studListResp?.data && studListResp?.data.length > 0){
+          setStudentDb(studListResp?.data)
+        }
+      }
+      else {
+        handleToastMessage(false, studListResp.message)
+        setStudentDb([])
+      }
+    } catch (e) {
+      handleToastMessage(false)
+      setStudentDb([])
+    }
+  }
+
+  const handleToastMessage = (typeOfMsg, msg) => {
+    const failureMessage = 'Something went wrong :(';
+
+    enqueueSnackbar(msg ? msg : failureMessage, {
+      variant: typeOfMsg ? "success" : "error",
+      persist: false,
+      autoHideDuration: 2000
+    });
+  }
 
   const resetAddSubject = () => {
     setEditing(false);
@@ -130,20 +178,6 @@ export default function SubjectManagement(props) {
     StaffModelClose(true)
   }
 
-  useEffect(() => {
-    getStaffList()
-  }, [])
-
-  const getStaffList = async () => {
-    let staffListResp = await getStaffs()
-    if (staffListResp.statusCode === 200) {
-      setStaffList(staffListResp.data)
-    }
-    else {
-      setStaffList([])
-    }
-  }
-
 
   const capitalizeFirst = str => {
     return str.charAt(0).toUpperCase();
@@ -160,25 +194,25 @@ export default function SubjectManagement(props) {
     } else {
       newChecked.splice(currentIndex, 1);
     }
-    let filteredObject = studentsList.filter((obj)=> {
-      return(
-      obj.id === value
+    let filteredObject = studentsList.filter((obj) => {
+      return (
+        obj.id === value
       );
     })
-   //API goes here
-    setStudentList([...studentList,filteredObject]);
+    //API goes here
+    setStudentList([...studentList, filteredObject]);
     console.log(studentList)
     setChecked(newChecked);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(checked)
-    },[checked])
-  
-  const addStudentsList = () =>{
-   let getList = []
-   
-  } 
+  }, [checked])
+
+  const addStudentsList = () => {
+    let getList = []
+
+  }
 
 
   return (
@@ -281,15 +315,15 @@ export default function SubjectManagement(props) {
             </Dialog>
 
           </Grid>
-
+          {/* Final student chips list */}
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
               <SpaceBetwwenDiv> <Typography variant='h6'>{`Manage students for `}{classDetails && classDetails}</Typography></SpaceBetwwenDiv>
               <Button onClick={StudentModelOpen}>{`+ Add Students`}</Button>
               <br />
               <Grid className='students-flex' lg={12} xl={12} md={12} sm={12} xs={12}>
-                {studentsList.map((stud) => (
-                  <Chip avatar={<Avatar>{capitalizeFirst(stud.name)}</Avatar>} label={stud.name} variant="outlined" />
+                {studentDb.map((stud) => (
+                  <Chip avatar={<Avatar>{capitalizeFirst(stud.firstName)}</Avatar>} label={stud.firstName} variant="outlined" />
                 ))}</Grid>
             </Card>
           </Grid>
@@ -323,53 +357,48 @@ export default function SubjectManagement(props) {
         </DialogContent>
       </Dialog>
       <Dialog fullWidth maxWidth="xs" open={studentModel} onClose={StudentModelClose}>
-          <DialogTitle><SpaceBetwwenDiv>Assign Student <span onClick={StudentModelClose}><CloseIcon /></span></SpaceBetwwenDiv></DialogTitle>
-          <DialogContent>
-          <TableContainer  style={{padding:"10px",maxWidth:"500px"}} component={Paper}>
-      <Table  aria-label="simple table">
-        <TableHead>
-       
- <TableRow>
- <TableCell align="center">STUDENT</TableCell>
- 
- 
-</TableRow>
-          
-         
-        </TableHead>
-        <TableBody>
-        <List>
-       {studentsList.map((student) => {
-        const labelId = `checkbox-list-secondary-label-${student.id}`;
-        return (
-          <ListItem
-            key={student.id}
-            secondaryAction={
-              <Checkbox
-                edge="end"
-                onChange={handleToggle(student.id)}
-                checked={checked.indexOf(student.id) !== -1}
-                inputProps={{ 'aria-labelledby': labelId }}
-              />
-            }
-            disablePadding
-          >
-            <ListItemButton>
-              <ListItemAvatar>
-                <Avatar
-                  alt={capitalizeFirst(`${student.name}`)}
-                  src={`/static/images/avatar/${student.id + 1}.jpg`}
-                />
-              </ListItemAvatar>
-              <ListItemText id={labelId} primary={`${student.name}`} />
-            </ListItemButton>
-          </ListItem>
-        );
-      })}
-    </List> </TableBody></Table></TableContainer>
-          </DialogContent>
-          <DialogActions><Button onClick={addStudentsList} className='submit-btn' variant="contained">Add Students</Button></DialogActions>
-        </Dialog>
+        <DialogTitle><SpaceBetwwenDiv>Assign Student <span onClick={StudentModelClose}><CloseIcon /></span></SpaceBetwwenDiv></DialogTitle>
+        <DialogContent>
+          <TableContainer style={{ padding: "10px", maxWidth: "500px" }} component={Paper}>
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center">STUDENT</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <List>
+                  {studentDb.map((student, id) => {
+                    const labelId = `checkbox-list-secondary-label-${id}`;
+                    return (
+                      <ListItem
+                        key={id}
+                        secondaryAction={
+                          <Checkbox
+                            edge="end"
+                            onChange={handleToggle(id)}
+                            checked={checked.indexOf(id) !== -1}
+                            inputProps={{ 'aria-labelledby': labelId }}
+                          />
+                        }
+                        disablePadding
+                      >
+                        <ListItemButton>
+                          <ListItemAvatar>
+                            <Avatar
+                              alt={capitalizeFirst(`${student.name}`)}
+                              src={`/static/images/avatar/${id + 1}.jpg`}
+                            />
+                          </ListItemAvatar>
+                          <ListItemText id={labelId} primary={`${student.firstName}`} />
+                        </ListItemButton>
+                      </ListItem>
+                    );
+                  })}
+                </List> </TableBody></Table></TableContainer>
+        </DialogContent>
+        <DialogActions><Button onClick={addStudentsList} className='submit-btn' variant="contained">Add Students</Button></DialogActions>
+      </Dialog>
     </div>
   );
 }
