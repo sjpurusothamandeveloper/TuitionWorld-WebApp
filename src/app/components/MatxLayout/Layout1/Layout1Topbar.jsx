@@ -100,9 +100,9 @@ const Layout1Topbar = () => {
     updateSidebarMode({ mode });
   };
 
-  // useEffect(() => {
-  //   decryptuserData()
-  // }, [])
+  useEffect(() => {
+    decryptuserData()
+  }, [])
 
   const decryptuserData = () => {
     let sessionEncToken = sessionStorage.getItem("twSampleData")
