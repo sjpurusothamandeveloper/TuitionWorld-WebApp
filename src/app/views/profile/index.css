@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+.poppins{
+    font-family: 'Poppins', sans-serif !important;
+} 
+.border-radius-50  {
+    border-radius: 8px;
+    padding:0px;
+    border-color: #e8f9f1;
+    color:#05D58E;
+    background-color: #e8f9f1;
+}
+.border-radius-50:hover  {
+    border-radius: 8px;
+    border-color: #e8f9f1;
+    color:#05D58E;
+    background-color: #e8f9f1;
+}

@@ -30,16 +30,16 @@ const Profile = (props) => {
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
     const [staffDetails, setStaffDetails] = useState()
-    useEffect(() => {
-        if (window.location.pathname.split('/').length >= 4) {
-            getParticularStaffById(window.location.pathname)
-        }
+    // useEffect(() => {
+    //     if (window.location.pathname.split('/').length >= 4) {
+    //         getParticularStaffById(window.location.pathname)
+    //     }
 
-    }, [])
+    // }, [])
 
-    useEffect(()=>{
-     console.log(staffDetails)
-    },[staffDetails])
+    // useEffect(()=>{
+    //  console.log(staffDetails)
+    // },[staffDetails])
 
     const getParticularStaffById = async (urlValue) => {
         console.log(urlValue.split('/'))
