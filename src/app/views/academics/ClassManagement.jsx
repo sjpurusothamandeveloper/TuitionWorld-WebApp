@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Grid, Box, Button, Radio, RadioGroup, FormControl, FormControlLabel, styled, Typography, Card, Collapse, DialogActions, DialogTitle, DialogContent, TextField, DialogContentText, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Dialog, Chip, Avatar, List, ListItem, Checkbox, ListItemButton, ListItemAvatar, ListItemText } from '@mui/material';
+import { Grid, Box, Button, Radio, RadioGroup, FormControl, FormControlLabel, styled, Typography, Card, Collapse, DialogActions, DialogTitle, DialogContent, TextField, DialogContentText, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Dialog, Chip, Avatar, List, ListItem, Checkbox, ListItemButton, ListItemAvatar, ListItemText, Select, MenuItem } from '@mui/material';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -10,6 +10,8 @@ import './index.css';
 import pic1 from "../../assets/images/2.jpg"
 import {  getStaffs, getStudents } from "../../services/AppService"
 import { studentsList } from './Constants';
+import StudentList from './StudentList';
+
 import { useSnackbar } from 'notistack';
 const maxDialog = "500px";
 
@@ -22,18 +24,22 @@ const SpaceBetwwenDiv = styled(`div`)(() => ({
   alignItems: 'center'
 }));
 
-export default function SubjectManagement(props) {
+export default function SubjectManagement({selectedFilms}) {
   const location = useLocation()
   const { classDetails } = location.state
   const [open, setOpen] = useState(false);
   const [staffModel, setStaffModel] = useState(false);
+  const [substaffModel, setsubStaffModel] = useState(false);
   const [studentModel, setStudentModel] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
   const [studentDb, setStudentDb] = useState([]);
   const [values, setValues] = useState("compulsory");
   const subjectsData = [
-    { id: 1, name: "Tamil" },
-    { id: 2, name: "English" },
-    { id: 3, name: "Mathematics" }
+    { id: 1, name: "Tamil",subTeacher:null },
+    { id: 2, name: "English",subTeacher:null },
+    { id: 3, name: "Mathematics",subTeacher:null }
   ];
   const { enqueueSnackbar } = useSnackbar();
   const initialFormState = { id: null, name: "" };
@@ -43,8 +49,13 @@ export default function SubjectManagement(props) {
   const [currentSubject, setCurrentSubject] = useState(initialFormState);
   const [assignedTeacher, setAssignedTeacher] = useState("");
   const [isAssignedTeacher, setIsAssignedTeacher] = useState(false);
+  const [assignedSubTeacher, setAssignedSubTeacher] = useState("");
+  const [isAssignedSubTeacher, setIsAssignedSubTeacher] = useState(false);
   const [staffList, setStaffList] = useState([])
   const [studentList, setStudentList] = useState([])
+  const [selectedTeacher, setSelectedTeacher] = useState("");
+  const [selectedSubjectId, setSelectedSubjectId] = useState(null);
+
 
   const [subject, setSubject] = useState(
     editing ? currentSubject : initialFormState
@@ -121,7 +132,8 @@ export default function SubjectManagement(props) {
 
   const addSubject = subject => {
     subject.id = subjects.length + 1;
-    setSubjects([...subjects, subject]);
+    const newSubjectObj = { id: subject.id, name: subject.name, subTeacher: "" };
+    setSubjects([...subjects, newSubjectObj]);
     setOpen(!true)
   };
 
@@ -164,6 +176,14 @@ export default function SubjectManagement(props) {
     setStaffModel(false);
   };
 
+  const subStaffModelOpen = () => {
+    setsubStaffModel(true);
+  };
+
+  const subStaffModelClose = () => {
+    setsubStaffModel(false);
+  };
+
   const StudentModelOpen = () => {
     setStudentModel(true);
   };
@@ -172,21 +192,48 @@ export default function SubjectManagement(props) {
     setStudentModel(false);
   };
 
+  const openModal = (id) => {
+    setSelectedSubjectId(id);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedSubjectId(null);
+    setSelectedTeacher("");
+  };
+
   const assigningTeacher = (name) => {
     setAssignedTeacher(name)
     setIsAssignedTeacher(true)
     StaffModelClose(true)
   }
+  // const assigningSubTeacher = (name) => {
+  //   setAssignedSubTeacher(name)
+    
+  //   setIsAssignedSubTeacher(true)
+  //   StaffModelClose(true)
+  // }
+
+  const assignTeacher = (id, teacher) => {
+    const updatedSubjects = subjects.map((subject) =>
+      subject.id === id ? { ...subject, subTeacher: teacher } : subject
+    );
+    setSubjects(updatedSubjects);
+    setIsModalOpen(false);
+    setSelectedSubjectId(null);
+    setSelectedTeacher("");
+  };
 
 
   const capitalizeFirst = str => {
     return str.charAt(0).toUpperCase();
   }
 
-  const [checked, setChecked] = useState([1]);
+  const [checked, setChecked] = useState([]);
 
   const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
+    const currentIndex = checked.indexOf(value.id);
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
@@ -233,10 +280,10 @@ export default function SubjectManagement(props) {
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
               <SpaceBetwwenDiv> <Typography variant='h6'>{`Manage class teacher, attendance for`} {classDetails}</Typography><Button>{`Manage Attendance`}</Button></SpaceBetwwenDiv>
-              {isAssignedTeacher ? <Chip avatar={<Avatar alt="Natacha" src={pic1} />} label={assignedTeacher} variant="outlined" /> : <Button onClick={StaffModelOpen}><Typography color="primary">{`+ Assign Class Teacher`}</Typography></Button>}</Card>
+              {isAssignedTeacher  ? <Chip avatar={<Avatar alt="Natacha" src={pic1} />} label={assignedTeacher} variant="outlined" /> : <Button onClick={StaffModelOpen}><Typography color="primary">{`+ Assign Class Teacher`}</Typography></Button>}</Card>
           </Grid>
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
-            <TableContainer style={{ padding: "10px" }} component={Paper}>
+            <TableContainer style={{ padding: "20px" }} component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
@@ -251,7 +298,16 @@ export default function SubjectManagement(props) {
                     subjects.map(subject => (
                       <TableRow key={subject.id}>
                         <TableCell>{subject.name}</TableCell>
-                        <TableCell></TableCell>
+                        {/* <TableCell>{subject.subTeacher !== null && subject.subTeacher !== "" ? <Chip avatar={<Avatar alt="Teacher" src={pic1} />} label={subject.subTeacher} variant="outlined" /> : <Button onClick={openModal}><Typography color="primary">{`+ Assign Subject Teacher`}</Typography></Button>}</TableCell> */}
+                         <TableCell> {subject.subTeacher ?  <Chip avatar={<Avatar alt="Teacher" src={pic1} />} label={subject.subTeacher} variant="outlined" /> : (
+                  <Button
+                   
+                    color="primary"
+                    onClick={() => openModal(subject.id)}
+                  >
+                   + Assign 
+                  </Button>
+                )}</TableCell>
                         <TableCell>
                           <Button
 
@@ -317,8 +373,13 @@ export default function SubjectManagement(props) {
           </Grid>
           {/* Final student chips list */}
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
+          <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
+            <StudentList /></Card>
+          </Grid>
+
+          {/* <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
-              <SpaceBetwwenDiv> <Typography variant='h6'>{`Manage students for `}{classDetails && classDetails}</Typography></SpaceBetwwenDiv>
+              <SpaceBetwwenDiv> <Typography variant='h6'>{`Manage students for 12 - A`}</Typography></SpaceBetwwenDiv>
               <Button onClick={StudentModelOpen}>{`+ Add Students`}</Button>
               <br />
               <Grid className='students-flex' lg={12} xl={12} md={12} sm={12} xs={12}>
@@ -326,7 +387,7 @@ export default function SubjectManagement(props) {
                   <Chip avatar={<Avatar>{capitalizeFirst(stud.firstName)}</Avatar>} label={stud.firstName} variant="outlined" />
                 ))}</Grid>
             </Card>
-          </Grid>
+          </Grid> */}
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Button className='submit-btn' variant="contained">Submit</Button>
           </Grid>
@@ -356,49 +417,91 @@ export default function SubjectManagement(props) {
                 ))} </TableBody></Table></TableContainer>
         </DialogContent>
       </Dialog>
-      <Dialog fullWidth maxWidth="xs" open={studentModel} onClose={StudentModelClose}>
-        <DialogTitle><SpaceBetwwenDiv>Assign Student <span onClick={StudentModelClose}><CloseIcon /></span></SpaceBetwwenDiv></DialogTitle>
+
+      <Dialog fullWidth maxWidth="sm" open={isModalOpen} onClose={closeModal}>
+        <DialogTitle><SpaceBetwwenDiv>{`Assign Staff`} <span onClick={closeModal}><CloseIcon /></span></SpaceBetwwenDiv></DialogTitle>
         <DialogContent>
-          <TableContainer style={{ padding: "10px", maxWidth: "500px" }} component={Paper}>
+          <TableContainer style={{ padding: "10px" }} component={Paper}>
             <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell align="center">STUDENT</TableCell>
+                  <TableCell>{`STAFF`}</TableCell>
+                  <TableCell align="center">{`ACTION`}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                <List>
-                  {studentDb.map((student, id) => {
-                    const labelId = `checkbox-list-secondary-label-${id}`;
-                    return (
-                      <ListItem
-                        key={id}
-                        secondaryAction={
-                          <Checkbox
-                            edge="end"
-                            onChange={handleToggle(id)}
-                            checked={checked.indexOf(id) !== -1}
-                            inputProps={{ 'aria-labelledby': labelId }}
-                          />
-                        }
-                        disablePadding
-                      >
-                        <ListItemButton>
-                          <ListItemAvatar>
-                            <Avatar
-                              alt={capitalizeFirst(`${student.name}`)}
-                              src={`/static/images/avatar/${id + 1}.jpg`}
-                            />
-                          </ListItemAvatar>
-                          <ListItemText id={labelId} primary={`${student.firstName}`} />
-                        </ListItemButton>
-                      </ListItem>
-                    );
-                  })}
-                </List> </TableBody></Table></TableContainer>
+
+
+                
+            
+                  <TableRow >
+                    <TableCell><Select fullWidth
+            labelId="teacher-select-label"
+            id="teacher-select"
+            value={selectedTeacher}
+            onChange={(e) => setSelectedTeacher(e.target.value)}
+          >
+            {staffList.map((teacher) => (
+              <MenuItem key={teacher.id} value={teacher.firstName  + " " + teacher.lastName}>
+                {teacher.firstName  + " " + teacher.lastName}
+              </MenuItem>
+            ))}
+          </Select></TableCell>
+                   <TableCell align='center'>   <Button 
+                        onClick={() => assignTeacher(selectedSubjectId, selectedTeacher)}
+                      >{`Assign`}</Button></TableCell>
+                  </TableRow>
+               </TableBody></Table></TableContainer>
         </DialogContent>
-        <DialogActions><Button onClick={addStudentsList} className='submit-btn' variant="contained">Add Students</Button></DialogActions>
       </Dialog>
+      <Dialog fullWidth maxWidth="xs" open={studentModel} onClose={StudentModelClose}>
+          <DialogTitle><SpaceBetwwenDiv>Assign Student <span onClick={StudentModelClose}><CloseIcon /></span></SpaceBetwwenDiv></DialogTitle>
+          <DialogContent>
+          <TableContainer  style={{padding:"10px",maxWidth:"500px"}} component={Paper}>
+      <Table  aria-label="simple table">
+        <TableHead>
+       
+ <TableRow>
+ <TableCell align="center">STUDENT</TableCell>
+ 
+ 
+</TableRow>
+          
+         
+        </TableHead>
+        <TableBody>
+        <List>
+       {studentsList.map((student) => {
+        const labelId = `checkbox-list-secondary-label-${student.id}`;
+        return (
+          <ListItem
+            key={student.id}
+            secondaryAction={
+              <Checkbox
+                edge="end"
+                onChange={handleToggle(student)}
+                checked={checked.indexOf(student.id) !== -1}
+                inputProps={{ 'aria-labelledby': labelId }}
+              />
+            }
+            disablePadding
+          >
+            <ListItemButton>
+              <ListItemAvatar>
+                <Avatar
+                  alt={capitalizeFirst(`${student.name}`)}
+                  src={`/static/images/avatar/${student.id + 1}.jpg`}
+                />
+              </ListItemAvatar>
+              <ListItemText id={labelId} primary={`${student.name}`} />
+            </ListItemButton>
+          </ListItem>
+        );
+      })}
+    </List> </TableBody></Table></TableContainer>
+          </DialogContent>
+          <DialogActions><Button onClick={addStudentsList} className='submit-btn' variant="contained">Add Students</Button></DialogActions>
+        </Dialog>
     </div>
   );
 }
