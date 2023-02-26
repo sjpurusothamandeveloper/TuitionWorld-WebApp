@@ -8,10 +8,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import LabelledSwitch from '../material-kit/switch/LabelledSwitch';
 import './index.css';
 import pic1 from "../../assets/images/2.jpg"
-import { getSection, getStaffs } from "../../services/AppService"
+import {  getStaffs, getStudents } from "../../services/AppService"
 import { studentsList } from './Constants';
 import StudentList from './StudentList';
 
+import { useSnackbar } from 'notistack';
 const maxDialog = "500px";
 
 
@@ -33,13 +34,14 @@ export default function SubjectManagement({selectedFilms}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
 
+  const [studentDb, setStudentDb] = useState([]);
   const [values, setValues] = useState("compulsory");
   const subjectsData = [
     { id: 1, name: "Tamil",subTeacher:null },
     { id: 2, name: "English",subTeacher:null },
     { id: 3, name: "Mathematics",subTeacher:null }
   ];
-
+  const { enqueueSnackbar } = useSnackbar();
   const initialFormState = { id: null, name: "" };
 
   const [subjects, setSubjects] = useState(subjectsData);
@@ -72,6 +74,54 @@ export default function SubjectManagement({selectedFilms}) {
   useEffect(() => {
     setSubject(currentSubject);
   }, [currentSubject]);
+
+  useEffect(() => {
+    getStaffList()
+  }, [])
+
+  const getStaffList = async () => {
+    let staffListResp = await getStaffs()
+    if (staffListResp.statusCode === 200) {
+      setStaffList(staffListResp.data)
+    }
+    else {
+      setStaffList([])
+    }
+  }
+
+  useEffect(() => {
+    getAllStudentsDetails()
+  }, []);
+
+  const getAllStudentsDetails = async () => {
+    try {
+      const studListResp = await getStudents()
+      console.log("resp", studListResp)
+      if (studListResp && studListResp.statusCode === 200) {
+        handleToastMessage(true, studListResp.message)
+        if(studListResp?.data && studListResp?.data.length > 0){
+          setStudentDb(studListResp?.data)
+        }
+      }
+      else {
+        handleToastMessage(false, studListResp.message)
+        setStudentDb([])
+      }
+    } catch (e) {
+      handleToastMessage(false)
+      setStudentDb([])
+    }
+  }
+
+  const handleToastMessage = (typeOfMsg, msg) => {
+    const failureMessage = 'Something went wrong :(';
+
+    enqueueSnackbar(msg ? msg : failureMessage, {
+      variant: typeOfMsg ? "success" : "error",
+      persist: false,
+      autoHideDuration: 2000
+    });
+  }
 
   const resetAddSubject = () => {
     setEditing(false);
@@ -175,20 +225,6 @@ export default function SubjectManagement({selectedFilms}) {
     setSelectedTeacher("");
   };
 
-  useEffect(() => {
-    getStaffList()
-  }, [])
-
-  const getStaffList = async () => {
-    let staffListResp = await getStaffs()
-    if (staffListResp.statusCode === 200) {
-      setStaffList(staffListResp.data)
-    }
-    else {
-      setStaffList([])
-    }
-  }
-
 
   const capitalizeFirst = str => {
     return str.charAt(0).toUpperCase();
@@ -205,25 +241,25 @@ export default function SubjectManagement({selectedFilms}) {
     } else {
       newChecked.splice(currentIndex, 1);
     }
-    let filteredObject = studentsList.filter((obj)=> {
-      return(
-      obj.id === value
+    let filteredObject = studentsList.filter((obj) => {
+      return (
+        obj.id === value
       );
     })
-   //API goes here
-    setStudentList([...studentList,filteredObject]);
+    //API goes here
+    setStudentList([...studentList, filteredObject]);
     console.log(studentList)
     setChecked(newChecked);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(checked)
-    },[checked])
-  
-  const addStudentsList = () =>{
-   let getList = []
-   
-  } 
+  }, [checked])
+
+  const addStudentsList = () => {
+    let getList = []
+
+  }
 
 
   return (
@@ -335,6 +371,7 @@ export default function SubjectManagement({selectedFilms}) {
             </Dialog>
 
           </Grid>
+          {/* Final student chips list */}
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
           <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
             <StudentList /></Card>
@@ -346,8 +383,8 @@ export default function SubjectManagement({selectedFilms}) {
               <Button onClick={StudentModelOpen}>{`+ Add Students`}</Button>
               <br />
               <Grid className='students-flex' lg={12} xl={12} md={12} sm={12} xs={12}>
-                {studentsList.map((stud) => (
-                  <Chip avatar={<Avatar>{capitalizeFirst(stud.name)}</Avatar>} label={stud.name} variant="outlined" />
+                {studentDb.map((stud) => (
+                  <Chip avatar={<Avatar>{capitalizeFirst(stud.firstName)}</Avatar>} label={stud.firstName} variant="outlined" />
                 ))}</Grid>
             </Card>
           </Grid> */}
