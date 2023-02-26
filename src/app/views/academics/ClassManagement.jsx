@@ -10,6 +10,7 @@ import './index.css';
 import pic1 from "../../assets/images/2.jpg"
 import { getSection, getStaffs } from "../../services/AppService"
 import { studentsList } from './Constants';
+import StudentList from './StudentList';
 
 const maxDialog = "500px";
 
@@ -22,7 +23,7 @@ const SpaceBetwwenDiv = styled(`div`)(() => ({
   alignItems: 'center'
 }));
 
-export default function SubjectManagement(props) {
+export default function SubjectManagement({selectedFilms}) {
   const location = useLocation()
   const { classDetails } = location.state
   const [open, setOpen] = useState(false);
@@ -193,10 +194,10 @@ export default function SubjectManagement(props) {
     return str.charAt(0).toUpperCase();
   }
 
-  const [checked, setChecked] = useState([1]);
+  const [checked, setChecked] = useState([]);
 
   const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
+    const currentIndex = checked.indexOf(value.id);
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
@@ -246,7 +247,7 @@ export default function SubjectManagement(props) {
               {isAssignedTeacher  ? <Chip avatar={<Avatar alt="Natacha" src={pic1} />} label={assignedTeacher} variant="outlined" /> : <Button onClick={StaffModelOpen}><Typography color="primary">{`+ Assign Class Teacher`}</Typography></Button>}</Card>
           </Grid>
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
-            <TableContainer style={{ padding: "10px" }} component={Paper}>
+            <TableContainer style={{ padding: "20px" }} component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
@@ -264,11 +265,11 @@ export default function SubjectManagement(props) {
                         {/* <TableCell>{subject.subTeacher !== null && subject.subTeacher !== "" ? <Chip avatar={<Avatar alt="Teacher" src={pic1} />} label={subject.subTeacher} variant="outlined" /> : <Button onClick={openModal}><Typography color="primary">{`+ Assign Subject Teacher`}</Typography></Button>}</TableCell> */}
                          <TableCell> {subject.subTeacher ?  <Chip avatar={<Avatar alt="Teacher" src={pic1} />} label={subject.subTeacher} variant="outlined" /> : (
                   <Button
-                    variant="contained"
+                   
                     color="primary"
                     onClick={() => openModal(subject.id)}
                   >
-                    Assign Teacher
+                   + Assign 
                   </Button>
                 )}</TableCell>
                         <TableCell>
@@ -334,8 +335,12 @@ export default function SubjectManagement(props) {
             </Dialog>
 
           </Grid>
-
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
+          <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
+            <StudentList /></Card>
+          </Grid>
+
+          {/* <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
               <SpaceBetwwenDiv> <Typography variant='h6'>{`Manage students for 12 - A`}</Typography></SpaceBetwwenDiv>
               <Button onClick={StudentModelOpen}>{`+ Add Students`}</Button>
@@ -345,7 +350,7 @@ export default function SubjectManagement(props) {
                   <Chip avatar={<Avatar>{capitalizeFirst(stud.name)}</Avatar>} label={stud.name} variant="outlined" />
                 ))}</Grid>
             </Card>
-          </Grid>
+          </Grid> */}
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Button className='submit-btn' variant="contained">Submit</Button>
           </Grid>
@@ -437,7 +442,7 @@ export default function SubjectManagement(props) {
             secondaryAction={
               <Checkbox
                 edge="end"
-                onChange={handleToggle(student.id)}
+                onChange={handleToggle(student)}
                 checked={checked.indexOf(student.id) !== -1}
                 inputProps={{ 'aria-labelledby': labelId }}
               />
