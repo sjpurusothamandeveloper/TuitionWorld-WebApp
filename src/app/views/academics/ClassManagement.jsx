@@ -24,7 +24,7 @@ const SpaceBetwwenDiv = styled(`div`)(() => ({
   alignItems: 'center'
 }));
 
-export default function SubjectManagement({selectedFilms}) {
+export default function SubjectManagement() {
   const location = useLocation()
   const { classDetails } = location.state
   const [open, setOpen] = useState(false);
@@ -32,7 +32,7 @@ export default function SubjectManagement({selectedFilms}) {
   const [substaffModel, setsubStaffModel] = useState(false);
   const [studentModel, setStudentModel] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  
 
   const [studentDb, setStudentDb] = useState([]);
   const [values, setValues] = useState("compulsory");
@@ -55,7 +55,7 @@ export default function SubjectManagement({selectedFilms}) {
   const [studentList, setStudentList] = useState([])
   const [selectedTeacher, setSelectedTeacher] = useState("");
   const [selectedSubjectId, setSelectedSubjectId] = useState(null);
-
+  const [finalStudValue ,setFinalStudValue] = useState([]);
 
   const [subject, setSubject] = useState(
     editing ? currentSubject : initialFormState
@@ -261,7 +261,20 @@ export default function SubjectManagement({selectedFilms}) {
 
   }
 
-
+  const Callback = (details) =>{
+    console.log("fetched",details)
+    
+    setFinalStudValue(details)
+    
+  }
+  const getData = (selectedStudents) =>{
+    let FinalValue = [{
+      assign : assignedTeacher ,
+      subs : subjects ,
+      studs : finalStudValue
+    }]
+    console.log("Final Value",FinalValue);
+  }
   return (
     <div>
       <Card style={{ padding: "15px" }}>
@@ -376,7 +389,7 @@ export default function SubjectManagement({selectedFilms}) {
           {/* Final student chips list */}
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
           <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
-            <StudentList /></Card>
+            <StudentList tempcallback={Callback} /></Card>
           </Grid>
 
           {/* <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
@@ -391,7 +404,7 @@ export default function SubjectManagement({selectedFilms}) {
             </Card>
           </Grid> */}
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
-            <Button className='submit-btn' variant="contained">Submit</Button>
+            <Button className='submit-btn' variant="contained" onClick={getData}>Submit</Button>
           </Grid>
         </Grid>
       </Card>

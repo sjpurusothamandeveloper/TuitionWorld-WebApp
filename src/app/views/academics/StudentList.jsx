@@ -25,13 +25,16 @@ const capitalizeFirst = str => {
   }
 
 
-export default function StudentList(props) {
-  const [selectedFilms, setSelectedFilms] = React.useState([]);
-  const handleSubmit = (event) => {
-    console.log("Selected films:", selectedFilms);
+const StudentList = ({tempcallback})=> {
+  const [selectedStudents, setSelectedStudents] = React.useState([]);
+  
+  const handleStudentSubmit = (event) => {
+    console.log("Selected students:", selectedStudents);
+   
     event.preventDefault();
   };
   
+ 
   return (
     <div>
    
@@ -40,7 +43,7 @@ export default function StudentList(props) {
               <SpaceBetwwenDiv> <Typography variant='h6'>{`Manage students for 12 - A`}</Typography></SpaceBetwwenDiv>
              
               <br />
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleStudentSubmit}>
       <Autocomplete
         multiple
         id="checkboxes-tags-demo"
@@ -62,14 +65,14 @@ export default function StudentList(props) {
         renderInput={(params) => (
           <TextField {...params} label="Students List" placeholder="Pick them..." />
         )}
-        onChange={(event, value) => setSelectedFilms(value)}
-        value={selectedFilms}
+        onChange={(event, value) =>{ setSelectedStudents(value); tempcallback(value)}}
+        value={selectedStudents}
       />
     
     </form><br />
               <Grid className='students-flex' lg={12} xl={12} md={12} sm={12} xs={12}>
-                {selectedFilms.map((stud) => (
-                  <Chip avatar={<Avatar>{capitalizeFirst(stud.name)}</Avatar>} label={stud.name} variant="outlined" />
+                {selectedStudents.map((stud) => (
+                  <Chip key={stud.id} avatar={<Avatar>{capitalizeFirst(stud.name)}</Avatar>} label={stud.name} variant="outlined" />
                 ))}</Grid>
             
           </Grid>
@@ -77,3 +80,4 @@ export default function StudentList(props) {
   );
 }
 
+export default StudentList;
