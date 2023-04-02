@@ -279,7 +279,9 @@ export default function SubjectManagement({selectedFilms}) {
           </Grid>
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
             <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
-              <SpaceBetwwenDiv> <Typography variant='h6'>{`Manage class teacher, attendance for`} {classDetails}</Typography><Button>{`Manage Attendance`}</Button></SpaceBetwwenDiv>
+              <SpaceBetwwenDiv> <Typography variant='h6'>{`Manage class teacher, attendance for`} {classDetails}</Typography>
+              {/* <Button>{`Manage Attendance`}</Button> */}
+              </SpaceBetwwenDiv>
               {isAssignedTeacher  ? <Chip avatar={<Avatar alt="Natacha" src={pic1} />} label={assignedTeacher} variant="outlined" /> : <Button onClick={StaffModelOpen}><Typography color="primary">{`+ Assign Class Teacher`}</Typography></Button>}</Card>
           </Grid>
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>

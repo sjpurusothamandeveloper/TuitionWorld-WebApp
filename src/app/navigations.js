@@ -30,7 +30,7 @@ export const navigations = [
     name: 'Administration',
     icon: 'money',
     children: [
-      { name: 'Admission', iconText: 'AD', path: '/administration/admission' },
+      { name: 'Admission', iconText: 'AD', path: '/administration/admission/details' },
     ],
   },
   { name: 'Result', path: '/result', icon: 'handshake'  },

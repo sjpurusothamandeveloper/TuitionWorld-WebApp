@@ -170,7 +170,8 @@ const AdditionForm = (props) => {
               <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
                 <Card className='padding-15'>
                   <SpaceBetwwenDiv><Typography variant='subtitle2' component='p'>{teacher.firstName + " " + teacher.lastName}</Typography>
-                  <Link to={"/profile/view/"+ teacher._id} style={{color:"orangered"}} state={{ studentId: teacher }} >View profile</Link>
+                  {/* <Link to={"/profile/view/"+ teacher._id} style={{color:"orangered"}} state={{ studentId: teacher }} >View profile</Link> */}
+                  <Link to={"/profile/view"} style={{color:"orangered"}} state={{ studentId: teacher }} >View profile</Link>
                   </SpaceBetwwenDiv>
                   <Typography variant='body2' component='p'>{teacher.emailId}</Typography></Card></Grid>)}</Grid>
 

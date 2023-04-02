@@ -7,8 +7,9 @@ const ViewStudent = Loadable(lazy(() => import('./ViewStudent')));
 
 const profileRoutes = [
   { path: '/profile/view/:id', element: <ProfileManagement /> },
-  { path: 'profile/view', element: <ViewStaff /> },
-  { path: 'profile/view-student', element: <ViewStudent /> }
+  { path: '/profile/view', element: <ViewStaff /> },
+  { path: '/profile/view-student', element: <ViewStudent /> }
 ];
+
 
 export default profileRoutes;

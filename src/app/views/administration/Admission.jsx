@@ -1,5 +1,5 @@
 import { Box, Button, styled } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const FlexBox = styled(Box)(() => ({
   display: 'flex',
@@ -31,15 +31,18 @@ const Admission = () => {
     <NotFoundRoot>
       <JustifyBox>
         <IMG src="/assets/images/illustrations/404.svg" alt="" />
-
+<Link to="/administration/admission/enquiry">
         <Button
           color="primary"
           variant="contained"
           sx={{ textTransform: 'capitalize' }}
-          onClick={() => navigate(-1)}
+        
         >
           Admission
-        </Button>
+        </Button></Link>
+        <Link to="/administration/admission/details"> <Button color="primary"
+          variant="contained"
+          sx={{ textTransform: 'capitalize' }}>Admission Tables</Button></Link>
       </JustifyBox>
     </NotFoundRoot>
   );
