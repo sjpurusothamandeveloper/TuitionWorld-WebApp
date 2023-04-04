@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Table, TableBody, TableCell,styled,Box,Paper, TableContainer, TableHead, TableRow, Switch, Card, Button, Chip, Avatar, Grid } from '@mui/material';
 import './index.css';
+import { useDispatch } from "react-redux";
+import ATTENDANCE_ACTIONS from "app/redux/actions/Attendance.action";
 
 const SpaceBox = styled(Box)(() => ({
   display: 'flex',
@@ -36,6 +38,7 @@ const StudentAttendance = () => {
   const [attendanceData, setAttendanceData] = useState(initialAttendanceData);
   const [presentAll , setPresentAll] = useState(false)
 
+  const dispatch = useDispatch();
   
   const handlePresentAll = (event) => {
     const updatedAttendanceData = attendanceData.map((student) => ({
@@ -60,6 +63,16 @@ const StudentAttendance = () => {
   const absentCount = attendanceData.filter((student) => !student.attendance).length;
   const percentage = presentCount * 100 / attendanceData.length;
 
+  const onSubmitAttendance = () => {
+    if(attendanceData.length > 0){
+      const re1Payload ={
+        class: 'String',
+        classTeacher: 'String',
+        subjectAtt: attendanceData,
+      }
+      dispatch(ATTENDANCE_ACTIONS.createNewAttendance(re1Payload))
+    }
+  }
   return (
     <Grid  container direction="row" justifyContent="flex-start" alignItems="stretch" columnSpacing={2}>
       
@@ -114,7 +127,7 @@ const StudentAttendance = () => {
          {/* <Button variant="contained" color={presentAll ? "error" : "success"} onClick={{handlePresentAll}}>
           {presentAll ? 'Absent All' : 'Present All'}
   </Button> */}
-  <Button className="submission-button" type="submit" variant="text" color="primary" onClick={() => console.log(attendanceData)}>
+  <Button className="submission-button" type="submit" variant="text" color="primary" onClick={onSubmitAttendance}>
     Submit
   </Button></SpaceBox>
       </Grid></Grid>
