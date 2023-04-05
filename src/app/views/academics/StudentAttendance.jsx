@@ -6,6 +6,7 @@ const SpaceBox = styled(Box)(() => ({
   display: 'flex',
   flexDirection:'row',
   justifyContent:'flex-end',
+  marginRight:"3%",
   gap:'25px',
   flexWrap:"wrap",
   alignItems: 'center',
@@ -64,7 +65,7 @@ const StudentAttendance = () => {
     <Grid  container direction="row" justifyContent="flex-start" alignItems="stretch" columnSpacing={2}>
       
     <Grid className="card-content" item xs={12} sm={12} md={12} xl={12} lg={12}>
-     
+     <Card className="table-card">
     <TableContainer  component={Paper} >
       <Table>
         <TableHead>
@@ -89,8 +90,9 @@ const StudentAttendance = () => {
           
         </TableBody>
       </Table>
-    </TableContainer></Grid>
-    <Grid style={{display:"flex",flexWrap:"wrap",justifyContent:"space-between",alignItems:"center"}} padding={1} marginLeft={2} marginRight={2}   item xs={12} sm={12} md={12} xl={12} lg={12}>
+    </TableContainer></Card></Grid>
+    <Grid item xs={12} sm={12} md={12} xl={12} lg={12}>
+   <Card className="attendance-footer" >
     <SpaceStart>
        <Chip
         avatar={<Avatar alt="Present" src="/assets/images/faces/smiling-face.gif" />}
@@ -117,7 +119,7 @@ const StudentAttendance = () => {
   <Button className="submission-button" type="submit" variant="text" color="primary" onClick={() => console.log(attendanceData)}>
     Submit
   </Button></SpaceBox>
-      </Grid></Grid>
+  </Card> </Grid></Grid>
  
   );
 };

@@ -267,7 +267,7 @@ export default function SubjectManagement() {
     setFinalStudValue(details)
     
   }
-  const getData = (selectedStudents) =>{
+  const getData = () =>{
     let FinalValue = [{
       assign : assignedTeacher ,
       subs : subjects ,
