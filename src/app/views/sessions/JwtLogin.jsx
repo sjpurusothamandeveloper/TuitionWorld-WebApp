@@ -11,6 +11,7 @@ import * as Yup from 'yup';
 import { useSnackbar } from 'notistack';
 import jwt from "jwt-simple";
 import jwt_decode from "jwt-decode";
+import { reStructureAllClassPayload } from 'app/redux/payload/acadamics.payload';
 
 const FlexBox = styled(Box)(() => ({ display: 'flex', alignItems: 'center' }));
 
@@ -85,7 +86,9 @@ const JwtLogin = () => {
         var payload = { userData: userObj?.data };
         var secret = 'TU!tI0nW0R1d';
         var token = jwt.encode(payload, secret);
+        sessionStorage.clear();
         sessionStorage.setItem('twSampleData', token)
+        sessionStorage.setItem('userId', userObj?.data?.data?._id)
         navigate('/dashboard/default')
       }
       else {

@@ -7,10 +7,10 @@ export const ATTENDANCE_ACTION_TYPES ={
 }
 
 
-const createNewAttendance = (attDetails) => (dispatch) => {
+const createNewAttendance = (attDetails) => async (dispatch) => {
 
     try {
-        const {data} = axios.post(ATTENDANCE_API.CREATE, {attendance: attDetails})
+        const {data} = await axios.post(ATTENDANCE_API.CREATE, {attendance: attDetails})
         dispatch({type: ATTENDANCE_ACTION_TYPES.CREATE, payload: data})
     } catch (error) {
         console.log('err',error)

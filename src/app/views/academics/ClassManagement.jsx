@@ -1,280 +1,327 @@
-import { React, useState, useEffect } from 'react';
-import { Grid, Box, Button, Radio, RadioGroup, FormControl, FormControlLabel, styled, Typography, Card, Collapse, DialogActions, DialogTitle, DialogContent, TextField, DialogContentText, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Dialog, Chip, Avatar, List, ListItem, Checkbox, ListItemButton, ListItemAvatar, ListItemText, Select, MenuItem } from '@mui/material';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
-import EditIcon from '@mui/icons-material/Edit';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import DeleteIcon from '@mui/icons-material/Delete';
-import CloseIcon from '@mui/icons-material/Close';
-import LabelledSwitch from '../material-kit/switch/LabelledSwitch';
-import './index.css';
-import pic1 from "../../assets/images/2.jpg"
-import {  getStaffs, getStudents } from "../../services/AppService"
-import { studentsList } from './Constants';
-import StudentList from './StudentList';
-
-import { useSnackbar } from 'notistack';
-const maxDialog = "500px";
-
+import { React, useState, useEffect, useCallback } from "react";
+import {
+  Grid,
+  Button,
+  styled,
+  Typography,
+  Card,
+  TextField,
+  Chip,
+  Avatar,
+} from "@mui/material";
+import { useLocation } from "react-router-dom";
+import pic1 from "../../assets/images/2.jpg";
+import StudentList from "./StudentList";
+import { useSnackbar } from "notistack";
+import { useDispatch, useSelector } from "react-redux";
+import ACADAMICS_ACTIONS from "app/redux/actions/Acadamics.actions";
+import DialogBox from "app/components/DialogBox";
+import EnhancedTable from "app/components/EnhancedTable";
+import DropDown from "app/components/DropDown";
+import "./index.css";
 
 const SpaceBetwwenDiv = styled(`div`)(() => ({
-  width: '100%',
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  alignItems: 'center'
+  width: "100%",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
 }));
 
 export default function SubjectManagement() {
-  const location = useLocation()
-  const { classDetails } = location.state
-  const [open, setOpen] = useState(false);
-  const [staffModel, setStaffModel] = useState(false);
-  const [substaffModel, setsubStaffModel] = useState(false);
-  const [studentModel, setStudentModel] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  
+  const location = useLocation();
+  const {
+    classDetails: { standard, section },
+  } = location.state;
 
-  const [studentDb, setStudentDb] = useState([]);
-  const [values, setValues] = useState("compulsory");
-  const subjectsData = [
-    { id: 1, name: "Tamil",subTeacher:null },
-    { id: 2, name: "English",subTeacher:null },
-    { id: 3, name: "Mathematics",subTeacher:null }
-  ];
+  const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
-  const initialFormState = { id: null, name: "" };
 
-  const [subjects, setSubjects] = useState(subjectsData);
-  const [editing, setEditing] = useState(false);
-  const [currentSubject, setCurrentSubject] = useState(initialFormState);
-  const [assignedTeacher, setAssignedTeacher] = useState("");
-  const [isAssignedTeacher, setIsAssignedTeacher] = useState(false);
-  const [assignedSubTeacher, setAssignedSubTeacher] = useState("");
-  const [isAssignedSubTeacher, setIsAssignedSubTeacher] = useState(false);
-  const [staffList, setStaffList] = useState([])
-  const [studentList, setStudentList] = useState([])
-  const [selectedTeacher, setSelectedTeacher] = useState("");
-  const [selectedSubjectId, setSelectedSubjectId] = useState(null);
-  const [finalStudValue ,setFinalStudValue] = useState([]);
-
-  const [subject, setSubject] = useState(
-    editing ? currentSubject : initialFormState
-  );
-  const staffData = [
-    { id: 1, name: "Purus" },
-    { id: 2, name: "Thaman" },
-    { id: 3, name: "HipHop" }
-  ];
-  const handleInputChange = event => {
-    const { name, value } = event.target;
-
-    setSubject({ ...subject, [name]: value });
-  };
+  const {
+    singleClassRoomDetails,
+    updateClassRoomDetails,
+    allStaffs,
+    allStudents,
+  } = useSelector((store) => store.acadamics);
 
   useEffect(() => {
-    setSubject(currentSubject);
-  }, [currentSubject]);
+    dispatch(ACADAMICS_ACTIONS.getAllStaffs());
+    dispatch(ACADAMICS_ACTIONS.getAllStudents());
+  }, [dispatch]);
 
   useEffect(() => {
-    getStaffList()
-  }, [])
-
-  const getStaffList = async () => {
-    let staffListResp = await getStaffs()
-    if (staffListResp.statusCode === 200) {
-      setStaffList(staffListResp.data)
-    }
-    else {
-      setStaffList([])
-    }
-  }
-
-  useEffect(() => {
-    getAllStudentsDetails()
-  }, []);
-
-  const getAllStudentsDetails = async () => {
-    try {
-      const studListResp = await getStudents()
-      console.log("resp", studListResp)
-      if (studListResp && studListResp.statusCode === 200) {
-        handleToastMessage(true, studListResp.message)
-        if(studListResp?.data && studListResp?.data.length > 0){
-          setStudentDb(studListResp?.data)
-        }
-      }
-      else {
-        handleToastMessage(false, studListResp.message)
-        setStudentDb([])
-      }
-    } catch (e) {
-      handleToastMessage(false)
-      setStudentDb([])
-    }
-  }
-
-  const handleToastMessage = (typeOfMsg, msg) => {
-    const failureMessage = 'Something went wrong :(';
-
-    enqueueSnackbar(msg ? msg : failureMessage, {
-      variant: typeOfMsg ? "success" : "error",
-      persist: false,
-      autoHideDuration: 2000
-    });
-  }
-
-  const resetAddSubject = () => {
-    setEditing(false);
-    setOpen(!true)
-    setSubject(initialFormState);
-    setCurrentSubject(initialFormState);
-  };
-
-  const addSubject = subject => {
-    subject.id = subjects.length + 1;
-    const newSubjectObj = { id: subject.id, name: subject.name, subTeacher: "" };
-    setSubjects([...subjects, newSubjectObj]);
-    setOpen(!true)
-  };
-
-  const deleteSubject = id => {
-    setEditing(false);
-    setSubjects(subjects.filter(subject => subject.id !== id));
-  };
-
-  const editRow = subject => {
-    setEditing(true);
-    setOpen(true)
-    setCurrentSubject(subject);
-  };
-
-  const updateSubject = (id, updatedSubject) => {
-    setEditing(false);
-    setOpen(false)
-    setSubjects(subjects.map(subject => (subject.id === id ? updatedSubject : subject)));
-  };
-
-  const handleChange = (type, event) => {
-    const { name, value } = event.target;
-
-    setValues({ type, [name]: value });
-  }
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const StaffModelOpen = () => {
-    setStaffModel(true);
-  };
-
-  const StaffModelClose = () => {
-    setStaffModel(false);
-  };
-
-  const subStaffModelOpen = () => {
-    setsubStaffModel(true);
-  };
-
-  const subStaffModelClose = () => {
-    setsubStaffModel(false);
-  };
-
-  const StudentModelOpen = () => {
-    setStudentModel(true);
-  };
-
-  const StudentModelClose = () => {
-    setStudentModel(false);
-  };
-
-  const openModal = (id) => {
-    setSelectedSubjectId(id);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedSubjectId(null);
-    setSelectedTeacher("");
-  };
-
-  const assigningTeacher = (name) => {
-    setAssignedTeacher(name)
-    setIsAssignedTeacher(true)
-    StaffModelClose(true)
-  }
-  // const assigningSubTeacher = (name) => {
-  //   setAssignedSubTeacher(name)
-    
-  //   setIsAssignedSubTeacher(true)
-  //   StaffModelClose(true)
-  // }
-
-  const assignTeacher = (id, teacher) => {
-    const updatedSubjects = subjects.map((subject) =>
-      subject.id === id ? { ...subject, subTeacher: teacher } : subject
-    );
-    setSubjects(updatedSubjects);
-    setIsModalOpen(false);
-    setSelectedSubjectId(null);
-    setSelectedTeacher("");
-  };
-
-
-  const capitalizeFirst = str => {
-    return str.charAt(0).toUpperCase();
-  }
-
-  const [checked, setChecked] = useState([]);
-
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value.id);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-    let filteredObject = studentsList.filter((obj) => {
-      return (
-        obj.id === value
+    if (standard && section) {
+      dispatch(
+        ACADAMICS_ACTIONS.getSingleClassRoom({
+          standard,
+          section,
+        })
       );
-    })
-    //API goes here
-    setStudentList([...studentList, filteredObject]);
-    console.log(studentList)
-    setChecked(newChecked);
-  };
+    }
+  }, [standard, section, dispatch]);
 
   useEffect(() => {
-    console.log(checked)
-  }, [checked])
-
-  const addStudentsList = () => {
-    let getList = []
-
-  }
-
-  const Callback = (details) =>{
-    console.log("fetched",details)
     
-    setFinalStudValue(details)
-    
-  }
-  const getData = (selectedStudents) =>{
-    let FinalValue = [{
-      assign : assignedTeacher ,
-      subs : subjects ,
-      studs : finalStudValue
-    }]
-    console.log("Final Value",FinalValue);
-  }
+    console.log(singleClassRoomDetails, 'singleClassRoomDetails')
+  }, [updateClassRoomDetails, singleClassRoomDetails, allStaffs, allStudents]);
+
+  const [assignedClassTeacher, setAssignedClassTeacher] = useState({
+    id: "",
+    name: "",
+  });
+  const [tableData, setTableData] = useState([]);
+  const [tablePreData, setTablePreData] = useState([]);
+  const [studentListArr, setstudentListArr] = useState([]);
+
+  const [modalState, setModalState] = useState({
+    show: "",
+  });
+
+  const [modalStateValues, setModalStateValues] = useState({
+    subName: "",
+    staff: "",
+  });
+
+  useEffect(() => {
+    if (singleClassRoomDetails) {
+      // table data
+      const subjTable = singleClassRoomDetails?.subjects;
+      let temp = [];
+      if (subjTable && subjTable.length > 0) {
+        subjTable.map((item) => {
+          console.log('subjTable api', item);
+          temp.push({
+            subject: item?.subjectName,
+            staffName: item?.subStaff,
+            key: item?.key,
+            staffRefId: item?.staffId,
+          });
+        });
+        setTablePreData(temp);
+      }
+
+      // assigned class teacher
+      const apiCT = singleClassRoomDetails?.classTeacher;
+      setAssignedClassTeacher({
+          ...apiCT
+      })
+
+      // students
+      const selectedStudents = singleClassRoomDetails?.students;
+      setstudentListArr(selectedStudents);
+
+    }
+  }, [singleClassRoomDetails]);
+
+  useEffect(() => {
+    let temp = [];
+    if (tablePreData && tablePreData.length > 0) {
+      tablePreData.map((item) => {
+        console.log('subjTable setpre', item);
+
+        temp.push({
+          subject: item?.subject,
+          staffName: item?.staffName ? (
+            <Chip
+              avatar={<Avatar alt="Natacha" src={pic1} />}
+              label={item.staffName}
+              variant="outlined"
+            />
+          ) : (
+            "click edit to assign"
+          ),
+
+          edit: (
+            <Button
+              onClick={() =>
+                handleModalState("EDIT_SUBJECT_STAFF", {
+                  subject: item.subject,
+                  staffName: item.staffName,
+                  key: item.key,
+                })
+              }
+            >{`Edit`}</Button>
+          ),
+          delete: (
+            <Button
+              onClick={() =>
+                handleModalState("DELETE_SUBJECT_STAFF", { key: item.key })
+              }
+            >{`Delete`}</Button>
+          ),
+          hiddenValues: item,
+        });
+      });
+    }
+    setTableData(temp);
+  }, [handleModalState, tablePreData]);
+
+  const handleInputChange = (key, value) => {
+
+    return setModalStateValues((prev) => ({ ...prev, [key]: value }));
+  };
+
+
+  const getObj = (arr = [], id) => {
+    const res = arr.filter((ob) => ob.id === id);
+
+    return res[0];
+  };
+
+  const getUpdatedClassTeacher = (vl) => {
+    let data = {
+      name: "",
+      id: "",
+    };
+    const clName = getObj(
+      allStaffs?.map((item) => ({
+        id: item._id,
+        name: `${item.firstName},${item.lastName}`,
+      })),
+      vl
+    );
+    // console.log("ASSIGN_CLASS_TEACHER clName 1", clName);
+    return {
+      ...data,
+      ...clName,
+    };
+  };
+  const handleModalState = useCallback(
+    (type, data) => {
+
+      switch (type) {
+        case "ASSIGN_CLASS_TEACHER":
+          setModalState({
+            show: "ASSIGN",
+          });
+          break;
+        case "EDIT_SUBJECT_STAFF":
+          setModalState({
+            show: "EDIT",
+            rowId: data.id,
+          });
+          break;
+        case "ADD_SUBJECT_STAFF":
+          setModalState({
+            show: "ADD",
+          });
+          break;
+        case "DELETE_SUBJECT_STAFF":
+          setModalState({
+            show: "DELETE",
+          });
+
+          break;
+        default:
+          setModalStateValues({ subName: "", staff: "" });
+          break;
+      }
+      // setModalState((prev) => ({ ...prev, ...modalDetails }));
+    },
+    []
+  );
+
+
+
+  const ModalBodyContent = ({ forClassTeacher, onChange }) => {
+    return (
+      <Grid
+        marginY={5}
+        container
+        columnSpacing={2}
+        direction="row"
+        justifyContent="flex-start"
+        alignItems="center"
+      >
+        {!forClassTeacher && (
+          <Grid item xs={4}>
+            <TextField
+              fullWidth
+              type="text"
+              name="name"
+              label="Subject"
+              variant="outlined"
+              defaultValue={modalStateValues?.subName}
+              onChange={(e) => onChange("subName", e.target.value)}
+            />
+          </Grid>
+        )}
+
+        <Grid item xs={4}>
+          <DropDown
+            name="staff"
+            label="Select Teacher"
+            onChange={(op) => onChange("staff", op)}
+            options={allStaffs?.map((item) => ({
+              id: item._id,
+              name: `${item.firstName},${item.lastName}`,
+            }))}
+            value={modalStateValues?.staff}
+          />
+        </Grid>
+      </Grid>
+    );
+  };
+
+  const handleModalActionStates = (k, val) => {
+    const assignT = modalStateValues.staff && getUpdatedClassTeacher(modalStateValues.staff);
+    const filterById = modalState.rowId && tablePreData.filter((it) => it.key !== modalState.rowId);
+
+    let temp;
+    switch (k) {
+      case "ADD":
+        const newSub = {
+          subject: modalStateValues.subName,
+          staffName: assignT.name,
+          id: assignT.id,
+        };
+        
+        setTablePreData((prev) => [...prev, newSub]);
+
+        break;
+
+      case "ASSIGN":
+        setAssignedClassTeacher(assignT);
+        handleModalActionStates("CLOSE");
+        break;
+
+      case "EDIT":
+        const edited = {
+          subject: modalStateValues.subName,
+          staffName: assignT.name,
+          id: assignT.id,
+        };
+
+        setTablePreData((prev) => [...filterById, edited]);
+        handleModalState();
+        break;
+
+      case "DELETE":
+        setTablePreData((prev) => [...filterById]);
+        handleModalState();
+        break;
+      case "CLOSE":
+        setModalStateValues(null);
+        break;
+
+      default:
+        break;
+    }
+
+    setModalState(temp);
+  };
+
+// final
+  const onSubmitClassDetails = () => {
+    const payload = {
+      tablePreData,
+      assignedClassTeacher,
+      studentListArr,
+      standard, section,
+      classId: singleClassRoomDetails?.classId,
+    }
+    dispatch(ACADAMICS_ACTIONS.updateSingleClassRoom(payload));
+  };
   return (
     <div>
       <Card style={{ padding: "15px" }}>
@@ -283,240 +330,157 @@ export default function SubjectManagement() {
           direction="row"
           rowSpacing={2}
           justifyContent="flex-start"
-          alignItems="center">
+          alignItems="center"
+        >
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
-            <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
-              <SpaceBetwwenDiv> <Typography variant='h6'>{classDetails && classDetails}
-              </Typography>
-              </SpaceBetwwenDiv></Card>
-          </Grid>
-          <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
-            <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
-              <SpaceBetwwenDiv> <Typography variant='h6'>{`Manage class teacher, attendance for`} {classDetails}</Typography>
-              {/* <Button>{`Manage Attendance`}</Button> */}
+            <Card
+              style={{ padding: "20px" }}
+              xs={12}
+              sm={12}
+              md={12}
+              lg={12}
+              xl={12}
+            >
+              <SpaceBetwwenDiv>
+                <Typography variant="h6">
+                  {standard && section ? `${standard}-${section}` : ""}
+                </Typography>
               </SpaceBetwwenDiv>
-              {isAssignedTeacher  ? <Chip avatar={<Avatar alt="Natacha" src={pic1} />} label={assignedTeacher} variant="outlined" /> : <Button onClick={StaffModelOpen}><Typography color="primary">{`+ Assign Class Teacher`}</Typography></Button>}</Card>
+            </Card>
           </Grid>
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
-            <TableContainer style={{ padding: "20px" }} component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>{`SUBJECT NAME`}</TableCell>
-                    <TableCell>{`SUBJECT TEACHER`}</TableCell>
-                    <TableCell>{`EDIT SUBJECT`}</TableCell>
-                    <TableCell>{`DELETE SUBJECT`}</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {subjects.length > 0 ? (
-                    subjects.map(subject => (
-                      <TableRow key={subject.id}>
-                        <TableCell>{subject.name}</TableCell>
-                        {/* <TableCell>{subject.subTeacher !== null && subject.subTeacher !== "" ? <Chip avatar={<Avatar alt="Teacher" src={pic1} />} label={subject.subTeacher} variant="outlined" /> : <Button onClick={openModal}><Typography color="primary">{`+ Assign Subject Teacher`}</Typography></Button>}</TableCell> */}
-                         <TableCell> {subject.subTeacher ?  <Chip avatar={<Avatar alt="Teacher" src={pic1} />} label={subject.subTeacher} variant="outlined" /> : (
-                  <Button
-                   
-                    color="primary"
-                    onClick={() => openModal(subject.id)}
-                  >
-                   + Assign 
-                  </Button>
-                )}</TableCell>
-                        <TableCell>
-                          <Button
-
-                            onClick={() => {
-                              editRow(subject);
-                            }}
-                          >
-                            {`Edit`}
-                          </Button>
-                        </TableCell>
-                        <TableCell>
-                          <Button
-
-                            onClick={() => deleteSubject(subject.id)}
-                          >
-                            {`Delete`}
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))
-                  ) : (
-                    <TableRow>
-                      <TableCell colSpan={3}>{`No Subject available :(`}</TableCell>
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <Button onClick={handleClickOpen}>{`+ Add Subject`}</Button>
-            <Dialog fullWidth maxWidth="sm" open={open} onClose={handleClose}>
-              <DialogTitle>{editing ? "Edit Subject" : "Add Subject"}</DialogTitle>
-              <DialogContent>
-                <form
-                  onSubmit={event => {
-                    event.preventDefault();
-                    if (!subject.name) return;
-                    editing ? updateSubject(subject.id, subject) : addSubject(subject);
-                    resetAddSubject();
-                  }}
+            <Card
+              style={{ padding: "20px" }}
+              xs={12}
+              sm={12}
+              md={12}
+              lg={12}
+              xl={12}
+            >
+              <SpaceBetwwenDiv>
+                {" "}
+                <Typography variant="h6">
+                  {`Manage class teacher, attendance for`}{" "}
+                  {`${standard}-${section}`}
+                </Typography>
+                {/* <Button>{`Manage Attendance`}</Button> */}
+              </SpaceBetwwenDiv>
+              {/* one ================================================================= */}
+              {assignedClassTeacher.name ? (
+                <Chip
+                  avatar={<Avatar alt="Natacha" src={pic1} />}
+                  label={assignedClassTeacher.name}
+                  variant="outlined"
+                />
+              ) : (
+                <Button
+                  onClick={() => handleModalState("ASSIGN_CLASS_TEACHER")}
                 >
-                  <br />
-                  <TextField
-                    fullWidth
-                    type="text"
-                    name="name"
-                    label="Subject"
-                    variant="outlined"
-                    value={subject.name}
-                    onChange={handleInputChange}
-                  />
-                  <br /><br />
-                  <Button style={{ backgroundColor: "#34314c" }} variant="contained" type="submit">{editing ? "Update" : "Add"}</Button>
-                  {editing && (
-                    <Button onClick={resetAddSubject} >
-                      {`Cancel`}
-                    </Button>
-                  )}
-                </form>
-              </DialogContent>
-
-            </Dialog>
-
+                  <Typography color="primary">{`+ Assign Class Teacher`}</Typography>
+                </Button>
+              )}
+            </Card>
+          </Grid>
+          <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
+            <EnhancedTable
+              heading={[
+                "SUBJECT NAME",
+                "SUBJECT TEACHER",
+                "EDIT SUBJECT",
+                "DELETE SUBJECT",
+              ]}
+              rows={tableData}
+              callBackFn={(da) => console.log("subjects", da)}
+            />
+            <Button
+              onClick={() => handleModalState("ADD_SUBJECT_STAFF")}
+            >{`+ Add Subject`}</Button>
           </Grid>
           {/* Final student chips list */}
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
-          <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
-            <StudentList tempcallback={Callback} /></Card>
-          </Grid>
-
-          {/* <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
-            <Card style={{ padding: "20px" }} xs={12} sm={12} md={12} lg={12} xl={12}>
-              <SpaceBetwwenDiv> <Typography variant='h6'>{`Manage students for 12 - A`}</Typography></SpaceBetwwenDiv>
-              <Button onClick={StudentModelOpen}>{`+ Add Students`}</Button>
-              <br />
-              <Grid className='students-flex' lg={12} xl={12} md={12} sm={12} xs={12}>
-                {studentDb.map((stud) => (
-                  <Chip avatar={<Avatar>{capitalizeFirst(stud.firstName)}</Avatar>} label={stud.firstName} variant="outlined" />
-                ))}</Grid>
+            <Card
+              style={{ padding: "20px" }}
+              xs={12}
+              sm={12}
+              md={12}
+              lg={12}
+              xl={12}
+            >
+              <StudentList
+                defaultValue={studentListArr}
+                tempcallback={(selectedStud) =>
+                  setstudentListArr(selectedStud)
+                }
+                studentList={allStudents}
+              />
             </Card>
-          </Grid> */}
+          </Grid>
           <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
-            <Button className='submit-btn' variant="contained" onClick={getData}>Submit</Button>
+            <Button
+              className="submit-btn"
+              variant="contained"
+              onClick={onSubmitClassDetails}
+            >
+              Submit
+            </Button>
           </Grid>
         </Grid>
       </Card>
 
-      <Dialog fullWidth maxWidth="sm" open={staffModel} onClose={StaffModelClose}>
-        <DialogTitle><SpaceBetwwenDiv>{`Assign Staff`} <span onClick={StaffModelClose}><CloseIcon /></span></SpaceBetwwenDiv></DialogTitle>
-        <DialogContent>
-          <TableContainer style={{ padding: "10px" }} component={Paper}>
-            <Table aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>{`STAFF`}</TableCell>
-                  <TableCell align="center">{`ACTION`}</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {staffList.map((staff, i) => (
-                  <TableRow key={staff.id}>
-                    <TableCell>{staff.firstName + " " + staff.lastName}</TableCell>
-                    <TableCell align="center">
-                      <Button onClick={() => {
-                        assigningTeacher(staff.firstName + " " + staff.lastName);
-                      }}>{`Assign`}</Button></TableCell>
-                  </TableRow>
-                ))} </TableBody></Table></TableContainer>
-        </DialogContent>
-      </Dialog>
+      {/* ==========ADD============ */}
+      {modalState && modalState.show === "ADD" && (
+        <DialogBox
+          title={"Add Subject"}
+          closeModal={() => handleModalActionStates("CLOSE")}
+          isModalOpen
+          onAction={() => handleModalActionStates("ADD")}
+          actionText={"Add"}
+          cancelText={"Cancel"}
+        >
+          <ModalBodyContent onChange={handleInputChange} />
+        </DialogBox>
+      )}
+      {/* ==========Assign============ */}
 
-      <Dialog fullWidth maxWidth="sm" open={isModalOpen} onClose={closeModal}>
-        <DialogTitle><SpaceBetwwenDiv>{`Assign Staff`} <span onClick={closeModal}><CloseIcon /></span></SpaceBetwwenDiv></DialogTitle>
-        <DialogContent>
-          <TableContainer style={{ padding: "10px" }} component={Paper}>
-            <Table aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>{`STAFF`}</TableCell>
-                  <TableCell align="center">{`ACTION`}</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
+      {modalState && modalState.show === "ASSIGN" && (
+        <DialogBox
+          title={"Add Class Teacher"}
+          closeModal={() => handleModalActionStates("CLOSE")}
+          isModalOpen
+          onAction={() => handleModalActionStates("ASSIGN")}
+          actionText={"Assign"}
+          cancelText={"Cancel"}
+        >
+          <ModalBodyContent forClassTeacher onChange={handleInputChange} />
+        </DialogBox>
+      )}
+      {/* ==========Edit============ */}
 
+      {modalState && modalState.show === "EDIT" && (
+        <DialogBox
+          title={"Edit Class Teacher"}
+          closeModal={() => handleModalActionStates("CLOSE")}
+          isModalOpen
+          onAction={() => handleModalActionStates("EDIT")}
+          actionText={"Update"}
+          cancelText={"Cancel"}
+        >
+          <ModalBodyContent onChange={handleInputChange} />
+        </DialogBox>
+      )}
+      {/* ==========Edit============ */}
 
-                
-            
-                  <TableRow >
-                    <TableCell><Select fullWidth
-            labelId="teacher-select-label"
-            id="teacher-select"
-            value={selectedTeacher}
-            onChange={(e) => setSelectedTeacher(e.target.value)}
-          >
-            {staffList.map((teacher) => (
-              <MenuItem key={teacher.id} value={teacher.firstName  + " " + teacher.lastName}>
-                {teacher.firstName  + " " + teacher.lastName}
-              </MenuItem>
-            ))}
-          </Select></TableCell>
-                   <TableCell align='center'>   <Button 
-                        onClick={() => assignTeacher(selectedSubjectId, selectedTeacher)}
-                      >{`Assign`}</Button></TableCell>
-                  </TableRow>
-               </TableBody></Table></TableContainer>
-        </DialogContent>
-      </Dialog>
-      <Dialog fullWidth maxWidth="xs" open={studentModel} onClose={StudentModelClose}>
-          <DialogTitle><SpaceBetwwenDiv>Assign Student <span onClick={StudentModelClose}><CloseIcon /></span></SpaceBetwwenDiv></DialogTitle>
-          <DialogContent>
-          <TableContainer  style={{padding:"10px",maxWidth:"500px"}} component={Paper}>
-      <Table  aria-label="simple table">
-        <TableHead>
-       
- <TableRow>
- <TableCell align="center">STUDENT</TableCell>
- 
- 
-</TableRow>
-          
-         
-        </TableHead>
-        <TableBody>
-        <List>
-       {studentsList.map((student) => {
-        const labelId = `checkbox-list-secondary-label-${student.id}`;
-        return (
-          <ListItem
-            key={student.id}
-            secondaryAction={
-              <Checkbox
-                edge="end"
-                onChange={handleToggle(student)}
-                checked={checked.indexOf(student.id) !== -1}
-                inputProps={{ 'aria-labelledby': labelId }}
-              />
-            }
-            disablePadding
-          >
-            <ListItemButton>
-              <ListItemAvatar>
-                <Avatar
-                  alt={capitalizeFirst(`${student.name}`)}
-                  src={`/static/images/avatar/${student.id + 1}.jpg`}
-                />
-              </ListItemAvatar>
-              <ListItemText id={labelId} primary={`${student.name}`} />
-            </ListItemButton>
-          </ListItem>
-        );
-      })}
-    </List> </TableBody></Table></TableContainer>
-          </DialogContent>
-          <DialogActions><Button onClick={addStudentsList} className='submit-btn' variant="contained">Add Students</Button></DialogActions>
-        </Dialog>
+      {modalState && modalState.show === "DELETE" && (
+        <DialogBox
+          title={"Delete Confirmation"}
+          closeModal={() => handleModalActionStates("CLOSE")}
+          isModalOpen
+          onAction={() => handleModalActionStates("DELETE")}
+          actionText={"Confirm"}
+          cancelText={"Cancel"}
+          bodyDesc={"Do you really wants to delete ?"}
+        ></DialogBox>
+      )}
     </div>
   );
 }
