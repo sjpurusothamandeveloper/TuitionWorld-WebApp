@@ -9,6 +9,8 @@ export const ACADAMICS_ACTION_TYPES ={
     UPDATE_SINGLE_CLASS_DETAILS: "UPDATE_SINGLE_CLASS_DETAILS",
     GET_ALL_STUDENTS_LIST: "GET_ALL_STUDENTS_LIST",
     GET_ALL_STAFFS_LIST: "GET_ALL_STAFFS_LIST",
+    CLEAR_ACADAMICS_STATE: "CLEAR_ACADAMICS_STATE",
+    SET_INITIAL_VALUES: "SET_INITIAL_VALUES",
 }
 
 const getUserId = () => {
@@ -62,11 +64,10 @@ const updateSingleClassRoom = (dat) => async (dispatch) =>{
 
     try {
         const restrPayload = getReqPayloadForSingleClass(dat);
-
         const {data} = await axios.post(ACADAMICS_API.PUT_UPDATE_CLASS_DETAILS,  { classId: dat.classId,details:restrPayload } );
         if (data.msg === "updated") {
             dispatch({type: ACADAMICS_ACTION_TYPES.UPDATE_SINGLE_CLASS_DETAILS, payload: data})
-            dispatch(getSingleClassRoom({userId: getUserId(), section: dat.standard, standard: dat.standard,}))
+            dispatch(getSingleClassRoom({userId: getUserId(), section: dat.section, standard: dat.standard,}))
         }
     } catch (error) {
         console.log('err',error)
@@ -101,6 +102,20 @@ const getAllStaffs =  () => async (dispatch) =>{
     }
 }
 
+const clearAcadamicsStates = (data) => async (dispatch) => {
+    try {
+        dispatch({type: ACADAMICS_ACTION_TYPES.CLEAR_ACADAMICS_STATE, payload: data})
+    } catch (error) {
+        console.log('err',error)
+    }
+}
+const setInitialValues = () => async (dispatch) => {
+    try {
+        dispatch({type: ACADAMICS_ACTION_TYPES.SET_INITIAL_VALUES})
+    } catch (error) {
+        console.log('err',error)
+    }
+}
 const ACADAMICS_ACTIONS = {
     createNewClassSection,
     getAllClassRooms,
@@ -108,6 +123,8 @@ const ACADAMICS_ACTIONS = {
     updateSingleClassRoom,
     getAllStaffs,
     getAllStudents,
+    clearAcadamicsStates,
+    setInitialValues,
 }
 
 export default ACADAMICS_ACTIONS;

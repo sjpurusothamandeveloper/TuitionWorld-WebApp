@@ -28,6 +28,47 @@ const SpaceBetwwenDiv = styled(`div`)(() => ({
   alignItems: "center",
 }));
 
+
+const ModalBodyContent = ({ forClassTeacher, onChange, modalStateValues, allStaffs }) => {
+  return (
+    <Grid
+      marginY={5}
+      container
+      columnSpacing={2}
+      direction="row"
+      justifyContent="flex-start"
+      alignItems="center"
+    >
+      {!forClassTeacher && (
+        <Grid item xs={4}>
+          <TextField
+            fullWidth
+            type="text"
+            name="name"
+            label="Subject"
+            variant="outlined"
+            defaultValue={modalStateValues?.subName}
+            onChange={(e) => onChange("subName", e.target.value)}
+          />
+        </Grid>
+      )}
+
+      <Grid item xs={4}>
+        <DropDown
+          name="staff"
+          label="Select Teacher"
+          onChange={(op) => onChange("staff", op)}
+          options={allStaffs?.map((item) => ({
+            id: item._id,
+            name: `${item.firstName},${item.lastName}`,
+          }))}
+          value={modalStateValues?.staff}
+        />
+      </Grid>
+    </Grid>
+  );
+};
+
 export default function SubjectManagement() {
   const location = useLocation();
   const {
@@ -39,17 +80,19 @@ export default function SubjectManagement() {
 
   const {
     singleClassRoomDetails,
-    updateClassRoomDetails,
     allStaffs,
     allStudents,
+    updated,
   } = useSelector((store) => store.acadamics);
 
   useEffect(() => {
+    dispatch(ACADAMICS_ACTIONS.setInitialValues());
     dispatch(ACADAMICS_ACTIONS.getAllStaffs());
     dispatch(ACADAMICS_ACTIONS.getAllStudents());
   }, [dispatch]);
 
   useEffect(() => {
+    setTableData((pr) => ([]))
     if (standard && section) {
       dispatch(
         ACADAMICS_ACTIONS.getSingleClassRoom({
@@ -61,10 +104,17 @@ export default function SubjectManagement() {
   }, [standard, section, dispatch]);
 
   useEffect(() => {
-    
-    console.log(singleClassRoomDetails, 'singleClassRoomDetails')
-  }, [updateClassRoomDetails, singleClassRoomDetails, allStaffs, allStudents]);
-
+    if(updated && updated === "updated") {
+      enqueueSnackbar("Updated Successfully", {
+        variant: "success",
+        persist: false,
+        autoHideDuration: 2000,
+      });
+      dispatch(ACADAMICS_ACTIONS.clearAcadamicsStates({
+        updated: null
+      }))
+    }
+  }, [dispatch, enqueueSnackbar, updated])
   const [assignedClassTeacher, setAssignedClassTeacher] = useState({
     id: "",
     name: "",
@@ -88,12 +138,12 @@ export default function SubjectManagement() {
       const subjTable = singleClassRoomDetails?.subjects;
       let temp = [];
       if (subjTable && subjTable.length > 0) {
-        subjTable.map((item) => {
-          console.log('subjTable api', item);
+        subjTable.map((item, k) => {
+          const ke = k + 1;
           temp.push({
             subject: item?.subjectName,
             staffName: item?.subStaff,
-            key: item?.key,
+            key: ke,
             staffRefId: item?.staffId,
           });
         });
@@ -117,7 +167,6 @@ export default function SubjectManagement() {
     let temp = [];
     if (tablePreData && tablePreData.length > 0) {
       tablePreData.map((item) => {
-        console.log('subjTable setpre', item);
 
         temp.push({
           subject: item?.subject,
@@ -138,6 +187,8 @@ export default function SubjectManagement() {
                   subject: item.subject,
                   staffName: item.staffName,
                   key: item.key,
+                  staffRefId: item.staffRefId,
+
                 })
               }
             >{`Edit`}</Button>
@@ -180,7 +231,6 @@ export default function SubjectManagement() {
       })),
       vl
     );
-    // console.log("ASSIGN_CLASS_TEACHER clName 1", clName);
     return {
       ...data,
       ...clName,
@@ -196,9 +246,10 @@ export default function SubjectManagement() {
           });
           break;
         case "EDIT_SUBJECT_STAFF":
+          setModalStateValues((prev) => ({...prev, staff: data.staffRefId, subName: data.subject}))
           setModalState({
             show: "EDIT",
-            rowId: data.id,
+            rowId: data.key,
           });
           break;
         case "ADD_SUBJECT_STAFF":
@@ -209,6 +260,7 @@ export default function SubjectManagement() {
         case "DELETE_SUBJECT_STAFF":
           setModalState({
             show: "DELETE",
+            rowId: data.key,
           });
 
           break;
@@ -216,56 +268,16 @@ export default function SubjectManagement() {
           setModalStateValues({ subName: "", staff: "" });
           break;
       }
-      // setModalState((prev) => ({ ...prev, ...modalDetails }));
     },
     []
   );
 
 
 
-  const ModalBodyContent = ({ forClassTeacher, onChange }) => {
-    return (
-      <Grid
-        marginY={5}
-        container
-        columnSpacing={2}
-        direction="row"
-        justifyContent="flex-start"
-        alignItems="center"
-      >
-        {!forClassTeacher && (
-          <Grid item xs={4}>
-            <TextField
-              fullWidth
-              type="text"
-              name="name"
-              label="Subject"
-              variant="outlined"
-              defaultValue={modalStateValues?.subName}
-              onChange={(e) => onChange("subName", e.target.value)}
-            />
-          </Grid>
-        )}
-
-        <Grid item xs={4}>
-          <DropDown
-            name="staff"
-            label="Select Teacher"
-            onChange={(op) => onChange("staff", op)}
-            options={allStaffs?.map((item) => ({
-              id: item._id,
-              name: `${item.firstName},${item.lastName}`,
-            }))}
-            value={modalStateValues?.staff}
-          />
-        </Grid>
-      </Grid>
-    );
-  };
 
   const handleModalActionStates = (k, val) => {
     const assignT = modalStateValues.staff && getUpdatedClassTeacher(modalStateValues.staff);
-    const filterById = modalState.rowId && tablePreData.filter((it) => it.key !== modalState.rowId);
+    const filterById = modalState.rowId && tablePreData?.filter((it) => it.key !== modalState.rowId);
 
     let temp;
     switch (k) {
@@ -273,7 +285,8 @@ export default function SubjectManagement() {
         const newSub = {
           subject: modalStateValues.subName,
           staffName: assignT.name,
-          id: assignT.id,
+          staffRefId: assignT.id,
+          key: tablePreData.length + 1,
         };
         
         setTablePreData((prev) => [...prev, newSub]);
@@ -289,16 +302,17 @@ export default function SubjectManagement() {
         const edited = {
           subject: modalStateValues.subName,
           staffName: assignT.name,
-          id: assignT.id,
+          staffRefId: assignT.id,
+          key: modalState.rowId,
         };
 
         setTablePreData((prev) => [...filterById, edited]);
-        handleModalState();
+        handleModalState("CLOSE");
         break;
 
       case "DELETE":
         setTablePreData((prev) => [...filterById]);
-        handleModalState();
+        handleModalState("CLOSE");
         break;
       case "CLOSE":
         setModalStateValues(null);
@@ -322,6 +336,7 @@ export default function SubjectManagement() {
     }
     dispatch(ACADAMICS_ACTIONS.updateSingleClassRoom(payload));
   };
+
   return (
     <div>
       <Card style={{ padding: "15px" }}>
@@ -412,6 +427,7 @@ export default function SubjectManagement() {
                   setstudentListArr(selectedStud)
                 }
                 studentList={allStudents}
+                forClass={`${standard}-${section}`}
               />
             </Card>
           </Grid>
@@ -437,7 +453,7 @@ export default function SubjectManagement() {
           actionText={"Add"}
           cancelText={"Cancel"}
         >
-          <ModalBodyContent onChange={handleInputChange} />
+          <ModalBodyContent allStaffs={allStaffs} modalStateValues={modalStateValues} onChange={handleInputChange} />
         </DialogBox>
       )}
       {/* ==========Assign============ */}
@@ -451,7 +467,7 @@ export default function SubjectManagement() {
           actionText={"Assign"}
           cancelText={"Cancel"}
         >
-          <ModalBodyContent forClassTeacher onChange={handleInputChange} />
+          <ModalBodyContent forClassTeacher allStaffs={allStaffs} modalStateValues={modalStateValues} onChange={handleInputChange} />
         </DialogBox>
       )}
       {/* ==========Edit============ */}
@@ -465,7 +481,7 @@ export default function SubjectManagement() {
           actionText={"Update"}
           cancelText={"Cancel"}
         >
-          <ModalBodyContent onChange={handleInputChange} />
+          <ModalBodyContent allStaffs={allStaffs} modalStateValues={modalStateValues} onChange={handleInputChange} />
         </DialogBox>
       )}
       {/* ==========Edit============ */}

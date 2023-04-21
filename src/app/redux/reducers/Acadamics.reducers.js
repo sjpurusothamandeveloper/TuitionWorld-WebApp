@@ -9,6 +9,8 @@ ACADAMICS_ACTION_TYPES
     updateClassRoomDetails: null,
     allStudents: [],
     allStaffs: [],
+    added: null,
+    updated: null
   };
   
   const AcadamicsReducer = function (state = initialState, action) {
@@ -23,6 +25,7 @@ ACADAMICS_ACTION_TYPES
         return {
           ...state,
           addNewSection: action.payload,
+          added: action.payload.msg,
         };
       }
       case ACADAMICS_ACTION_TYPES.GET_SINGLE_CLASS_DETAILS: {
@@ -35,6 +38,7 @@ ACADAMICS_ACTION_TYPES
         return {
           ...state,
           updateClassRoomDetails: action.payload,
+          updated: action.payload.msg
         };
       }
       case ACADAMICS_ACTION_TYPES.GET_ALL_STAFFS_LIST: {
@@ -44,9 +48,20 @@ ACADAMICS_ACTION_TYPES
         };
       }
       case ACADAMICS_ACTION_TYPES.GET_ALL_STUDENTS_LIST: {
-        return {
+        return { 
           ...state,
           allStudents: action.payload,
+        };
+      }
+      case ACADAMICS_ACTION_TYPES.CLEAR_ACADAMICS_STATE: {
+        return { 
+          ...state,
+          ...action.payload,
+        };
+      }
+      case ACADAMICS_ACTION_TYPES.SET_INITIAL_VALUES: {
+        return { 
+          ...initialState
         };
       }
       default: {

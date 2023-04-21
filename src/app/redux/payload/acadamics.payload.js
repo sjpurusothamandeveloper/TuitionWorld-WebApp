@@ -171,10 +171,8 @@ export const reStructureClassPayload = (data) => {
   if (data?.subjects && data?.subjects.length > 0) {
     data?.subjects.map(item => {
       subjects.push({
-        id: item?.subjectStaff,
         subjectName: item?.subject,
         subStaff: item?.staffName ,
-        key: item?._id,
         staffId: item?.staffRefId,
       })
     })
@@ -208,7 +206,7 @@ export const getReqPayloadForSingleClass = (data=[]) => {
     sub.map((o) => {
       subjects.push({
         subject: o.subject,
-        staffRefId: o.id,
+        staffRefId: o.staffRefId,
         staffName: o.staffName,
         isStaffAssigned: o.id ? true : false,
       })
@@ -217,7 +215,6 @@ export const getReqPayloadForSingleClass = (data=[]) => {
 
   const stud = data?.studentListArr;
 
-  console.log('ata?.tableData;', data)
   if (stud && stud.length > 0) {
     stud.map((o) => {
       students.push({

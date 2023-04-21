@@ -39,24 +39,26 @@ const ClassroomSetup = () => {
 
   const dispatch = useDispatch();
 
-  const { allClassRooms, addNewSection } = useSelector(
+  const { allClassRooms, added } = useSelector(
     (store) => store.acadamics
   );
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
+    if(added && added === "new section added") {
+      enqueueSnackbar("New Section Added", {
+        variant: "success",
+        persist: false,
+        autoHideDuration: 2000,
+      });
+      dispatch(ACADAMICS_ACTIONS.clearAcadamicsStates({
+        added: null
+      }))
+    }
+  }, [dispatch, enqueueSnackbar, added])
+  useEffect(() => {
     dispatch(ACADAMICS_ACTIONS.getAllClassRooms("643932a60b60b95484f9d253"));
   }, [dispatch]);
-
-  const handleToastMessage = (typeOfMsg, msg) => {
-    const failureMessage = "Something went wrong :(";
-
-    enqueueSnackbar(msg ? msg : failureMessage, {
-      variant: typeOfMsg ? "success" : "error",
-      persist: false,
-      autoHideDuration: 2000,
-    });
-  };
 
   const newSectionHandler = async (tp, std) => {
     const data = {
@@ -144,6 +146,7 @@ const ClassroomSetup = () => {
                                     standard: classByType.standards,
                                     section: sect,
                                   } }}
+                                  replace={true}
                                 >
                                   <Typography
                                     variant="p"

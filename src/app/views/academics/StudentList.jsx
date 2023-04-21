@@ -21,21 +21,24 @@ const capitalizeFirst = (str) => {
   return str.charAt(0).toUpperCase();
 };
 
-const StudentList = ({ tempcallback, studentList, defaultValue }) => {
+const StudentList = ({ tempcallback, studentList, defaultValue, forClass="" }) => {
   const [selectedStudents, setSelectedStudents] = React.useState([]);
+  const [def, setDef] = React.useState([]);
 
   React.useEffect(() => {
     if(defaultValue) {
+      console.log('selectedStudents' , def)
+      setDef(defaultValue)
       setSelectedStudents(defaultValue)
     }
-  }, [defaultValue])
+  }, [def, defaultValue])
 
   return (
     <div>
       <Grid item lg={12} xl={12} md={12} sm={12} xs={12}>
         <SpaceBetwwenDiv>
           {" "}
-          <Typography variant="h6">{`Manage students for 12 - A`}</Typography>
+          <Typography variant="h6">{`Manage students for ${forClass}`}</Typography>
         </SpaceBetwwenDiv>
 
         <br />
@@ -44,7 +47,10 @@ const StudentList = ({ tempcallback, studentList, defaultValue }) => {
           id="checkboxes-tags-demo"
           options={studentList}
           disableCloseOnSelect
+          defaultValue={def}
           getOptionLabel={(option) => option.name}
+          getOptionSelected={(option, value) => option.value === value.value}
+          isOptionEqualToValue={(option, value) => option.value === value.value}
           renderOption={(props, option, { selected }) => (
             <li {...props}>
               <Checkbox
