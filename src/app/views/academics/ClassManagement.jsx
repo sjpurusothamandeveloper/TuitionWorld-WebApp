@@ -86,9 +86,12 @@ export default function SubjectManagement() {
   } = useSelector((store) => store.acadamics);
 
   useEffect(() => {
-    dispatch(ACADAMICS_ACTIONS.setInitialValues());
     dispatch(ACADAMICS_ACTIONS.getAllStaffs());
     dispatch(ACADAMICS_ACTIONS.getAllStudents());
+
+    return () => {
+      dispatch(ACADAMICS_ACTIONS.setInitialValues());
+    };
   }, [dispatch]);
 
   useEffect(() => {
