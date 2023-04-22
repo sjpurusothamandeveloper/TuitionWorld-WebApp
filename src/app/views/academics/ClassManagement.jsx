@@ -280,15 +280,15 @@ export default function SubjectManagement() {
 
   const handleModalActionStates = (k, val) => {
     const assignT = modalStateValues.staff && getUpdatedClassTeacher(modalStateValues.staff);
-    const filterById = modalState.rowId && tablePreData?.filter((it) => it.key !== modalState.rowId);
+    const filterById = modalState?.rowId && tablePreData?.filter((it) => it.key !== modalState.rowId);
 
     let temp;
     switch (k) {
       case "ADD":
         const newSub = {
           subject: modalStateValues.subName,
-          staffName: assignT.name,
-          staffRefId: assignT.id,
+          staffName: assignT?.name,
+          staffRefId: assignT?.id,
           key: tablePreData.length + 1,
         };
         
@@ -304,8 +304,8 @@ export default function SubjectManagement() {
       case "EDIT":
         const edited = {
           subject: modalStateValues.subName,
-          staffName: assignT.name,
-          staffRefId: assignT.id,
+          staffName: assignT?.name,
+          staffRefId: assignT?.id,
           key: modalState.rowId,
         };
 
