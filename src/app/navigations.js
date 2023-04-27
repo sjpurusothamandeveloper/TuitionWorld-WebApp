@@ -8,7 +8,7 @@ export const navigations = [
     icon: 'classroom',
     children: [
       { name: 'Classroom Setup', iconText: 'CS', path: '/academic/classroom-setup' },
-      { name: 'Student Attendance', iconText: 'SA', path: '/academic/student-attendance' },
+      { name: 'Student Attendance', iconText: 'SA', path: '/academic/attendance-index' },
     ],
   },
   {
