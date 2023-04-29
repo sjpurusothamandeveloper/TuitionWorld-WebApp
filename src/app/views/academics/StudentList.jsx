@@ -49,8 +49,8 @@ const StudentList = ({ tempcallback, studentList, defaultValue, forClass="" }) =
           disableCloseOnSelect
           defaultValue={def}
           getOptionLabel={(option) => option.name}
-          getOptionSelected={(option, value) => option.value === value.value}
-          isOptionEqualToValue={(option, value) => option.value === value.value}
+          getOptionSelected={(option, value) => option.id === value.id}
+          isOptionEqualToValue={(option, value) => option.id === value.id}
           renderOption={(props, option, { selected }) => (
             <li {...props}>
               <Checkbox
