@@ -79,6 +79,7 @@ const StudentAdditionForm = (props) => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    handleGetStudentsList()
   };
 
   const handleToastMessage = (typeOfMsg, msg) => {
@@ -161,7 +162,7 @@ const StudentAdditionForm = (props) => {
             {studentList.map((student) =>
               <Grid item xs={10} sm={10} md={10} lg={10} xl={10}>
                 <Card className='padding-15'>
-                  <SpaceBetwwenDiv><Typography variant='subtitle2' component='p'>{student.firstName + " " + student.lastName}</Typography><Link to={"/profile/view-student"} style={{color:"orangered"}} state={{ studentId: student }} ><Button>View</Button></Link></SpaceBetwwenDiv>
+                  <SpaceBetwwenDiv><Typography variant='subtitle2' component='p'>{student.firstName + " " + student.lastName}</Typography><Link to={"/profile/view-student"} style={{ color: "orangered" }} state={{ studentId: student }} ><Button>View</Button></Link></SpaceBetwwenDiv>
                   <Typography variant='body2' component='p'>{student.emailId}</Typography></Card></Grid>)}</Grid>
         </TabPanel>
         <TabPanel value={value} index={1}>
