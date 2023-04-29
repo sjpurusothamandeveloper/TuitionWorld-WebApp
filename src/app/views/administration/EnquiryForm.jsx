@@ -110,7 +110,7 @@ const EnquiryForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="Emailid"
+                    name="email"
                     defaultValue=""
                     render={({ field }) => (<TextField  {...field} fullWidth id="outlined-basic" label="Email ID" variant="outlined" />)}
                   />
@@ -189,19 +189,36 @@ const EnquiryForm = (props) => {
 
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <Controller
+                <Controller
                     control={control}
-                    name="board"
-
+                    name="schoolBoard"
+                   
                     defaultValue=""
-                    render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Board" variant="outlined" />)}
+                    render={({ field }) => (
+                      <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">
+                          Board
+                        </InputLabel>
+                        <Select
+                          {...field}
+                          labelId="demo-simple-select-label"
+                          id="demo-simple-select"
+                          variant="outlined"
+                          label="Medium"
+                        >
+                          <MenuItem value="StateBoard" >StateBoard</MenuItem>
+                          <MenuItem value="CBSE" >CBSE</MenuItem>
+                         
+                        </Select>
+                      </FormControl>
+                    )}
                   />
 
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                 <Controller
                     control={control}
-                    name="medium"
+                    name="schoolMedium"
                    
                     defaultValue=""
                     render={({ field }) => (

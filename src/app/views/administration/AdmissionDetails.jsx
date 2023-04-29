@@ -7,7 +7,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom';
 import { indexOf } from 'lodash';
-import { getAdmission } from 'app/services/AppService';
+import { deleteAdmission, getAdmission } from 'app/services/AppService';
 
 
 const SpaceBetwwenDiv = styled(`div`)(() => ({
@@ -30,6 +30,8 @@ const AdmissionDetails = () => {
       useEffect(() => {
         handleGetAdmissionList()
       }, [])    
+
+     
 
       // const deleteEnquiry = id => {
       // setStudents(students.filter(student => student.id != id))
@@ -54,7 +56,8 @@ const AdmissionDetails = () => {
           console.log(err)
         }
       }
-
+       
+    
 
     return ( 
     <div>
@@ -72,30 +75,30 @@ const AdmissionDetails = () => {
         <Table >
           <TableHead>
             <TableRow>
-            <TableCell className="padding-15-left " align="center">No</TableCell>
-            <TableCell align="left">Student ID</TableCell>
-              <TableCell align="left">Student Name</TableCell>
-              <TableCell align="center">Class</TableCell>
-              <TableCell align="center">Mobile</TableCell>
-              <TableCell align="center">Action</TableCell>
-              {/* <TableCell align="center"></TableCell> */}
+            {/* <TableCell className="padding-15-left " align="center">No</TableCell> */}
+            {/* <TableCell align="left">Student ID</TableCell> */}
+              <TableCell className="padding-15-left" align="left">Student Name</TableCell>
+              <TableCell align="left">Mobile</TableCell>
+              <TableCell align="left">Email</TableCell>
+              <TableCell align="left">Medium</TableCell>
+              <TableCell align="left">Board</TableCell>
             </TableRow>
           </TableHead>
          
           <TableBody >
             {admissionList.map((student) => (
-              <TableRow>
+              <TableRow key ={student._id}>
                  {/* <TableCell className="padding-15-left " align="center">{student.id}</TableCell> */}
+                <TableCell className="padding-15-left" align="left">{student.fullName}</TableCell>
                 <TableCell align="left">{student.mobileNumber}</TableCell>
-                <TableCell align="left">{student.fullNname}</TableCell>
-                <TableCell align="center">
+                <TableCell align="left">
               
                 {student.email}
      
                 </TableCell>
-                <TableCell align="center">{student.schoolBoard}</TableCell>
-                {/* <TableCell align="center"><span onClick={() =>deleteEnquiry(student.id)}><DeleteIcon  color="error" /></span></TableCell> */}
-                 {/* <TableCell align="center"><Button>View</Button></TableCell> */}
+                <TableCell align="left">{student.schoolMedium}</TableCell>
+                <TableCell align="left">{student.schoolBoard}</TableCell>
+               
               </TableRow>
             ))}
           </TableBody>
