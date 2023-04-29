@@ -10,3 +10,4 @@ export const userAuthUrl = "http://localhost:"+ localServerPort + "/users/auth/l
 export const sectionsListUrl = "http://localhost:"+ localServerPort + "/sections"
 export const leaveApplyUrl = "http://localhost:"+ localServerPort + "/leave"
 export const leaveListUrl = "http://localhost:"+ localServerPort + "/leave"
+export const admissionUrl = "http://localhost:"+ localServerPort + "/admission"
