@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import "../academics/index.css";
 import {
   Grid,
@@ -42,6 +42,10 @@ const ClassroomSetup = () => {
   const { allClassRooms, added } = useSelector(
     (store) => store.acadamics
   );
+  const [expanded, setExpanded] = useState({});
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded({ ...expanded, [panel]: isExpanded });
+  };
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -72,8 +76,11 @@ const ClassroomSetup = () => {
     classesByClassType,
     newSectionHandler,
   }) => {
+    const panel = classType;
+    const isExpanded = expanded[panel];
     return (
-      <Accordion className="Accordion-main" >
+      <Accordion className="Accordion-main"  expanded={isExpanded}
+      onChange={handleChange(panel)} >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"

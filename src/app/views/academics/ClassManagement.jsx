@@ -283,6 +283,14 @@ export default function SubjectManagement() {
     const filterById = modalState?.rowId && tablePreData?.filter((it) => it.key !== modalState.rowId);
 
     let temp;
+    const resetFormState = () => {
+      setModalStateValues({
+        subName: "",
+        staffName: "",
+        staffRefId: "",
+      });
+    };
+
     switch (k) {
       case "ADD":
         const newSub = {
@@ -293,7 +301,7 @@ export default function SubjectManagement() {
         };
         
         setTablePreData((prev) => [...prev, newSub]);
-
+        resetFormState(); // reset form state after adding a subject
         break;
 
       case "ASSIGN":
