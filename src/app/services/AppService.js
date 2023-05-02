@@ -1,4 +1,4 @@
-import { staffByIdUrl, leaveListUrl,admissionUrl, leaveApplyUrl, sectionsListUrl, staffCreationUrl, staffListUrl, studentCreationUrl, userAuthUrl, userCreationUrl, studentListUrl } from "app/services/Services";
+import { staffByIdUrl, leaveListUrl,admissionUrl,attendanceUrl, leaveApplyUrl, sectionsListUrl, staffCreationUrl, staffListUrl, studentCreationUrl, userAuthUrl, userCreationUrl, studentListUrl, getAttendanceUrl } from "app/services/Services";
 import axios from "axios";
 
 export const saveStaff = async(payload) => {
@@ -181,6 +181,37 @@ export const getAdmission = async () => {
 export const saveAdmissions = async(payload) => {
     const payloadObj = payload;
         let apiResp = await axios.post(admissionUrl, payloadObj)
+            .then(res => {
+                console.log("Data", res)
+                return res.data;    
+            })
+            .catch(err => {
+                console.log(err)
+                return err
+            })
+            return apiResp;
+}
+
+export const getAttendance = async () => {
+    const payload = {
+        _id: '6447b5d7cc61964abcbe96c1'
+        
+    }
+    let apiResp = await axios.post(getAttendanceUrl,payload)
+            .then(res => {
+                console.log("Data", res)
+                return res.data;    
+            })
+            .catch(err => {
+                console.log(err)
+                return err
+            })
+            return apiResp;
+}
+
+export const saveAttendance = async(payload) => {
+    const payloadObj = payload;
+        let apiResp = await axios.post(attendanceUrl, payloadObj)
             .then(res => {
                 console.log("Data", res)
                 return res.data;    

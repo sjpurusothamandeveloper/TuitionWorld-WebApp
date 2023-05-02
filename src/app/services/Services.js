@@ -11,3 +11,5 @@ export const sectionsListUrl = "http://localhost:"+ localServerPort + "/sections
 export const leaveApplyUrl = "http://localhost:"+ localServerPort + "/leave"
 export const leaveListUrl = "http://localhost:"+ localServerPort + "/leave"
 export const admissionUrl = "http://localhost:"+ localServerPort + "/admission"
+export const attendanceUrl = "http://localhost:"+ localServerPort + "/attendance"
+export const getAttendanceUrl = "http://localhost:"+ localServerPort + "/attendance/getAttendById"
