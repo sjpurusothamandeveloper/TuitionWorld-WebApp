@@ -1,4 +1,4 @@
-import { staffByIdUrl, leaveListUrl, leaveApplyUrl, sectionsListUrl, staffCreationUrl, staffListUrl, studentCreationUrl, userAuthUrl, userCreationUrl, studentListUrl } from "app/services/Services";
+import { staffByIdUrl, leaveListUrl,admissionUrl, leaveApplyUrl, sectionsListUrl, staffCreationUrl, staffListUrl, studentCreationUrl, userAuthUrl, userCreationUrl, studentListUrl } from "app/services/Services";
 import axios from "axios";
 
 export const saveStaff = async(payload) => {
@@ -164,3 +164,32 @@ export const saveLeave = async(payload) => {
             })
             return apiResp;
 }
+
+export const getAdmission = async () => {
+    let apiResp = await axios.get(admissionUrl)
+            .then(res => {
+                console.log("Data", res)
+                return res.data;    
+            })
+            .catch(err => {
+                console.log(err)
+                return err
+            })
+            return apiResp;
+}
+
+export const saveAdmissions = async(payload) => {
+    const payloadObj = payload;
+        let apiResp = await axios.post(admissionUrl, payloadObj)
+            .then(res => {
+                console.log("Data", res)
+                return res.data;    
+            })
+            .catch(err => {
+                console.log(err)
+                return err
+            })
+            return apiResp;
+}
+
+

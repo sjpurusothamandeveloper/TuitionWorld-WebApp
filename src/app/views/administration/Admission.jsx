@@ -1,6 +1,7 @@
 import { Box, Button, styled } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 
+
 const FlexBox = styled(Box)(() => ({
   display: 'flex',
   alignItems: 'center',
@@ -26,6 +27,10 @@ const NotFoundRoot = styled(FlexBox)(() => ({
 
 const Admission = () => {
   const navigate = useNavigate();
+ 
+
+
+
 
   return (
     <NotFoundRoot>

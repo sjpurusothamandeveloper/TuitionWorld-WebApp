@@ -6,24 +6,65 @@ import {
   InputLabel,
   FormControl, Button, TextField, styled, Typography, Card, Collapse, IconButton
 } from '@mui/material';
+import { saveAdmissions, getAdmission } from 'app/services/AppService.js';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { useSnackbar } from 'notistack';
+
 
 const dateTday = new Date();
 
 
 const EnquiryForm = (props) => {
-
+  const { enqueueSnackbar } = useSnackbar();
+  const [value, setValue] = useState(0);
+ 
+  const [isLoading, setisLoading] = useState(false)
   const {
     handleSubmit,
     reset,
     control,
     formState: { errors },
   } = useForm();
-  const submitEnqury = (EnquryData) => {
-    console.log("submitEnqury", EnquryData);
+  // const submitEnquiry = (EnquiryData) => {
+  //   console.log("submitEnquiry", EnquiryData);
+  // }
+
+  const submitEnquiry = async (EnquiryData) => {
+    setisLoading(true)
+    // console.log("submitStaff", staffData);
+    try {
+      const responseFromApi = await saveAdmissions(EnquiryData)
+      console.log("resp", responseFromApi)
+      if (responseFromApi && responseFromApi.statusCode === 200) {
+        setisLoading(false)
+        handleToastMessage(true, responseFromApi.message)
+        reset()
+      }
+      else {
+        setisLoading(false)
+        handleToastMessage(false, responseFromApi.message)
+      }
+    }
+    catch (err) {
+      setisLoading(false)
+      handleToastMessage(false, "Something Went Wrong :(")
+      console.log("Error in Enquiry Submit Method", err)
+    }
   }
+
+  const handleToastMessage = (typeOfMsg, msg) => {
+    const failureMessage = 'Something went wrong :(';
+
+    enqueueSnackbar(msg ? msg : failureMessage, {
+      variant: typeOfMsg ? "success" : "error",
+      persist: false,
+      autoHideDuration: 2000
+    });
+  }
+
+
   return (
     <div>
       <Card style={{ padding: "15px" }}>
@@ -69,7 +110,7 @@ const EnquiryForm = (props) => {
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                   <Controller
                     control={control}
-                    name="Emailid"
+                    name="email"
                     defaultValue=""
                     render={({ field }) => (<TextField  {...field} fullWidth id="outlined-basic" label="Email ID" variant="outlined" />)}
                   />
@@ -148,19 +189,36 @@ const EnquiryForm = (props) => {
 
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
-                  <Controller
+                <Controller
                     control={control}
-                    name="board"
-
+                    name="schoolBoard"
+                   
                     defaultValue=""
-                    render={({ field }) => (<TextField    {...field} fullWidth id="outlined-basic" label="Board" variant="outlined" />)}
+                    render={({ field }) => (
+                      <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">
+                          Board
+                        </InputLabel>
+                        <Select
+                          {...field}
+                          labelId="demo-simple-select-label"
+                          id="demo-simple-select"
+                          variant="outlined"
+                          label="Medium"
+                        >
+                          <MenuItem value="StateBoard" >StateBoard</MenuItem>
+                          <MenuItem value="CBSE" >CBSE</MenuItem>
+                         
+                        </Select>
+                      </FormControl>
+                    )}
                   />
 
                 </Grid>
                 <Grid item xs={10} sm={6} md={3} lg={3} xl={3} >
                 <Controller
                     control={control}
-                    name="medium"
+                    name="schoolMedium"
                    
                     defaultValue=""
                     render={({ field }) => (
@@ -190,7 +248,7 @@ const EnquiryForm = (props) => {
                 
                 <Grid item xs={10} sm={5} md={3} lg={2} xl={2} >
 
-                  <Button onClick={handleSubmit(submitEnqury)} fullWidth variant='contained' color='warning'>Submit</Button>
+                  <Button onClick={handleSubmit(submitEnquiry)} fullWidth variant='contained' color='warning'>Submit</Button>
                 </Grid>
                 <Grid item xs={10} sm={5} md={3} lg={2} xl={2} >
 

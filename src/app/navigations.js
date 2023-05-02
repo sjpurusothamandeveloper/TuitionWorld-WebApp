@@ -33,7 +33,7 @@ export const navigations = [
       { name: 'Admission', iconText: 'AD', path: '/administration/admission/details' },
     ],
   },
-  { name: 'Result', path: '/result', icon: 'handshake'  },
+  // { name: 'Result', path: '/result', icon: 'handshake'  },
   // { name: 'Profile', path: '/profile/view/:id', icons: 'user'}
   // {
   //   name: 'Session/Auth',
