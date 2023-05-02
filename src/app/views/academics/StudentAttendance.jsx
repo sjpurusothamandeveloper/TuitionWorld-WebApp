@@ -66,8 +66,9 @@ const StudentAttendance = () => {
   const onSubmitAttendance = () => {
     if(attendanceData.length > 0){
       const re1Payload ={
-        class: 'String',
-        classTeacher: 'String',
+        _id: '64500114834dd555d82843ff',
+        class: '12-A',
+        classTeacher: 'Aadhira Lavakumar',
         subjectAtt: attendanceData,
       }
       dispatch(ATTENDANCE_ACTIONS.createNewAttendance(re1Payload))
