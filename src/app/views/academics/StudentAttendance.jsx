@@ -172,14 +172,17 @@ const StudentAttendance = () => {
       const responseFromApi = await getAttendance()
       console.log("getCall", responseFromApi)
       if (responseFromApi && responseFromApi.statusCode === 200) {
-        if (responseFromApi.data && responseFromApi.data.length > 0) {
-          setAttendanceList(responseFromApi.data)
+        if (responseFromApi.data ) {
+          // setAttendanceList(responseFromApi.data)
+          
+          let attData = responseFromApi.data.subjectAtt
+         setAttendanceData(attData)
         }
         else {
           setAttendanceList([])
         }
       }
-
+     
     }
     catch (err) {
       console.log(err)
@@ -187,8 +190,8 @@ const StudentAttendance = () => {
   }
 
   useEffect(() => {
-    // handleGetAttendanceList()
-    handleStaticData()
+    handleGetAttendanceList()
+    // handleStaticData()
 }, [])
 
    const handleStaticData =()=>{
